@@ -368,14 +368,14 @@ h1, h2, h3, p { margin: 0; }
   Promise.all([fgImg, bgImg].map(function (im) { return im.decode ? im.decode().catch(function () {}) : Promise.resolve(); })).then(startFocus);
   setTimeout(startFocus, 2500);
 
-  // ---- Flash camera sound, made on the fly (no file). Only ever plays after a tap or click. ----
-  // Shutter click + flash pop, then the rising whine of the flash recharging (like a disposable camera).
+  // ---- DSLR shutter sound, made on the fly (no file). Only ever plays after a tap or click. ----
+  // "ka-chunk": mirror up + shutter, then the mirror coming back down. About a tenth of a second.
   var actx = null;
   function shutter() {
     try {
       var AC = window.AudioContext || window.webkitAudioContext; if (!AC) return;
       actx = actx || new AC(); if (actx.state === "suspended") actx.resume();
-      var now = actx.currentTime, out = actx.createGain(); out.gain.value = 0.9; out.connect(actx.destination);
+      var now = actx.currentTime, out = actx.createGain(); out.gain.value = 0.6; out.connect(actx.destination);
       function noise(at, len, type, freq, q, vol, curve) {
         var n = Math.max(1, Math.floor(actx.sampleRate * len)), buf = actx.createBuffer(1, n, actx.sampleRate), d = buf.getChannelData(0);
         for (var i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / n, curve || 3);
@@ -384,21 +384,20 @@ h1, h2, h3, p { margin: 0; }
         var g = actx.createGain(); g.gain.value = vol;
         src.connect(f); f.connect(g); g.connect(out); src.start(now + at);
       }
-      noise(0, 0.012, "bandpass", 4800, 1.4, 1.0, 2);       // tick: shutter blades
-      noise(0.004, 0.06, "highpass", 6500, 0.7, 0.35, 4);   // fzzt: the flash firing
-      noise(0.022, 0.035, "bandpass", 1700, 1.1, 0.75, 3);  // clack: shutter closing
-      // flash recharge whine: a thin tone that rises and fades
-      var osc = actx.createOscillator(), og = actx.createGain(), hp = actx.createBiquadFilter();
-      osc.type = "triangle"; hp.type = "highpass"; hp.frequency.value = 1200;
-      var t0 = now + 0.14, t1 = t0 + 1.05;
-      osc.frequency.setValueAtTime(1500, t0);
-      osc.frequency.exponentialRampToValueAtTime(7800, t1);
-      og.gain.setValueAtTime(0.0001, t0);
-      og.gain.exponentialRampToValueAtTime(0.05, t0 + 0.12);
-      og.gain.setValueAtTime(0.05, t1 - 0.3);
-      og.gain.exponentialRampToValueAtTime(0.0001, t1);
-      osc.connect(hp); hp.connect(og); og.connect(out);
-      osc.start(t0); osc.stop(t1 + 0.05);
+      function thump(at, from, to, len, vol) {
+        var o = actx.createOscillator(), g = actx.createGain();
+        o.type = "sine"; o.frequency.setValueAtTime(from, now + at); o.frequency.exponentialRampToValueAtTime(to, now + at + len);
+        g.gain.setValueAtTime(vol, now + at); g.gain.exponentialRampToValueAtTime(0.0001, now + at + len);
+        o.connect(g); g.connect(out); o.start(now + at); o.stop(now + at + len + 0.02);
+      }
+      // "ka": shutter opens and the mirror slaps up
+      noise(0, 0.006, "highpass", 3200, 0.7, 0.9, 1.5);
+      noise(0.002, 0.028, "bandpass", 1150, 1.4, 0.85, 3);
+      thump(0.002, 170, 70, 0.045, 0.35);
+      // "chunk": shutter closes and the mirror drops back
+      noise(0.062, 0.007, "highpass", 2600, 0.7, 0.7, 1.5);
+      noise(0.064, 0.034, "bandpass", 850, 1.3, 0.75, 3);
+      thump(0.064, 140, 60, 0.05, 0.3);
     } catch (e) {}
   }
 
