@@ -19,7 +19,7 @@
 <meta name="theme-color" content="#0f1221">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,600;0,700;0,800;1,400&family=VT323&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@500;700&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
 /* Layout: one calm column, like a page read in bed by a nightlight. Concentric zone rings are the signature graphic. */
 :root {
@@ -446,26 +446,26 @@ details .body { display: grid; gap: 12px; padding-top: 12px; max-width: 66ch; }
   --ink: #f4f3ee; --muted: #9d9c96; --rec: #ff3b30;
   --font-display: "Inter Tight", "Helvetica Neue", Arial, system-ui, sans-serif;
   --font-body: "Inter Tight", "Helvetica Neue", Arial, system-ui, sans-serif;
-  --font-osd: "VT323", ui-monospace, Menlo, monospace;
+  --font-osd: "JetBrains Mono", ui-monospace, Menlo, monospace;
   --radius: 8px;
   color-scheme: dark;
 }
 h1, h2, h3 { letter-spacing: -0.02em; }
-.eyebrow { font-family: var(--font-osd); font-size: 1.15rem; letter-spacing: 0.06em; line-height: 1.15; }
-.btn { border-radius: 4px; font: 400 1.45rem/1 var(--font-osd); letter-spacing: 0.04em; text-transform: uppercase; }
-.btn-small { font-size: 1.2rem; }
+.eyebrow { font-family: var(--font-osd); font-weight: 500; font-size: 0.72rem; letter-spacing: 0.1em; line-height: 1.4; }
+.btn { border-radius: 4px; font: 700 0.86rem/1.2 var(--font-osd); letter-spacing: 0.06em; text-transform: uppercase; }
+.btn-small { font-size: 0.78rem; }
 .btn-primary { background: var(--ink); color: #060606; }
 .btn-primary::before { content: "▶"; color: var(--rec); font-size: 0.85em; }
 .jump { border-radius: 4px; }
-.score, .example-num { font-family: var(--font-osd); font-weight: 400; letter-spacing: 0; }
-.score { font-size: clamp(5.4rem, 22vw, 9rem); line-height: 0.82; }
-.example-num { font-size: 4.6rem; }
-.band-name { font-family: var(--font-osd); font-weight: 400; font-size: 2.1rem; letter-spacing: 0.02em; text-transform: uppercase; }
-.rung-name, .rung-count, .opt .key { font-family: var(--font-osd); font-size: 1.05rem; letter-spacing: 0.05em; }
-.opt .key { font-size: 1.15rem; }
-.recbar { display: flex; align-items: center; gap: 10px; margin-bottom: 22px; font: 400 1.5rem/1 var(--font-osd); letter-spacing: 0.04em; color: var(--ink); text-decoration: none; text-shadow: 0 0 4px rgba(255,255,255,0.35); }
+.score, .example-num { font-family: var(--font-display); font-weight: 800; letter-spacing: -0.05em; }
+.score { font-size: clamp(4.4rem, 18vw, 7.5rem); line-height: 0.88; }
+.example-num { font-size: 3.4rem; }
+.band-name { font-family: var(--font-osd); font-weight: 700; font-size: 1.15rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.rung-name, .rung-count, .opt .key { font-family: var(--font-osd); font-weight: 500; font-size: 0.7rem; letter-spacing: 0.08em; }
+.opt .key { font-size: 0.78rem; }
+.recbar { display: flex; align-items: center; gap: 10px; margin-bottom: 22px; font: 800 1.15rem/1 var(--font-display); letter-spacing: -0.03em; word-spacing: 0.1em; color: var(--ink); text-decoration: none; text-shadow: 0 0 4px rgba(255,255,255,0.35); }
 .recbar i { width: 11px; height: 11px; border-radius: 50%; background: var(--rec); box-shadow: 0 0 8px var(--rec); animation: recblink 1.6s steps(1) infinite; }
-.recbar span { margin-left: auto; font-size: 1.15rem; color: var(--muted); text-shadow: none; }
+.recbar span { margin-left: auto; font: 500 0.68rem/1 var(--font-osd); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-shadow: none; }
 @keyframes recblink { 50% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .recbar i { animation: none; } }
 </style>
@@ -480,7 +480,7 @@ h1, h2, h3 { letter-spacing: -0.02em; }
     <div class="intro-head">
       <p class="eyebrow">A self-check from <a href="https://imjustnate.com/">I'm Just Nate</a> · Nightmares Come True</p>
       <h1 id="intro-title">How much of your life runs on <em>comfort</em>?</h1>
-      <p class="lede">29 questions and one checklist, about 6 minutes. You find out how much of your life you spend playing it safe, where you do it most, and get a 30-day ladder out.</p>
+      <p class="lede">29 questions and one checklist, about 6 minutes. You find out how much of your life you spend playing it safe, where you do it most, and get a 30-day ladder to climb out.</p>
       <div class="intro-actions">
         <button class="btn btn-primary" id="start" type="button">Start the audit</button>
         <button class="btn btn-ghost" id="resume" type="button" hidden>Continue where you left off</button>
@@ -1391,10 +1391,10 @@ h1, h2, h3 { letter-spacing: -0.02em; }
     return '<div class="unlock">' +
       '<div class="unlock-copy"><span class="eyebrow">Free · 5 more ladders</span>' +
         '<h3>Get a ladder for every area of your life</h3>' +
-        '<p>You have ladders for your two safest areas. The other five (' + esc(rest.join(", ")) + ') come with my free newsletter: subscribe and the unlock word lands in your inbox within a few minutes. If it\'s not there, check Promotions or spam.</p>' +
+        '<p>You have ladders for your two safest areas. The other five (' + esc(rest.join(", ")) + ') come free with my Substack newsletter. Subscribe (it\'s free, no card needed) and the unlock word lands in your inbox within a few minutes. If it\'s not there, check Promotions or spam.</p>' +
         '<p class="fine">It\'s where I write the full story behind every nightmare I face on camera. Unsubscribe any time.</p></div>' +
       '<div class="sub-wrap"><iframe class="sub-embed" src="' + SUBSTACK_URL + '/embed" title="Subscribe to I\'m Just Nate" loading="lazy" scrolling="no"></iframe></div>' +
-      '<p class="fine">Box not showing? <a href="' + SUBSTACK_URL + '/subscribe" target="_blank" rel="noopener">Subscribe on Substack</a> instead.</p>' +
+      '<p class="fine">Box not showing? <a href="' + SUBSTACK_URL + '/subscribe" target="_blank" rel="noopener">Subscribe free on Substack</a> instead.</p>' +
       '<div class="unlock-row"><label class="lab" for="unlock-in">Got the word? Type it here.</label>' +
         '<div class="code-row"><input id="unlock-in" class="email-in" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Unlock word">' +
         '<button class="btn btn-primary btn-small" type="button" id="unlock-btn">Unlock my ladders</button></div>' +
@@ -1601,7 +1601,7 @@ h1, h2, h3 { letter-spacing: -0.02em; }
     var W = 1080, H = 1920, c = document.createElement("canvas"); c.width = W; c.height = H;
     var g = c.getContext("2d");
     var BG = "#060606", INK = "#f4f3ee", MUTED = "#9d9c96", AMBER = "#f2b544", COMF = "#8796dc", PANIC = "#ef7462", LINE = "#2d3356";
-    var FD = '"VT323", ui-monospace, monospace', FB = '"Inter Tight", "Helvetica Neue", Arial, system-ui, sans-serif', FM = '"VT323", ui-monospace, monospace';
+    var FD = '"Inter Tight", "Helvetica Neue", Arial, system-ui, sans-serif', FB = '"Inter Tight", "Helvetica Neue", Arial, system-ui, sans-serif', FM = '"JetBrains Mono", ui-monospace, monospace';
     function spacing(px) { if ("letterSpacing" in g) g.letterSpacing = px; }
     g.fillStyle = BG; g.fillRect(0, 0, W, H);
     var MCY = 1105, S = 1.72;
@@ -1610,19 +1610,19 @@ h1, h2, h3 { letter-spacing: -0.02em; }
     g.fillStyle = glow; g.fillRect(0, 0, W, H);
     g.textAlign = "center"; g.textBaseline = "alphabetic";
 
-    g.fillStyle = INK; g.font = "400 46px " + FM; spacing("3px");
+    g.fillStyle = INK; g.font = "500 28px " + FM; spacing("6px");
     g.fillText("THE COMFORT AUDIT", W / 2, 170); spacing("0px");
     g.textAlign = "left"; g.fillStyle = "#ff3b30"; g.beginPath(); g.arc(78, 92, 14, 0, Math.PI * 2); g.fill();
-    g.fillStyle = INK; g.font = "400 50px " + FM; g.fillText("REC", 104, 108);
-    g.textAlign = "right"; g.fillText(fmtDate(R.date).toUpperCase(), W - 60, 108); g.textAlign = "center";
+    g.fillStyle = INK; g.font = "500 30px " + FM; g.fillText("REC", 104, 103);
+    g.textAlign = "right"; g.fillText(fmtDate(R.date).toUpperCase(), W - 60, 103); g.textAlign = "center";
 
     var num = String(R.sc.overall);
-    g.font = "400 340px " + FD; var nw = g.measureText(num).width;
-    g.font = "400 170px " + FD; var pw = g.measureText("%").width;
+    spacing("-14px"); g.font = "800 300px " + FD; var nw = g.measureText(num).width;
+    g.font = "800 140px " + FD; var pw = g.measureText("%").width;
     var x0 = W / 2 - (nw + pw + 8) / 2;
     g.textAlign = "left"; g.fillStyle = INK;
-    g.font = "400 340px " + FD; g.fillText(num, x0, 470);
-    g.font = "400 170px " + FD; g.fillText("%", x0 + nw + 8, 470);
+    g.font = "800 300px " + FD; g.fillText(num, x0, 470);
+    g.font = "800 140px " + FD; g.fillText("%", x0 + nw + 8, 470); spacing("0px");
     g.textAlign = "center";
     g.font = "700 54px " + FB; g.fillStyle = INK;
     wrapLines(g, "of my life is lived playing it safe.", 900).forEach(function (l, i) { g.fillText(l, W / 2, 565 + i * 66); });
@@ -1642,7 +1642,7 @@ h1, h2, h3 { letter-spacing: -0.02em; }
       g.beginPath(); g.moveTo(W / 2, MCY); g.lineTo(e[0], e[1]); g.stroke();
       pts.push({ p: P(radiusFor(ds.pct), a), r: radiusFor(ds.pct), a: a, id: ds.id });
     });
-    g.font = "400 30px " + FM; spacing("3px"); g.fillStyle = MUTED;
+    g.font = "500 18px " + FM; spacing("4px"); g.fillStyle = MUTED;
     g.fillText("COMFORT", W / 2, MCY - R_COMFORT * S + 34);
     g.fillText("STRETCH", W / 2, MCY - R_STRETCH * S + 32);
     g.fillStyle = PANIC; g.fillText("PANIC", W / 2, MCY - R_STRETCH * S - 12); spacing("0px");
@@ -1661,7 +1661,7 @@ h1, h2, h3 { letter-spacing: -0.02em; }
 
     g.fillStyle = AMBER; g.font = "700 46px " + FB;
     wrapLines(g, "My other " + R.other + "%: where I feel the nerves and go anyway.", 900).forEach(function (l, i) { g.fillText(l, W / 2, 1560 + i * 58); });
-    g.fillStyle = INK; g.font = "400 96px " + FD; g.fillText("What's yours?", W / 2, 1745);
+    g.fillStyle = INK; g.font = "800 80px " + FD; spacing("-2px"); g.fillText("What's yours?", W / 2, 1745); spacing("0px");
     g.fillStyle = MUTED; g.font = "400 34px " + FB;
     g.fillText("Take the free Comfort Audit at imjustnate.com", W / 2, 1810);
     g.fillStyle = INK; g.font = "700 36px " + FB; g.fillText("@imjustnatehere", W / 2, 1862);
@@ -1670,7 +1670,7 @@ h1, h2, h3 { letter-spacing: -0.02em; }
   function makeShareImage() {
     var img = el("share-img"); if (!img) return;
     var fontsReady = (document.fonts && document.fonts.load)
-      ? Promise.all([document.fonts.load('400 340px "VT323"'), document.fonts.load('700 54px "Inter Tight"'), document.fonts.load('400 34px "Inter Tight"')]).catch(function () {})
+      ? Promise.all([document.fonts.load('800 300px "Inter Tight"'), document.fonts.load('700 54px "Inter Tight"'), document.fonts.load('400 34px "Inter Tight"'), document.fonts.load('500 28px "JetBrains Mono"')]).catch(function () {})
       : Promise.resolve();
     var timeout = new Promise(function (res) { setTimeout(res, 2500); });
     Promise.race([fontsReady, timeout]).then(function () {
