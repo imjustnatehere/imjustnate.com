@@ -23,6 +23,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap">
 <link rel="preload" as="image" href="/nate-bg.v3.webp" type="image/webp">
 <link rel="preload" as="image" href="/nate-fg.v3.webp" type="image/webp">
+<script>document.documentElement.classList.add("js");</script>
 <style>
 /* Camcorder: black body, white on-screen-display type, one red REC accent. */
 :root {
@@ -49,12 +50,14 @@ h1, h2, h3, p { margin: 0; }
 
 /* ===== Viewfinder ===== */
 .hero { display: grid; position: relative; isolation: isolate; }
-.ambient { position: absolute; z-index: -1; left: 0; right: 0; top: 0; height: calc(100% + 200px); overflow: hidden; pointer-events: none;
+.ambient { position: absolute; z-index: -1; left: 0; right: 0; top: 0; height: calc(100% + 160px); overflow: hidden; pointer-events: none;
   -webkit-mask: linear-gradient(180deg, #000 55%, transparent); mask: linear-gradient(180deg, #000 55%, transparent); }
 .ambient img { position: absolute; left: 50%; top: 0; width: 120%; height: 100%; margin-left: -60%; object-fit: cover; object-position: 50% 30%;
-  filter: blur(70px) saturate(1.9) brightness(1.7); opacity: 0.95; will-change: transform; }
+  filter: blur(70px) saturate(1.75) brightness(1.45); opacity: 0.82; will-change: transform; }
 .vf { position: relative; overflow: hidden; background: #000; height: min(84svh, 720px); min-height: 520px; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
-.scene { position: absolute; left: 0; top: 0; width: 100%; height: 100%; will-change: transform; transform-origin: 50% 40%; }
+.scene { position: absolute; left: 0; top: 0; width: 100%; height: 100%; will-change: transform; transform-origin: 50% 40%; transition: filter 0.3s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.js .vf:not(.sharp) .scene { filter: blur(9px) brightness(1.04); }
+.vf.refocus .scene { filter: blur(2.5px); transition: filter 0.06s; }
 .layer { position: absolute; inset: -4%; width: 108%; height: 108%; object-fit: cover; object-position: 50% 28%; will-change: transform; pointer-events: none; -webkit-user-drag: none; }
 .layer.fg { filter: contrast(1.04); }
 /* Focus box that locks onto his face and rides along with him */
@@ -63,12 +66,12 @@ h1, h2, h3, p { margin: 0; }
 .af i:nth-child(1) { left: 0; top: 0; border-right: 0; border-bottom: 0; } .af i:nth-child(2) { right: 0; top: 0; border-left: 0; border-bottom: 0; }
 .af i:nth-child(3) { left: 0; bottom: 0; border-right: 0; border-top: 0; } .af i:nth-child(4) { right: 0; bottom: 0; border-left: 0; border-top: 0; }
 .af span { position: absolute; left: 0; top: -20px; font-size: 11px; white-space: nowrap; color: #fff; }
-.af { transition: opacity 0.5s; }
-.af.on { opacity: 0.9; transition: opacity 0.2s; }
-.af.snapin { animation: snapin 0.3s ease-out both; }
-@keyframes snapin { 0% { transform: scale(1.25); opacity: 0; } 100% { transform: scale(1); opacity: 0.9; } }
-.af.hunt { animation: hunt 1.1s ease-out both; }
-@keyframes hunt { 0% { transform: scale(1.5); opacity: 0; } 25% { transform: scale(0.88); opacity: 1; } 45% { transform: scale(1.08); } 60% { transform: scale(0.97); opacity: 0.4; } 70% { opacity: 1; } 100% { transform: scale(1); opacity: 0.9; } }
+.af { transition: opacity 0.16s ease-out; }
+.af.on { opacity: 0.95; transition: opacity 0.08s; }
+.af.snapin { animation: snapin 0.18s ease-out both; }
+@keyframes snapin { 0% { transform: scale(1.18); opacity: 0; } 100% { transform: scale(1); opacity: 0.95; } }
+.af.hunt { animation: hunt 0.42s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+@keyframes hunt { 0% { transform: scale(1.35); opacity: 0; } 40% { transform: scale(0.93); opacity: 1; } 70% { transform: scale(1.03); } 100% { transform: scale(1); opacity: 0.95; } }
 .af.locked i { border-color: #8dff9a; } .af.locked span { color: #8dff9a; }
 .scan { position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: 0.5; mix-blend-mode: multiply;
   background: repeating-linear-gradient(0deg, rgba(0,0,0,0.22) 0 1px, transparent 1px 3px), radial-gradient(120% 90% at 50% 45%, transparent 55%, rgba(0,0,0,0.55) 100%); }
@@ -91,7 +94,7 @@ h1, h2, h3, p { margin: 0; }
 .date { right: 18px; bottom: 22px; font-size: 12px !important; opacity: 0.85; }
 .hint { left: 50%; top: 78px; transform: translateX(-50%); font-size: 11px !important; white-space: nowrap; opacity: 0.85; transition: opacity 0.6s; }
 .hint.gone { opacity: 0; }
-.shoot { left: 50%; top: 100px; transform: translateX(-50%); display: flex; align-items: center; gap: 8px; white-space: nowrap; font-size: 11px !important; color: #fff;
+.shoot { left: 16px; bottom: 15px; display: flex; align-items: center; gap: 8px; white-space: nowrap; font-size: 11px !important; color: #fff;
   padding: 7px 12px; border: 1px solid rgba(255,255,255,0.55); border-radius: 999px; background: rgba(0,0,0,0.45); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
   opacity: 0; transition: opacity 0.5s; }
 .shoot i { width: 8px; height: 8px; border-radius: 50%; background: var(--rec); box-shadow: 0 0 6px var(--rec); animation: blink 1.2s steps(1) infinite; }
@@ -174,8 +177,8 @@ h1, h2, h3, p { margin: 0; }
   .top nav a:hover { color: var(--ink); }
   .hero { grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr); gap: 56px; align-items: center; padding-bottom: 20px; }
   .vf { height: min(82vh, 780px); min-height: 560px; border-radius: 8px; box-shadow: 0 0 0 1px rgba(255,255,255,0.06), 0 40px 120px -30px rgba(0,0,0,0.9); }
-  .ambient { left: -14%; right: 40%; top: -12%; height: 124%; -webkit-mask: radial-gradient(closest-side, #000 55%, transparent); mask: radial-gradient(closest-side, #000 55%, transparent); }
-  .ambient img { width: 100%; margin-left: -50%; opacity: 1; }
+  .ambient { left: -12%; right: 42%; top: -10%; height: 120%; -webkit-mask: radial-gradient(closest-side, #000 47%, transparent); mask: radial-gradient(closest-side, #000 47%, transparent); }
+  .ambient img { width: 100%; margin-left: -50%; opacity: 0.92; }
   .title { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; left: 0; bottom: 0; }
   .side { display: grid; gap: 18px; }
   .side h1 { font: 800 clamp(3.6rem, 6vw, 5.8rem)/0.88 var(--font-body); letter-spacing: -0.05em; word-spacing: 0.12em; text-transform: none; }
@@ -189,7 +192,7 @@ h1, h2, h3, p { margin: 0; }
   .hud .osd { font-size: 14px; }
 }
 @media (max-width: 899px) { .side .heading { display: none; } .hero .side { padding: 0 max(18px, env(safe-area-inset-left, 0px)); } .hero { margin: 0 calc(-1 * max(18px, env(safe-area-inset-left, 0px))); } }
-@media (prefers-reduced-motion: reduce) { .rec i, .top .mark i, .menu a:hover b, .next > p.osd i, .cta b, .shoot i { animation: none; } .cta, .tape .go { transition: none; } .hint { display: none; } .af.hunt { animation: none; } .flash.go { animation-duration: 0.25s; } }
+@media (prefers-reduced-motion: reduce) { .rec i, .top .mark i, .menu a:hover b, .next > p.osd i, .cta b, .shoot i { animation: none; } .cta, .tape .go { transition: none; } .hint { display: none; } .af.hunt, .af.snapin { animation: none; } .js .vf:not(.sharp) .scene, .vf.refocus .scene { filter: none; } .flash.go { animation-duration: 0.25s; } }
 </style>
 </head>
 <body>
@@ -330,7 +333,7 @@ h1, h2, h3, p { margin: 0; }
   hint.textContent = finePointer ? "◀ move your mouse ▶" : "◀ drag to move the camera ▶";
   var shoot = document.getElementById("shoot");
   document.getElementById("shoottxt").textContent = finePointer ? "Click to take a photo" : "Tap to take a photo";
-  setTimeout(function () { if (!shots) shoot.classList.add("show"); }, 2600);
+  setTimeout(function () { if (!shots) shoot.classList.add("show"); }, 1600);
 
   // ---- Focus box: sits on his face and rides along with him ----
   var fgImg = fg.querySelector("img"), af = document.getElementById("af"), afLabel = document.getElementById("aflabel");
@@ -349,14 +352,41 @@ h1, h2, h3, p { margin: 0; }
   var afTimers = [];
   function lockFocus(quick) {
     afTimers.forEach(clearTimeout); afTimers = [];
-    af.classList.remove("locked", "hunt"); afLabel.textContent = "AF";
+    af.classList.remove("locked", "hunt", "snapin"); afLabel.textContent = "AF";
     af.classList.add("on");
     if (!reduce) { void af.offsetWidth; af.classList.add(quick ? "snapin" : "hunt"); }
-    afTimers.push(setTimeout(function () { af.classList.add("locked"); afLabel.textContent = "AF ● LOCK"; }, reduce ? 0 : (quick ? 250 : 1000)));
-    afTimers.push(setTimeout(function () { af.classList.remove("on"); }, reduce ? 1200 : (quick ? 1300 : 2300)));
-    afTimers.push(setTimeout(function () { af.classList.remove("locked", "hunt", "snapin"); afLabel.textContent = "AF"; }, reduce ? 1600 : (quick ? 1800 : 2800)));
+    if (quick && !reduce) { vf.classList.add("refocus"); afTimers.push(setTimeout(function () { vf.classList.remove("refocus"); }, 90)); }
+    afTimers.push(setTimeout(function () { vf.classList.add("sharp"); }, quick ? 0 : 230));
+    afTimers.push(setTimeout(function () { af.classList.add("locked"); afLabel.textContent = "AF ● LOCK"; }, reduce ? 0 : (quick ? 150 : 380)));
+    afTimers.push(setTimeout(function () { af.classList.remove("on"); }, reduce ? 700 : (quick ? 520 : 760)));
+    afTimers.push(setTimeout(function () { af.classList.remove("locked", "hunt", "snapin"); afLabel.textContent = "AF"; }, reduce ? 900 : (quick ? 720 : 960)));
   }
-  setTimeout(function () { lockFocus(false); }, 500);
+  // Start the focus pull once the photo is actually on screen (never wait more than 2.5s)
+  var started = false;
+  function startFocus() { if (started) return; started = true; placeAF(); setTimeout(function () { lockFocus(false); }, 120); }
+  var bgImg = bg;
+  Promise.all([fgImg, bgImg].map(function (im) { return im.decode ? im.decode().catch(function () {}) : Promise.resolve(); })).then(startFocus);
+  setTimeout(startFocus, 2500);
+
+  // ---- Shutter sound, made on the fly (no file). Only ever plays after a tap or click. ----
+  var actx = null;
+  function shutter() {
+    try {
+      var AC = window.AudioContext || window.webkitAudioContext; if (!AC) return;
+      actx = actx || new AC(); if (actx.state === "suspended") actx.resume();
+      var now = actx.currentTime;
+      function burst(at, len, freq, vol) {
+        var n = Math.floor(actx.sampleRate * len), buf = actx.createBuffer(1, n, actx.sampleRate), d = buf.getChannelData(0);
+        for (var i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / n, 3);
+        var src = actx.createBufferSource(); src.buffer = buf;
+        var f = actx.createBiquadFilter(); f.type = "bandpass"; f.frequency.value = freq; f.Q.value = 0.9;
+        var g = actx.createGain(); g.gain.value = vol;
+        src.connect(f); f.connect(g); g.connect(actx.destination); src.start(now + at);
+      }
+      burst(0, 0.035, 2600, 0.9);     // "ka" — the mirror flipping up
+      burst(0.075, 0.05, 1500, 0.7);  // "chik" — the shutter closing
+    } catch (e) {}
+  }
 
   // ---- Tap or click for a camera flash ----
   var flash = document.getElementById("flash"), snap = document.getElementById("snap"), shots = 0, downX = 0, downY = 0, downT = 0, snapT = null;
@@ -368,6 +398,7 @@ h1, h2, h3, p { margin: 0; }
     snap.textContent = "● PHOTO " + ("00" + shots).slice(-3);
     snap.classList.add("show"); clearTimeout(snapT); snapT = setTimeout(function () { snap.classList.remove("show"); }, 1300);
     shoot.classList.remove("show");
+    shutter();
     lockFocus(true);
   });
 
