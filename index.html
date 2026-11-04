@@ -75,9 +75,13 @@ p { margin: 0; }
 .btn-primary { background: var(--accent); color: var(--on-accent); }
 .btn-ghost { color: var(--ink); border-color: var(--line); }
 @media (hover: hover) { .btn-primary:hover { filter: brightness(1.06); } .btn-ghost:hover { border-color: var(--accent); } }
-.rings { width: 100%; max-width: 420px; justify-self: center; aspect-ratio: 1; }
-.rings .dot { animation: drift 7s ease-in-out infinite alternate; transform-origin: 210px 210px; }
-@keyframes drift { from { transform: rotate(0deg); } to { transform: rotate(16deg); } }
+.portrait { position: relative; margin: 0; justify-self: center; width: 100%; max-width: 380px; padding: 28px; }
+.portrait .halo { position: absolute; left: 50%; top: 50%; width: 136%; height: auto; aspect-ratio: 1; transform: translate(-50%, -50%); overflow: visible; pointer-events: none; }
+.portrait .halo .dot { animation: drift 7s ease-in-out infinite alternate; transform-origin: 210px 210px; }
+@keyframes drift { from { transform: rotate(0deg); } to { transform: rotate(14deg); } }
+.portrait picture { position: relative; display: block; transform: rotate(-2deg); }
+.portrait img { display: block; width: 100%; height: auto; border-radius: 16px; border: 6px solid #f4efe4; box-shadow: 0 28px 60px -18px rgba(0, 0, 0, 0.65); background: #222; }
+.portrait figcaption { position: relative; margin-top: 14px; text-align: center; font: 500 0.8rem/1 var(--font-mono); letter-spacing: 0.1em; color: var(--muted); }
 
 /* Cards */
 .cards { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; padding-bottom: 56px; }
@@ -104,14 +108,22 @@ p { margin: 0; }
 .foot { border-top: 1px solid var(--line); padding-block: 24px 40px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px; font-size: 0.875rem; color: var(--muted); }
 
 @media (max-width: 760px) {
-  .hero { grid-template-columns: minmax(0, 1fr); padding-block: 16px 40px; gap: 8px; }
-  .rings { order: -1; max-width: 220px; justify-self: start; margin-left: -10px; }
+  /* Phone: headline first, then photo beside the intro, so the main button stays near the top */
+  .hero { grid-template-columns: 124px minmax(0, 1fr); grid-template-areas: "eyebrow eyebrow" "title title" "photo lede" "actions actions"; padding-block: 12px 40px; gap: 0 18px; align-items: start; }
+  .hero-copy { display: contents; }
+  .hero .eyebrow { grid-area: eyebrow; }
+  .hero h1 { grid-area: title; margin-bottom: 20px; }
+  .hero .lede { grid-area: lede; margin-top: 0; font-size: 1.02rem; line-height: 1.5; }
+  .hero .hero-actions { grid-area: actions; }
+  .portrait { grid-area: photo; max-width: none; width: 124px; padding: 4px 0 0; justify-self: start; }
+  .portrait .halo, .portrait figcaption { display: none; }
+  .portrait img { border-width: 4px; border-radius: 10px; }
   .cards { grid-template-columns: minmax(0, 1fr); }
   .card { padding: 20px; }
   .hero-actions .btn { flex: 1 1 100%; }
   .nav a.hide-sm { display: none; }
 }
-@media (prefers-reduced-motion: reduce) { .rings .dot { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .portrait .halo .dot { animation: none; } }
 </style>
 </head>
 <body>
@@ -130,7 +142,7 @@ p { margin: 0; }
 
   <main>
     <section class="hero" aria-labelledby="hero-h">
-      <div>
+      <div class="hero-copy">
         <p class="eyebrow">Nightmares Come True</p>
         <h1 id="hero-h">I'm making my nightmares <em>come true.</em> On purpose. On camera.</h1>
         <p class="lede">For most of my life, my go-to line was <b>“I'm just Nate. I can't do that.”</b> So now I find the things that genuinely scare me and do them anyway. Some go well. Some go badly. Everything gets posted.</p>
@@ -139,15 +151,18 @@ p { margin: 0; }
           <a class="btn btn-ghost" href="https://imjustnate.substack.com" rel="noopener">Read the full story</a>
         </div>
       </div>
-      <svg class="rings" viewBox="0 0 420 420" role="img" aria-label="Three rings: comfort in the middle, stretch around it, panic on the outside, with one dot out in the stretch">
-        <circle cx="210" cy="210" r="196" fill="rgba(239,116,98,0.06)" stroke="#ef7462" stroke-opacity=".45" stroke-width="2" stroke-dasharray="3 9" stroke-linecap="round"/>
-        <circle cx="210" cy="210" r="138" fill="rgba(242,181,68,0.07)" stroke="#f2b544" stroke-opacity=".7" stroke-width="2"/>
-        <circle cx="210" cy="210" r="74" fill="rgba(135,150,220,0.22)" stroke="#8796dc" stroke-width="2"/>
-        <text x="210" y="215" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" letter-spacing="2" fill="#8796dc">COMFORT</text>
-        <text x="210" y="98" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="2" fill="#f2b544" fill-opacity=".85">STRETCH</text>
-        <text x="210" y="34" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="2" fill="#ef7462" fill-opacity=".8">PANIC</text>
-        <g class="dot"><circle cx="318" cy="128" r="13" fill="#f2b544"/><circle cx="318" cy="128" r="22" fill="none" stroke="#f2b544" stroke-opacity=".35" stroke-width="2"/></g>
-      </svg>
+      <figure class="portrait">
+        <svg class="halo" viewBox="0 0 420 420" aria-hidden="true">
+          <circle cx="210" cy="210" r="204" fill="none" stroke="#ef7462" stroke-opacity=".45" stroke-width="2" stroke-dasharray="3 9" stroke-linecap="round"/>
+          <circle cx="210" cy="210" r="150" fill="none" stroke="#f2b544" stroke-opacity=".6" stroke-width="2"/>
+          <g class="dot"><circle cx="377" cy="93" r="12" fill="#f2b544"/><circle cx="377" cy="93" r="21" fill="none" stroke="#f2b544" stroke-opacity=".35" stroke-width="2"/></g>
+        </svg>
+        <picture>
+          <source type="image/webp" srcset="/nate-600.webp 600w, /nate-1000.webp 1000w" sizes="(max-width: 760px) 62vw, 380px">
+          <img src="/nate-1000.jpg" srcset="/nate-600.jpg 600w, /nate-1000.jpg 1000w" sizes="(max-width: 760px) 62vw, 380px" width="1000" height="1363" alt="Nate in a flash-lit selfie, looking straight at the camera" fetchpriority="high">
+        </picture>
+        <figcaption>@imjustnatehere</figcaption>
+      </figure>
     </section>
 
     <section class="cards" aria-label="Start here">
