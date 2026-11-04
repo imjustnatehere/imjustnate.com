@@ -1,0 +1,2064 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Comfort Audit · I'm Just Nate</title>
+<meta name="description" content="How much of your life runs on comfort? A free 6-minute self-check: your Comfort Score, a map of where you play it safe, and a step-by-step ladder out.">
+<link rel="canonical" href="https://imjustnate.com/audit/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="I'm Just Nate">
+<meta property="og:title" content="The Comfort Audit: how much of your life runs on comfort?">
+<meta property="og:description" content="Free, about 6 minutes. Your Comfort Score, your zone map, and a step-by-step ladder out.">
+<meta property="og:url" content="https://imjustnate.com/audit/">
+<meta property="og:image" content="https://imjustnate.com/og-audit.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0f1221">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one calm column, like a page read in bed by a nightlight. Concentric zone rings are the signature graphic. */
+:root {
+  --bg: #0f1221;          /* night */
+  --surface: #171b2f;     /* duvet */
+  --surface-2: #1f2440;
+  --line: #2d3356;
+  --ink: #edecf6;
+  --muted: #a5a8c4;
+  --accent: #f2b544;      /* nightlight amber */
+  --accent-text: #f2b544;
+  --on-accent: #1b1405;
+  --comfort: #8796dc;     /* comfort zone */
+  --comfort-soft: rgba(135, 150, 220, 0.16);
+  --stretch-soft: rgba(242, 181, 68, 0.10);
+  --panic: #ef7462;
+  --panic-soft: rgba(239, 116, 98, 0.10);
+  --focus: #f2b544;
+
+  --font-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Atkinson Hyperlegible", "Verdana", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --step--1: 0.875rem;
+  --step-0: 1.0625rem;
+  --step-1: 1.25rem;
+  --step-2: 1.6rem;
+  --step-3: 2.2rem;
+  --step-4: 3.2rem;
+  --step-5: 5rem;
+  --radius: 14px;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #f2f3f9;
+    --surface: #ffffff;
+    --surface-2: #e8eaf4;
+    --line: #d3d6e8;
+    --ink: #151a2e;
+    --muted: #525873;
+    --accent: #f2b544;
+    --accent-text: #8a5300;
+    --on-accent: #1b1405;
+    --comfort: #4c5cb0;
+    --comfort-soft: rgba(76, 92, 176, 0.12);
+    --stretch-soft: rgba(242, 181, 68, 0.16);
+    --panic: #c4463a;
+    --panic-soft: rgba(196, 70, 58, 0.08);
+    --focus: #8a5300;
+    color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #f2f3f9;
+  --surface: #ffffff;
+  --surface-2: #e8eaf4;
+  --line: #d3d6e8;
+  --ink: #151a2e;
+  --muted: #525873;
+  --accent: #f2b544;
+  --accent-text: #8a5300;
+  --on-accent: #1b1405;
+  --comfort: #4c5cb0;
+  --comfort-soft: rgba(76, 92, 176, 0.12);
+  --stretch-soft: rgba(242, 181, 68, 0.16);
+  --panic: #c4463a;
+  --panic-soft: rgba(196, 70, 58, 0.08);
+  --focus: #8a5300;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 56px;
+}
+.wrap.wide { max-width: 1000px; }
+h1, h2, h3 {
+  font-family: var(--font-display);
+  line-height: 1.12;
+  text-wrap: balance;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+p { margin: 0; }
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.muted { color: var(--muted); }
+a { color: var(--accent-text); }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 6px; }
+
+.btn {
+  font: 700 var(--step-0)/1 var(--font-body);
+  border-radius: 999px;
+  padding: 0.95em 1.6em;
+  border: 2px solid transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  min-height: 52px;
+}
+.btn-primary { background: var(--accent); color: var(--on-accent); }
+.btn-primary:disabled { opacity: 0.4; cursor: not-allowed; filter: none; }
+.btn-ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+.btn-small { min-height: 40px; padding: 0.55em 1.1em; font-size: var(--step--1); }
+.link-btn { background: none; border: 0; color: var(--accent-text); font: 700 var(--step--1) var(--font-body); cursor: pointer; padding: 6px 2px; min-height: 34px; text-decoration: underline; text-underline-offset: 3px; }
+/* Hover only where a real pointer can hover, so a tap never leaves an option looking picked */
+@media (hover: hover) {
+  .btn-primary:hover:not(:disabled) { filter: brightness(1.06); }
+  .btn-ghost:hover { border-color: var(--muted); }
+  .opt:hover { border-color: var(--muted); }
+}
+
+/* ---------- Intro ---------- */
+.intro { display: grid; gap: 40px; }
+.intro-head { display: grid; gap: 18px; padding-top: 12px; }
+.intro h1 { font-size: clamp(2.3rem, 7vw, var(--step-4)); font-weight: 800; }
+.intro h1 em { font-style: normal; color: var(--accent-text); }
+.lede { font-size: var(--step-1); color: var(--ink); max-width: 36ch; }
+.intro-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.fine { font-size: var(--step--1); color: var(--muted); }
+.gets { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; padding: 0; margin: 0; list-style: none; }
+.gets li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; display: grid; gap: 4px; }
+.gets b { font-family: var(--font-display); font-size: var(--step-1); font-weight: 700; }
+.gets span { color: var(--muted); font-size: var(--step--1); }
+.example { display: grid; gap: 22px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+.example-top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; align-items: center; }
+.example-copy { display: grid; gap: 10px; min-width: 0; }
+.example .stamp { justify-self: start; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.09em; text-transform: uppercase; border: 1px dashed var(--muted); color: var(--muted); padding: 3px 8px; border-radius: 6px; }
+.example-num { font-family: var(--font-display); font-weight: 800; font-size: var(--step-4); line-height: 1; }
+.example-num small { font-size: 0.4em; font-weight: 700; letter-spacing: 0; }
+.rules { display: grid; gap: 10px; border-top: 1px solid var(--line); padding-top: 24px; }
+.rules h2 { font-size: var(--step-1); }
+.rules ul { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; }
+
+/* How to read the map */
+.readbox { display: grid; gap: 14px; min-width: 0; }
+.readbox h3 { font-size: var(--step-1); }
+.example .readbox { border-top: 1px solid var(--line); padding-top: 20px; }
+.readcard { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+.howto { margin: 0; padding-left: 1.3em; display: grid; gap: 8px; font-size: var(--step--1); color: var(--muted); max-width: 66ch; }
+.howto b { color: var(--ink); }
+.key-svg { width: 100%; max-width: 540px; height: auto; display: block; }
+.key-svg .k-comfort { fill: var(--comfort-soft); stroke: var(--comfort); stroke-width: 1.2; }
+.key-svg .k-stretch { fill: var(--stretch-soft); stroke: var(--accent); stroke-width: 1; stroke-opacity: 0.6; }
+.key-svg .k-panic { fill: var(--panic-soft); stroke: var(--panic); stroke-width: 1.2; stroke-dasharray: 3 4; }
+.key-svg .k-band { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.08em; fill: var(--muted); text-anchor: middle; }
+.key-svg .k-band.p { fill: var(--panic); }
+.key-svg .k-dot { fill: var(--accent); stroke: var(--bg); stroke-width: 2; }
+.key-svg .k-dot.in { fill: var(--comfort); }
+.key-svg .k-lead { stroke: var(--muted); stroke-width: 1; }
+.key-svg .k-lab { font-family: var(--font-body); font-size: 11.5px; font-weight: 700; fill: var(--ink); }
+.key-svg .k-end { font-family: var(--font-mono); font-size: 9px; fill: var(--muted); }
+
+/* ---------- Quiz ---------- */
+.quiz { display: grid; gap: 26px; }
+.progress { display: grid; gap: 8px; }
+.progress-top { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+.track { height: 6px; border-radius: 6px; background: var(--surface-2); overflow: hidden; }
+.track > div { height: 100%; width: 0; background: var(--accent); border-radius: 6px; transition: width 0.3s ease; }
+.qhead { display: grid; gap: 12px; }
+#qtext { font-size: clamp(1.45rem, 4.6vw, var(--step-3)); font-weight: 700; outline: none; }
+.qhint { color: var(--muted); font-size: var(--step--1); }
+fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+.opts { display: grid; gap: 10px; }
+.opt { position: relative; display: flex; align-items: center; gap: 14px; background: var(--surface); border: 2px solid var(--line); border-radius: var(--radius); padding: 14px 16px; cursor: pointer; min-height: 58px; transition: border-color 0.15s ease, background 0.15s ease; -webkit-tap-highlight-color: transparent; }
+.opt input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.opt .key { flex: none; width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--line); display: grid; place-items: center; font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); }
+.opt .lbl { min-width: 0; }
+.opt:has(input:checked) { border-color: var(--accent); background: var(--stretch-soft); }
+.opt:has(input:checked) .key { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.opt:has(input:focus-visible) { outline: 3px solid var(--focus); outline-offset: 2px; }
+.opt.check .key { border-radius: 8px; }
+.qnav { display: flex; justify-content: space-between; gap: 12px; align-items: center; flex-wrap: wrap; }
+
+/* ---------- Results ---------- */
+.results { display: grid; gap: 56px; }
+.res-head { display: grid; gap: 18px; }
+.score-row { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px 24px; }
+.score { font-family: var(--font-display); font-weight: 800; font-size: clamp(4.2rem, 16vw, 7.5rem); line-height: 0.9; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.score small { font-size: 0.42em; letter-spacing: 0; }
+.band { display: grid; gap: 6px; padding-bottom: 8px; }
+.band-name { font-family: var(--font-display); font-size: var(--step-2); font-weight: 700; color: var(--accent-text); }
+.res-head p.big { font-size: var(--step-1); max-width: 42ch; }
+.res-head p.big b { color: var(--accent-text); }
+.delta { font-family: var(--font-mono); font-size: var(--step--1); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; justify-self: start; }
+.sec { display: grid; gap: 20px; }
+.sec-head { display: grid; gap: 8px; }
+.sec-head h2 { font-size: var(--step-2); }
+.sec-head p { color: var(--muted); max-width: 62ch; }
+.mapgrid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 32px; align-items: center; }
+.zone-svg { width: 100%; height: auto; display: block; max-width: 460px; margin: 0 auto; }
+.zone-svg .z-panic { fill: var(--panic-soft); stroke: var(--panic); stroke-width: 1.5; stroke-dasharray: 4 5; }
+.zone-svg .z-stretch { fill: var(--stretch-soft); stroke: var(--accent); stroke-width: 1; stroke-opacity: 0.55; }
+.zone-svg .z-comfort { fill: var(--comfort-soft); stroke: var(--comfort); stroke-width: 1.5; }
+.zone-svg .spoke { stroke: var(--line); stroke-width: 1; }
+.zone-svg .shape { fill: var(--accent); fill-opacity: 0.18; stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; }
+.zone-svg .dot { fill: var(--accent); stroke: var(--bg); stroke-width: 2.5; }
+.zone-svg .dot.in { fill: var(--comfort); }
+.zone-svg .zl { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.08em; fill: var(--muted); text-anchor: middle; }
+.zone-svg .zl.p { fill: var(--panic); }
+.zone-svg .axis { font-family: var(--font-body); font-size: 15px; font-weight: 700; fill: var(--ink); }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: var(--step--1); color: var(--muted); }
+.legend i { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; }
+.bars-wrap { display: grid; gap: 14px; min-width: 0; }
+.bars-note { font-size: var(--step--1); color: var(--muted); }
+.bars { display: grid; gap: 14px; padding: 0; margin: 0; list-style: none; }
+.bar { display: grid; gap: 6px; }
+.bar-top { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.bar-name { font-weight: 700; }
+.bar-pct { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.bar-track { height: 10px; border-radius: 6px; background: var(--surface-2); overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 6px; background: var(--accent); }
+.bar-fill.in { background: var(--comfort); }
+.bar-desc { font-size: var(--step--1); color: var(--muted); }
+.bar-desc b { color: var(--ink); font-weight: 700; }
+.tag { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 8px; border-radius: 6px; border: 1px solid currentColor; margin-left: 8px; white-space: nowrap; }
+.tag.safe { color: var(--comfort); }
+.tag.brave { color: var(--accent-text); }
+
+.habits { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.habit { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; display: grid; gap: 8px; align-content: start; }
+.habit h3 { font-size: var(--step-1); }
+.habit p { font-size: var(--step--1); }
+.habit .try { color: var(--ink); }
+.habit .try b { color: var(--accent-text); }
+.empty { background: var(--surface); border: 1px dashed var(--line); border-radius: var(--radius); padding: 18px; color: var(--muted); }
+
+.ladders { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.ladder { display: grid; gap: 14px; align-content: start; min-width: 0; }
+.ladder h3 { font-size: var(--step-1); display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; align-items: baseline; }
+.ladder h3 span { font-family: var(--font-mono); font-size: var(--step--1); color: var(--muted); font-weight: 500; }
+.rungs { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.rung { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--line); border-radius: 10px; padding: 14px 16px 8px; display: grid; gap: 6px; min-width: 0; }
+.rung[data-level="0"] { border-left-color: var(--comfort); }
+.rung[data-level="1"] { border-left-color: color-mix(in srgb, var(--comfort) 40%, var(--accent)); }
+.rung[data-level="2"] { border-left-color: var(--accent); }
+.rung[data-level="3"] { border-left-color: var(--panic); }
+.rung.editing { border-color: var(--accent); }
+.rung-top { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.rung-name { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.rung-count { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); }
+.rung-count.own { color: var(--accent-text); }
+.rung-text { overflow-wrap: anywhere; }
+.rung-actions { display: flex; flex-wrap: wrap; gap: 0 18px; align-items: center; }
+.own-input { width: 100%; font: var(--step-0)/1.5 var(--font-body); color: var(--ink); background: var(--surface-2); border: 2px solid var(--line); border-radius: 10px; padding: 10px 12px; resize: vertical; min-height: 88px; }
+.own-input:focus { border-color: var(--accent); outline: none; }
+.ladder-note { font-size: var(--step--1); color: var(--muted); }
+
+/* Your other X% */
+.other-lead { font-family: var(--font-display); font-size: var(--step-2); font-weight: 700; line-height: 1.2; max-width: 32ch; text-wrap: balance; }
+.other-lead b { color: var(--accent-text); }
+.truths { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.truth { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; display: grid; gap: 6px; align-content: start; }
+.truth h3 { font-size: var(--step-1); }
+.truth p { font-size: var(--step--1); color: var(--muted); }
+.proof-box { display: grid; gap: 12px; border-top: 1px solid var(--line); padding-top: 20px; }
+.proof-box h3 { font-size: var(--step-1); }
+.proof { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.proof li { display: grid; grid-template-columns: 16px minmax(0, 1fr); gap: 12px; align-items: start; }
+.proof li::before { content: ""; width: 12px; height: 12px; margin-top: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--stretch-soft); }
+.other-note { font-size: var(--step--1); color: var(--muted); max-width: 64ch; }
+
+/* Change since last time, result codes, returning visitors */
+.chg { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; margin-left: 6px; }
+.chg.good { color: var(--accent-text); border-color: var(--accent); }
+.code-box { display: grid; gap: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; }
+.code { font-family: var(--font-mono); font-size: clamp(1rem, 4.2vw, 1.35rem); letter-spacing: 0.04em; color: var(--ink); background: var(--surface-2); border: 1px dashed var(--muted); border-radius: 10px; padding: 12px 14px; overflow-wrap: anywhere; user-select: all; -webkit-user-select: all; }
+.returning { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; }
+.returning p { flex: 1 1 240px; min-width: 0; }
+.returning b { color: var(--accent-text); }
+.restore { border-top: 0; padding-top: 0; }
+.restore summary { font-family: var(--font-body); font-size: var(--step--1); color: var(--accent-text); text-decoration: underline; text-underline-offset: 3px; }
+.code-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.code-in { flex: 1 1 220px; min-width: 0; font: 1rem var(--font-mono); letter-spacing: 0.03em; color: var(--ink); background: var(--surface-2); border: 2px solid var(--line); border-radius: 10px; padding: 10px 12px; min-height: 44px; }
+.code-in:focus { border-color: var(--accent); outline: none; }
+
+/* Jump to ladder, split bars, email, how it works */
+.jump { justify-self: start; display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0.7em 1.2em; border-radius: 999px; border: 2px solid var(--accent); background: var(--stretch-soft); color: var(--accent-text); font: 700 var(--step-0)/1.3 var(--font-body); text-decoration: none; }
+.jump span { font-size: 1.15em; }
+@media (hover: hover) { .jump:hover { background: var(--accent); color: var(--on-accent); } }
+.split { display: flex; height: 12px; border-radius: 6px; overflow: hidden; background: var(--surface-2); }
+.split .s-safe { background: var(--comfort); }
+.split .s-push { background: var(--accent); }
+.bar-nums { display: flex; flex-wrap: wrap; gap: 2px 16px; font-size: var(--step--1); }
+.bar-nums i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; }
+.bar-nums i.k-safe { background: var(--comfort); }
+.bar-nums i.k-push { background: var(--accent); }
+.bar-nums b { font-family: var(--font-mono); font-weight: 500; font-variant-numeric: tabular-nums; }
+.bar-top .chg { margin-left: 0; }
+.howclimb { display: grid; gap: 12px; }
+.howclimb h3 { font-size: var(--step-1); }
+.howclimb .howto { font-size: var(--step-0); color: var(--ink); gap: 10px; }
+.howclimb .howto b { color: var(--accent-text); }
+.dchart h3 { font-size: var(--step-1); }
+.email-box { display: grid; gap: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; }
+.email-box h3 { font-size: var(--step-1); }
+.email-in { flex: 1 1 220px; min-width: 0; font: 1rem var(--font-body); color: var(--ink); background: var(--surface-2); border: 2px solid var(--line); border-radius: 10px; padding: 10px 12px; min-height: 44px; }
+.email-in:focus { border-color: var(--accent); outline: none; }
+a.btn { text-decoration: none; }
+
+/* Unlock all 7 ladders (newsletter) */
+.unlock { display: grid; gap: 14px; background: var(--surface); border: 2px solid var(--accent); border-radius: var(--radius); padding: 20px; }
+.unlock h3 { font-size: var(--step-2); line-height: 1.15; }
+.unlock-copy { display: grid; gap: 8px; }
+.unlock-copy p { max-width: 62ch; }
+.sub-wrap { border-radius: 12px; overflow: hidden; background: #fff; width: 100%; max-width: 520px; }
+.sub-embed { display: block; width: 100%; height: 300px; border: 0; background: #fff; }
+.unlock-row { display: grid; gap: 8px; }
+.unlock-row .lab { font-weight: 700; font-size: var(--step--1); }
+.unlock-done, .unlock-note { background: var(--stretch-soft); border: 1px solid var(--accent); border-radius: var(--radius); padding: 14px 16px; }
+.unlock-done b, .unlock-note b { color: var(--accent-text); }
+.unlock a, .foot a, .eyebrow a { color: var(--accent-text); }
+
+/* Share image */
+.share { display: grid; grid-template-columns: minmax(0, 250px) minmax(0, 1fr); gap: 24px; align-items: start; }
+.share-img { width: 100%; max-width: 250px; aspect-ratio: 9 / 16; height: auto; border-radius: 14px; border: 1px solid var(--line); background: var(--surface); display: block; }
+.share-copy { display: grid; gap: 14px; align-content: start; min-width: 0; }
+.caption { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: var(--step--1); }
+
+/* Dread log: on each step */
+.log-line { display: flex; flex-wrap: wrap; gap: 6px; }
+.log-chip { font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent-text); border: 1px solid var(--accent); border-radius: 6px; padding: 1px 6px; }
+.log-chip.done { color: var(--comfort); border-color: var(--comfort); }
+.logform { display: grid; gap: 12px; border-top: 1px dashed var(--line); padding-top: 12px; margin-top: 2px; }
+.logform fieldset { display: grid; gap: 6px; }
+.logform legend, .logform .lab { font-size: var(--step--1); font-weight: 700; padding: 0; margin-bottom: 6px; }
+.dial { display: grid; grid-template-columns: repeat(11, minmax(0, 1fr)); gap: 3px; }
+.dial label { position: relative; display: block; }
+.dial input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.dial span { display: grid; place-items: center; min-height: 36px; border-radius: 6px; background: var(--surface-2); color: var(--muted); font: 500 0.8rem var(--font-mono); cursor: pointer; }
+.dial input:checked + span { background: var(--accent); color: var(--on-accent); font-weight: 700; }
+.dial input:focus-visible + span { outline: 3px solid var(--focus); outline-offset: 1px; }
+.log-ta { width: 100%; font: var(--step--1)/1.5 var(--font-body); color: var(--ink); background: var(--surface-2); border: 2px solid var(--line); border-radius: 10px; padding: 8px 10px; resize: vertical; min-height: 64px; }
+.log-ta:focus { border-color: var(--accent); outline: none; }
+
+/* Dread log: the chart */
+.dchart { display: grid; gap: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; }
+.dchart.example { border-style: dashed; }
+.dsum { font-family: var(--font-display); font-size: var(--step-1); font-weight: 700; max-width: 40ch; }
+.dsum b { color: var(--accent-text); }
+.drows { display: grid; gap: 14px; }
+.drow { display: grid; gap: 6px; }
+.drow-lab { font-size: var(--step--1); min-width: 0; overflow-wrap: anywhere; }
+.drow-lab small { color: var(--muted); display: block; font-size: 0.78rem; }
+.dtrack { position: relative; height: 22px; margin: 0 8px; }
+.dtrack::before { content: ""; position: absolute; left: 0; right: 0; top: 10px; height: 2px; background: var(--surface-2); }
+.dband { position: absolute; top: 3px; height: 16px; left: 40%; width: 30%; background: var(--stretch-soft); border-radius: 4px; }
+.dline { position: absolute; top: 9px; height: 4px; background: var(--muted); border-radius: 2px; opacity: 0.45; }
+.ddot { position: absolute; top: 3px; width: 16px; height: 16px; margin-left: -8px; border-radius: 50%; }
+.ddot.pred { border: 3px solid var(--accent); background: var(--surface); }
+.ddot.peak { background: var(--comfort); border: 2px solid var(--surface); }
+.daxis { display: flex; justify-content: space-between; margin: 0 2px; font: 500 0.72rem var(--font-mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.dlegend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: var(--step--1); color: var(--muted); }
+.dlegend i { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; }
+.dlegend i.pred { border: 3px solid var(--accent); }
+.dlegend i.peak { background: var(--comfort); }
+.dlegend i.band { border-radius: 3px; background: var(--stretch-soft); outline: 1px solid var(--accent); }
+
+.plan { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.plan > li { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 16px; padding: 18px; background: var(--surface); }
+.plan > li + li { border-top: 1px solid var(--line); }
+.plan .wk { font-family: var(--font-mono); font-size: var(--step--1); color: var(--muted); letter-spacing: 0.04em; }
+.plan .wk b { display: block; font-family: var(--font-display); font-size: var(--step-1); color: var(--ink); letter-spacing: 0; }
+.plan ul { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; min-width: 0; overflow-wrap: anywhere; }
+.plan .kind { font-weight: 700; }
+.save-row { display: grid; gap: 10px; background: var(--stretch-soft); border: 1px solid var(--accent); border-radius: var(--radius); padding: 18px; }
+.save-row p { font-size: var(--step--1); color: var(--muted); max-width: 60ch; }
+
+.method { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+.steps { margin: 0; padding-left: 1.3em; display: grid; gap: 10px; }
+.scale { display: grid; grid-template-columns: repeat(11, minmax(0, 1fr)); gap: 3px; margin-top: 6px; }
+.scale span { font-family: var(--font-mono); font-size: 0.72rem; text-align: center; padding: 6px 0; border-radius: 4px; background: var(--surface-2); color: var(--muted); }
+.scale span.s { background: var(--stretch-soft); color: var(--accent-text); font-weight: 700; outline: 1px solid var(--accent); }
+.scale span.p { background: var(--panic-soft); color: var(--panic); }
+.scale-cap { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--muted); font-family: var(--font-mono); margin-top: 4px; }
+.template { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; display: grid; gap: 12px; }
+.template pre { margin: 0; font-family: var(--font-mono); font-size: 0.85rem; white-space: pre-wrap; line-height: 1.7; color: var(--ink); }
+.fallback { width: 100%; min-height: 160px; font-family: var(--font-mono); font-size: 0.85rem; background: var(--surface-2); color: var(--ink); border: 1px solid var(--line); border-radius: 10px; padding: 10px; }
+
+details { border-top: 1px solid var(--line); padding-top: 16px; }
+details + details { margin-top: 4px; }
+summary { cursor: pointer; font-family: var(--font-display); font-size: var(--step-1); font-weight: 700; padding: 4px 0; }
+details .body { display: grid; gap: 12px; padding-top: 12px; max-width: 66ch; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.status { font-size: var(--step--1); color: var(--muted); }
+.foot { border-top: 1px solid var(--line); padding-top: 24px; display: grid; gap: 10px; font-size: var(--step--1); color: var(--muted); }
+.foot b { color: var(--ink); }
+.sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+@media (max-width: 720px) {
+  .mapgrid, .habits, .ladders, .method, .example-top, .truths, .share { grid-template-columns: minmax(0, 1fr); }
+  .share-img { max-width: 230px; margin: 0 auto; }
+  .plan > li { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .gets { grid-template-columns: minmax(0, 1fr); }
+  .example .example-svg { max-width: 300px; width: 100%; margin: 0 auto; }
+}
+@media (hover: none) { .kbd { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+</style>
+<style>[hidden]{display:none!important} body{margin:0}</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+
+  <!-- ===== Intro ===== -->
+  <section class="screen intro" id="intro" aria-labelledby="intro-title">
+    <div class="intro-head">
+      <p class="eyebrow">A self-check from <a href="https://imjustnate.com/">I'm Just Nate</a> · Nightmares Come True</p>
+      <h1 id="intro-title">How much of your life runs on <em>comfort</em>?</h1>
+      <p class="lede">29 questions and one checklist, about 6 minutes. You find out how much of your life you spend playing it safe, where you do it most, and get a 30-day ladder out.</p>
+      <div class="intro-actions">
+        <button class="btn btn-primary" id="start" type="button">Start the audit</button>
+        <button class="btn btn-ghost" id="resume" type="button" hidden>Continue where you left off</button>
+      </div>
+      <p class="fine">Your answers never leave this browser. Nothing is sent anywhere.</p>
+      <p class="unlock-note" id="unlock-note" hidden><b>Your other five ladders are unlocked.</b> Take the audit to see all seven. Taken it before on another phone or browser? Bring back your result with your code below.</p>
+      <div class="returning" id="returning" hidden>
+        <p id="last-line"></p>
+        <button class="btn btn-ghost btn-small" id="view-last" type="button">See my last results</button>
+      </div>
+      <details class="restore" id="restore">
+        <summary>Retaking? Bring back your last result</summary>
+        <div class="body">
+          <p class="fine">Paste the result code from your last audit. It's on your results page and in your PDF. When you finish, you'll see what changed.</p>
+          <div class="code-row">
+            <label class="sr" for="code-in">Result code</label>
+            <input id="code-in" class="code-in" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="CA1-…">
+            <button class="btn btn-ghost btn-small" id="code-load" type="button">Load my result</button>
+          </div>
+          <p class="status" id="code-status" role="status"></p>
+        </div>
+      </details>
+    </div>
+
+    <ul class="gets" aria-label="What you get">
+      <li><b>Comfort Score</b><span>How much of your life you spend playing it safe, from 0 to 100%.</span></li>
+      <li><b>Zone map</b><span>Seven areas of life, and how safe you play it in each.</span></li>
+      <li><b>Your comfort habits</b><span>The quiet ways you keep yourself safe, and what to try instead.</span></li>
+      <li><b>A 30-day ladder</b><span>Steps from a 5-minute Bad Dream up to a real nightmare. Shuffle them, write your own, log how each one went, and download it as a PDF.</span></li>
+    </ul>
+
+    <div class="example" aria-label="Example result">
+      <div class="example-top">
+        <div class="example-svg" id="example-map"></div>
+        <div class="example-copy">
+          <span class="stamp">Example result</span>
+          <div class="example-num">68<small>%</small></div>
+          <p><b>Padded.</b> 68% of this person's life is lived playing it safe. Their dots sit closest to the middle for Body and Being seen, where they play it safest. Honesty reaches farthest out, into the stretch.</p>
+        </div>
+      </div>
+      <div class="readbox">
+        <h3>How to read the map</h3>
+        <ol class="howto" id="howto-intro"></ol>
+        <div id="example-key"></div>
+        <p class="fine">That's one spoke of the map laid flat, from the middle (left) to the outside (right). Body is 88% safe, so its dot sits deep in comfort. Honesty is 44% safe, so its dot reaches out into the stretch.</p>
+      </div>
+    </div>
+
+    <div class="rules">
+      <h2>Before you start</h2>
+      <ul>
+        <li>Answer for the last 3 months. What you actually did, not what you would do.</li>
+        <li>There are no good or bad scores. Comfort keeps you safe; too much of it keeps you small.</li>
+        <li>Go with your first answer. You can always go back.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== Quiz ===== -->
+  <section class="screen quiz" id="quiz" hidden aria-label="The audit">
+    <div class="progress">
+      <div class="progress-top">
+        <span class="eyebrow" id="qarea">Being seen</span>
+        <span class="eyebrow" id="qcount">1 of 30</span>
+      </div>
+      <div class="track" role="progressbar" aria-label="Progress" aria-valuemin="0" aria-valuemax="30" aria-valuenow="0" id="track"><div id="trackfill"></div></div>
+    </div>
+    <div class="qhead">
+      <h2 id="qtext" tabindex="-1">Question</h2>
+      <p class="qhint" id="qhint"></p>
+    </div>
+    <fieldset aria-labelledby="qtext">
+      <div class="opts" id="opts"></div>
+    </fieldset>
+    <div class="qnav">
+      <button class="btn btn-ghost" id="back" type="button">Back</button>
+      <button class="btn btn-primary" id="next" type="button" disabled>Next</button>
+    </div>
+  </section>
+
+  <!-- ===== Results ===== -->
+  <section class="screen results" id="results" hidden aria-labelledby="res-title"></section>
+
+</div>
+
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- Content ---------- */
+  var SCALES = {
+    recency: { hint: "Pick the closest, then tap Next.", opts: ["This week", "This month", "Within the last 3 months", "Within the last year", "Over a year ago, or never"] },
+    avoid:   { hint: "Think about the last 3 months. Pick one, then tap Next.", opts: ["Never", "Rarely", "Sometimes", "Often", "Almost always"] },
+    like:    { hint: "How much does this sound like you? Pick one, then tap Next.", opts: ["Not like me", "A little like me", "Somewhat like me", "Mostly like me", "Exactly like me"] },
+    week:    { hint: "A rough guess is fine. Pick one, then tap Next.", opts: ["More than 6 hours", "3 to 6 hours", "1 to 3 hours", "Less than an hour", "Almost none"] }
+  };
+
+  // Each area: 4 rungs, 6 options per rung.
+  var DOMAINS = [
+    { id: "seen", name: "Being seen", short: "Seen",
+      desc: "Being watched while you do something: performing, speaking up, sharing what you made.",
+      ladder: [
+        ["Sing one line of a song out loud in a public place, like a store aisle.",
+         "Speak first in your next meeting or group chat, with a real opinion.",
+         "Record a 15-second video of yourself talking to the camera, and send it to a friend.",
+         "Ask your question out loud in a class, meeting or talk instead of saving it for after.",
+         "Read one paragraph of something you wrote out loud to a friend.",
+         "Be the first to clap, cheer or laugh out loud at something this week."],
+        ["Share something you made without editing it twice.",
+         "Give a short toast at the next dinner or gathering.",
+         "Post a video of yourself talking about something you care about, and don't delete it.",
+         "Volunteer to give the next update at work, school or church.",
+         "Play, sing or show something you're still learning to one person.",
+         "Tell a story at dinner all the way to the end, even if the table goes quiet."],
+        ["Sign up for an open mic, a story night or karaoke, and go.",
+         "Take a beginner dance class and stand in the front row.",
+         "Offer to lead something: a workshop, a lesson, a meeting or a game night.",
+         "Busk for 20 minutes somewhere people walk by.",
+         "Enter something you made into a show, contest or showcase where it gets judged.",
+         "Start a public account for something you make and post to it weekly for a month."],
+        ["Perform something (a song, a set, a talk) for an audience you invited.",
+         "Put something true about yourself somewhere public, and leave it up.",
+         "Do a full stand-up, story or poetry set at an open mic.",
+         "Give a talk you volunteered for, in front of people whose opinion matters to you.",
+         "Sing a whole song solo on a stage, in front of people who know you.",
+         "Post the thing you've been afraid to post, and don't check it for a full day."]
+      ] },
+    { id: "social", name: "Strangers & new rooms", short: "Strangers",
+      desc: "Meeting new people and walking into rooms where you know no one.",
+      ladder: [
+        ["Ask a stranger for a recommendation, then ask one real follow-up question.",
+         "Say hi to a neighbor you have never talked to.",
+         "Compliment a stranger on something specific, then keep walking.",
+         "Ask the person next to you in line how their day is actually going.",
+         "Learn the name of someone you see every week (a barista, a coworker, a neighbor) and use it.",
+         "Sit next to someone new instead of next to the person you know."],
+        ["Sit in a café or at a public event alone for 30 minutes, phone away.",
+         "At your next event, introduce yourself to one new person and learn three things about them.",
+         "Eat a meal alone at a sit-down restaurant, no phone.",
+         "Invite an acquaintance for coffee, and set the day and time yourself.",
+         "At a party, join a group of people you don't know mid-conversation.",
+         "Keep a conversation with a stranger going for more than five minutes."],
+        ["Go to a meetup, class or event alone where you know no one.",
+         "Host something small and invite one person you would like to know better.",
+         "Go to a mixer or networking event and talk to five new people.",
+         "Join a pickup game, run club or volunteer shift on your own.",
+         "Invite three people who don't know each other to the same dinner.",
+         "Take a day trip somewhere new alone, and talk to at least three locals."],
+        ["Go to a party where you know no one and stay until the end.",
+         "Join a group (a club, a team, a choir) and keep showing up for a month.",
+         "Host a gathering and invite people you'd like to know, not just close friends.",
+         "Travel somewhere alone for a weekend and make a plan with someone you meet there.",
+         "Go to a wedding, reunion or work event solo, and spend it talking to people you don't know.",
+         "Organize a meetup for strangers who share one of your interests, and host it yourself."]
+      ] },
+    { id: "asking", name: "Asking & hearing no", short: "Asking",
+      desc: "Asking for what you want, and risking the no.",
+      ladder: [
+        ["Ask for something small you would usually skip: a discount, a sample, a better table.",
+         "Message someone you admire with one specific question.",
+         "Ask a stranger to take your photo.",
+         "Ask to try something before you buy it.",
+         "Ask a friend or coworker for help with something you'd normally figure out alone.",
+         "Ask for a free upgrade, a refill or a later checkout."],
+        ["Politely send back an order that is wrong.",
+         "Ask three people for a favor this week, and count the noes.",
+         "Ask a restaurant or store for something that isn't on the menu.",
+         "Call and ask for a lower price on a bill, plan or subscription.",
+         "Ask someone directly for their honest opinion of something you made.",
+         "Ask for the extension or change you need, without apologizing for it."],
+        ["Pitch an idea, a project or yourself to someone who could say no.",
+         "Ask for honest feedback from someone whose opinion scares you.",
+         "Collect ten noes in one week. Only real asks count.",
+         "Cold-email five people you'd like to work with or learn from.",
+         "Ask a local business to sponsor, host or team up with something you're doing.",
+         "Ask for a meeting with someone two levels above you."],
+        ["Ask for the big thing you have been putting off: the raise, the date, the collaboration.",
+         "Apply for something you think is out of your league, and tell someone you did.",
+         "Ask out the person you've been thinking about.",
+         "Pitch yourself, in person, for the job, role or client you want most.",
+         "Ask someone with a big platform to share, fund or feature your work.",
+         "Spend a full day asking for something every hour you're awake, and make one of those asks the one that scares you most."]
+      ] },
+    { id: "body", name: "Your body, seen", short: "Body",
+      desc: "Your body in photos, on video, or moving where people can watch.",
+      ladder: [
+        ["Let someone take a photo of you, and don't retake it.",
+         "Keep one unflattering photo of yourself where you will see it.",
+         "Send a photo of yourself to a friend after looking at it only once.",
+         "Go a whole day without checking yourself in a mirror or a window.",
+         "Wear the shirt you think is “too much” to run one errand.",
+         "Film yourself dancing for 30 seconds and watch it once without deleting it."],
+        ["Wear something bolder than usual for a whole day out.",
+         "Take a workout class and skip the back row.",
+         "Go to a pool or beach and stay in your swimsuit the whole time.",
+         "Let a friend take ten photos of you, and post the one they pick.",
+         "Dance for a full song at the next event with music.",
+         "Leave the house in an outfit and keep it on all day, no changing."],
+        ["Join a dance, swim or movement class where people will see you trying.",
+         "Get a portrait taken and post it without retouching.",
+         "Do a photoshoot somewhere public, where people walk by.",
+         "Sign up for a beginner sport or a rec league game.",
+         "Go to a sauna, hot spring or pool where you can't hide under clothes.",
+         "Post a video of yourself moving: dancing, working out or trying a sport."],
+        ["Do something physical in front of people you know: a race, a dance, a game.",
+         "Walk or perform somewhere your body is the whole point: a runway, a stage, a dance-off.",
+         "Model for an art class or a photographer's project.",
+         "Perform a dance in front of an audience.",
+         "Run a race with friends or family waiting at the finish line.",
+         "Post the photo of yourself you would normally hide."]
+      ] },
+    { id: "control", name: "Not being in control", short: "Control",
+      desc: "Not knowing the plan, letting others decide, and losing your way out.",
+      ladder: [
+        ["Let someone else choose your meal, and don't change it.",
+         "Leave your phone in another room for an evening.",
+         "Let a friend pick the music for the whole drive.",
+         "Say yes to the first plan someone suggests today.",
+         "Take a different route home without looking it up.",
+         "Flip a coin to make one small decision today, and stick with it."],
+        ["Say yes to a plan before you know all the details.",
+         "Get somewhere new without a map for part of the way.",
+         "Let a friend pick an activity you've never done, and go along with it.",
+         "Spend an afternoon without checking the time.",
+         "Go to a movie, show or restaurant you know nothing about.",
+         "Go out without a set time to come home."],
+        ["Let a friend plan a day for you and reveal it as you go.",
+         "Commit to an event early, tell people you're coming, and go.",
+         "Book a trip somewhere new with only the first night planned.",
+         "Let someone cut or style your hair however they want.",
+         "Take a class where the teacher decides everything: improv, a cooking class, a mystery workshop.",
+         "Say yes to every invitation you get for a week."],
+        ["Spend a full day where someone else makes every decision.",
+         "Travel somewhere you don't speak the language, with nothing booked past the first night.",
+         "Take a trip where someone else picked the place, and find out when you get there.",
+         "Go on a blind date someone else set up, and let them pick the plan.",
+         "Perform in an improv show in front of an audience.",
+         "Spend a full weekend somewhere new without your phone."]
+      ] },
+    { id: "honesty", name: "Saying the true thing", short: "Honesty",
+      desc: "Saying how you really feel, and admitting what you don't know.",
+      ladder: [
+        ["Once today, answer “how are you?” with the true answer.",
+         "Tell someone one specific thing you appreciate about them, with no joke attached.",
+         "Say “I was wrong” about something small, out loud.",
+         "Tell someone you miss them.",
+         "When someone asks what you think, give your opinion before you hear theirs.",
+         "Say “I don't love that” about one small thing, kindly."],
+        ["Say “I don't know” out loud instead of nodding along.",
+         "Share one honest opinion you would usually keep to yourself.",
+         "Tell a friend about something you're struggling with, without turning it into a joke.",
+         "Apologize for something specific without explaining yourself.",
+         "Tell someone what you actually want for dinner, the weekend or your birthday.",
+         "Give someone the honest, kind feedback they asked for."],
+        ["Have the conversation you have been avoiding, kindly.",
+         "Ask someone close to you what they think you hold back.",
+         "Tell someone something small but real that you've been hiding from them.",
+         "Write someone a letter about what they mean to you, and give it to them.",
+         "Say no to something you'd normally say yes to out of guilt.",
+         "Tell your friends, family or coworkers about a goal you might fail at."],
+        ["Tell someone the thing you have never said to them.",
+         "Share a real failure or insecurity publicly, in your own words.",
+         "Tell someone how you really feel about them.",
+         "Ask your friends what they think your biggest insecurities are, and listen without defending.",
+         "Tell your family something true about yourself that you've kept back.",
+         "Put your biggest insecurity somewhere people will see it."]
+      ] },
+    { id: "newness", name: "Being new at things", short: "New",
+      desc: "Being a beginner, and how much of your life is actually new.",
+      ladder: [
+        ["Do one small thing today you have never done: a new food, route or app.",
+         "Ask someone to teach you something they're good at, for ten minutes.",
+         "Order the thing on the menu you can't pronounce.",
+         "Watch a beginner tutorial for a skill you've always wanted, then try the first step.",
+         "Walk into a shop, gym or club you've always been curious about and ask how to start.",
+         "Try the first move of a new sport at a park: a free throw, a kickflip, a cartwheel."],
+        ["Try a drop-in class in something you have never done.",
+         "Learn something new in public: a skateboard, a rink, a climbing wall.",
+         "Cook a recipe you've never made, for someone else.",
+         "Spend an hour learning an instrument, a language or a skill from zero.",
+         "Go somewhere in your city you've never been, alone.",
+         "Play a game or sport with people who are better than you."],
+        ["Take a four-week class where you start as the least experienced person.",
+         "Join a beginner group (a run club, a choir, a pottery studio) and go three times.",
+         "Learn a short song, dance or trick this week and show it to friends at the end of it.",
+         "Sign up for a beginner league, lesson series or course with a fixed start date.",
+         "Spend a weekend learning something with a teacher watching: surfing, skiing, climbing.",
+         "Try a job, shift or volunteer role you've never done, for a day."],
+        ["Enter something (a contest, a show, a race) with a skill you have had for a week.",
+         "Commit publicly to learning something by a date, then show the result either way.",
+         "Perform or compete in something you started learning less than a month ago.",
+         "Take a class in the thing you've always said you'd be terrible at, and finish it.",
+         "Spend 30 days learning a skill and post your progress publicly every week.",
+         "Do the thing you've said “I could never” about, with a teacher."]
+      ] }
+  ];
+
+  // p = the "proof" line shown when an answer lands on the brave end. {when} fills in "this week", "this month" or "in the last 3 months".
+  var QUESTIONS = [
+    { d: "seen", t: "recency", q: "When did you last perform, present or speak up in front of a group? A toast, a pitch, a song or an opinion in a meeting all count.",
+      p: "You spoke up or performed in front of a group {when}." },
+    { d: "seen", t: "avoid", q: "When there's a chance to be the center of attention (a toast, the dance floor, a turn at the mic), how often do you find a way out of it?",
+      p: "When there's a chance to be the center of attention, you rarely duck out of it." },
+    { d: "seen", t: "like", q: "I would rather do something badly in private than decently where people can see.",
+      p: "You'd rather try something where people can see than hide it." },
+    { d: "seen", t: "recency", q: "When did you last share something you made (writing, music, art, an idea) with people whose opinion matters to you?",
+      p: "You shared something you made with people whose opinion matters to you {when}." },
+
+    { d: "social", t: "recency", q: "When did you last start a conversation with a stranger that went past small talk?",
+      p: "You had a real conversation with a stranger {when}." },
+    { d: "social", t: "avoid", q: "When you're invited somewhere you won't know many people, how often do you skip it?",
+      p: "You show up even when you won't know many people there." },
+    { d: "social", t: "recency", q: "When did you last go to something social on your own: an event, a class, a meetup?",
+      p: "You went to something social on your own {when}." },
+    { d: "social", t: "like", q: "At social events, I mostly stay with the people I came with.",
+      p: "At events, you leave the people you came with and meet new ones." },
+
+    { d: "asking", t: "recency", q: "When did you last ask for something you weren't sure you'd get? A discount, a favor, a raise or a date all count.",
+      p: "You asked for something you weren't sure you'd get {when}." },
+    { d: "asking", t: "avoid", q: "How often do you decide not to ask because you assume the answer would be no?",
+      p: "You ask even when you think the answer might be no." },
+    { d: "asking", t: "recency", q: "When did you last send a message, pitch or application to someone who might ignore it?",
+      p: "You sent a message, pitch or application that could have been ignored {when}." },
+    { d: "asking", t: "avoid", q: "When an order, a bill or a piece of work isn't what you asked for, how often do you let it go rather than say something?",
+      p: "You speak up when something isn't what you asked for." },
+
+    { d: "body", t: "avoid", q: "How often do you avoid photos or videos of yourself, or delete them right after?",
+      p: "You let photos and videos of yourself exist." },
+    { d: "body", t: "recency", q: "When did you last wear something that made you feel noticeable or exposed?",
+      p: "You wore something that made you feel noticeable {when}." },
+    { d: "body", t: "avoid", q: "How often do you skip something physical (dancing, swimming, a game) because of how you'd look doing it?",
+      p: "You join in physical things without letting how you'll look stop you." },
+    { d: "body", t: "like", q: "I would only let someone post a photo of me if I could approve it first.",
+      p: "You let people post photos of you without approving them first." },
+
+    { d: "control", t: "avoid", q: "How often do you need to know the plan (where, who, how long) before you'll say yes?",
+      p: "You say yes before you know the whole plan." },
+    { d: "control", t: "recency", q: "When did you last let someone else make a real decision for you (the plan, the order, the route) without overriding it?",
+      p: "You let someone else make a real decision for you {when}." },
+    { d: "control", t: "avoid", q: "When you don't know what to expect, how often do you reach for your phone to check, research or escape?",
+      p: "You can sit in not knowing without reaching for your phone." },
+    { d: "control", t: "like", q: "I keep a way out of most plans: I can leave early, cancel, or watch from the side.",
+      p: "You commit to plans without keeping a way out." },
+
+    { d: "honesty", t: "recency", q: "When did you last tell someone how you really felt, when it was uncomfortable to say?",
+      p: "You told someone how you really felt {when}, even though it was hard to say." },
+    { d: "honesty", t: "avoid", q: "When someone asks how you are, how often do you give the easy answer instead of the true one?",
+      p: "You give the true answer when people ask how you are." },
+    { d: "honesty", t: "recency", q: "When did you last admit out loud that you'd failed at something, or didn't know something?",
+      p: "You admitted out loud that you'd failed or didn't know something {when}." },
+    { d: "honesty", t: "like", q: "When things get personal, I use a joke to change the subject.",
+      p: "You let things get personal without joking your way out." },
+
+    { d: "newness", t: "recency", q: "When did you last do something for the very first time?",
+      p: "You did something for the very first time {when}." },
+    { d: "newness", t: "avoid", q: "How often do you skip trying something because you'd be bad at it at first?",
+      p: "You try things even when you'll be bad at them at first." },
+    { d: "newness", t: "recency", q: "When did you last take a class or lesson where you were the least experienced person there?",
+      p: "You were the least experienced person in a class or lesson {when}." },
+    { d: "newness", t: "like", q: "Most of my weeks look almost exactly the same.",
+      p: "Your weeks don't all look the same." },
+
+    { d: "week", t: "week", q: "In a typical week, how much time do you spend doing something that makes you at least a little nervous?",
+      p: "You spend {hours} a week doing things that make you nervous." }
+  ];
+
+  var WHEN = ["this week", "this month", "in the last 3 months"];
+  function proofList(answers) {
+    var out = [];
+    QUESTIONS.forEach(function (q, i) {
+      var a = answers[i];
+      if (a === null || a === undefined) return;
+      var limit = q.t === "recency" ? 2 : 1;
+      if (a > limit) return;
+      var text = q.p.replace("{when}", WHEN[a] || "").replace("{hours}", a === 0 ? "more than 6 hours" : "3 to 6 hours");
+      out.push({ a: a, i: i, text: text });
+    });
+    out.sort(function (x, y) { return x.a - y.a || x.i - y.i; });
+    return out.slice(0, 6).map(function (o) { return o.text; });
+  }
+
+  var HABITS = [
+    { id: "rehearse", name: "Rehearsing", text: "I rehearse what I'll say before calls or conversations.",
+      why: "It teaches you that the script kept you safe, not you.", tryit: "Go in with one sentence ready, not the whole conversation." },
+    { id: "buddy", name: "The buddy shield", text: "At events, I stay close to one safe person.",
+      why: "You never find out you can stand on your own in that room.", tryit: "Spend the first 15 minutes apart from them." },
+    { id: "exit", name: "The early exit", text: "I leave early, or plan my exit before I arrive.",
+      why: "Leaving at the peak of discomfort teaches your body that leaving is what fixed it.", tryit: "Stay 20 minutes past the moment you want to go." },
+    { id: "phone", name: "The phone shield", text: "I look at my phone so I don't look awkward.",
+      why: "The awkward moment never gets the chance to pass on its own.", tryit: "Pocket the phone and let one awkward moment run its course." },
+    { id: "humor", name: "The humor shield", text: "I make a joke about myself before anyone else can.",
+      why: "People only ever meet the version of you that you control.", tryit: "Answer one serious question without a punchline." },
+    { id: "prereject", name: "Pre-rejection", text: "I say no to myself before anyone can say no to me.",
+      why: "You collect the rejection yourself, every time, and never learn the real odds.", tryit: "Let them decide. Ask, then wait." },
+    { id: "notcaring", name: "Not caring, on purpose", text: "I act like I don't care how things go.",
+      why: "If you never look like you tried, failing can't count. Neither can succeeding.", tryit: "Say out loud what you want to happen." },
+    { id: "overprep", name: "Over-preparing", text: "I over-prepare so nothing can go wrong.",
+      why: "Every success gets credited to the prep instead of to you.", tryit: "Do one thing this week at 70% ready." },
+    { id: "homefield", name: "Home field only", text: "I mostly do things I already know I'm good at.",
+      why: "Your confidence only gets tested where it can't lose.", tryit: "Do one thing you're bad at where people can see." },
+    { id: "softyes", name: "The soft yes", text: "I keep plans vague so I can back out.",
+      why: "A maybe keeps the exit open, and the exit keeps the fear alive.", tryit: "Turn one maybe into a firm yes, and tell someone." },
+    { id: "reassure", name: "Checking afterward", text: "Afterward, I ask people whether it went okay.",
+      why: "The relief comes from them, so you never learn to trust your own read.", tryit: "After the next one, wait a full day before asking anyone." },
+    { id: "backrow", name: "The back-row seat", text: "I pick the back row, the corner, or the outside of the group.",
+      why: "From the back, you can watch life without being part of it.", tryit: "Sit in the front, or in the middle, once this week." }
+  ];
+
+  var BANDS = [
+    { min: 80, name: "Fully cocooned", text: "Almost everything in your life is arranged to keep you safe. That isn't a flaw. It's a system that works, right up until it starts keeping out the life you want. Start at the bottom rung. It will feel bigger than it looks, and that's the point." },
+    { min: 65, name: "Padded", text: "You mostly do what you already know you can do. The courage is there; it just rarely gets called on. A few planned stretches a month would change the shape of your year." },
+    { min: 50, name: "Mostly cozy", text: "You step outside your comfort zone sometimes, usually when life makes you. The next move is stepping out on purpose, before you're forced to." },
+    { min: 30, name: "Stretching often", text: "You step outside your comfort zone more than most people. Your growth is in the one or two areas you still play safe." },
+    { min: 0, name: "Living in the stretch", text: "Discomfort is a regular part of your week. Make sure you're choosing it rather than drowning in it. Rest counts too." }
+  ];
+
+  var RUNGS = [
+    { name: "Bad Dream", time: "About 5 minutes", hint: "Something small that takes about 5 minutes and makes you a little nervous." },
+    { name: "Small nightmare", time: "An hour or so", hint: "Something that takes an hour or so and makes your heart beat a bit faster." },
+    { name: "Nightmare", time: "Takes planning", hint: "Something you'd have to plan for, that scares you more than the last rung." },
+    { name: "Big nightmare", time: "The one you've been avoiding", hint: "The thing you've been avoiding." }
+  ];
+
+  var HOWTO = [
+    "<b>Each spoke is one area of life.</b> There are seven, like Being seen or Asking.",
+    "<b>Each area gets a number: how safe you play it there.</b> It comes from your four answers about that area. 100% safe means you avoid it every time. 0% means you go for it every time.",
+    "<b>The safer you play it, the closer the dot sits to the middle.</b> A big number pulls the dot in. A small number pushes it out.",
+    "<b>The rings are the zones.</b> The blue middle circle is comfort (55% safe or more). The amber ring is stretch, where growth happens. The dashed outer ring is panic, too much to learn from. No dot lands there; it's a reminder not to aim for it.",
+    "<b>The shape is your reach.</b> A small, tight shape means most of life stays in comfort. Points that reach into the amber ring are where you already stretch."
+  ];
+
+  var TEMPLATE = "Step:\nDread before, 0–10:\nThe worst thing I think will happen:\n\nWhat actually happened:\nDread at its peak, 0–10:\nHow I handled it:\nWould I do it again?";
+
+  var TOTAL_STEPS = QUESTIONS.length + 1; // + habits checklist
+  var KEY_PROGRESS = "comfortAudit.progress.v1";
+  var KEY_LAST = "comfortAudit.last.v1";
+  var KEY_LADDER = "comfortAudit.ladder.v2";
+
+  /* ---------- Storage (best effort) ---------- */
+  function load(key) { try { var v = localStorage.getItem(key); return v ? JSON.parse(v) : null; } catch (e) { return null; } }
+  function save(key, val) { try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) {} }
+  function drop(key) { try { localStorage.removeItem(key); } catch (e) {} }
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+
+  /* ---------- History and result codes ---------- */
+  var KEY_HISTORY = "comfortAudit.history.v1";
+  function loadHistory() {
+    var h = load(KEY_HISTORY);
+    if (!Array.isArray(h)) {
+      h = [];
+      var last = load(KEY_LAST);
+      if (last && typeof last.overall === "number" && last.date) h.push(last);
+    }
+    return h.filter(function (e) { return e && typeof e.overall === "number" && typeof e.date === "string"; })
+      .sort(function (a, b) { return a.date < b.date ? -1 : (a.date > b.date ? 1 : 0); });
+  }
+  function saveHistory(h) {
+    h.sort(function (a, b) { return a.date < b.date ? -1 : (a.date > b.date ? 1 : 0); });
+    save(KEY_HISTORY, h.slice(-12));
+  }
+
+  // Code: CA1-<days since Jan 1 2026>-<answers, two per character>-<habits bitmask>-<check>
+  var EPOCH = Date.UTC(2026, 0, 1), B36 = "0123456789abcdefghijklmnopqrstuvwxyz";
+  function codeSum(answers, days, mask) { return answers.reduce(function (s, d) { return s + d; }, 0) + days + mask; }
+  function encodeResult(answers, habits, iso) {
+    var days = Math.max(0, Math.floor((new Date(iso).getTime() - EPOCH) / 86400000));
+    var digits = answers.map(function (a) { return a === null || a === undefined ? 0 : a; });
+    var packed = "";
+    for (var i = 0; i < digits.length; i += 2) packed += B36[digits[i] * 5 + (i + 1 < digits.length ? digits[i + 1] : 0)];
+    var mask = 0;
+    HABITS.forEach(function (h, j) { if (habits.indexOf(h.id) !== -1) mask += Math.pow(2, j); });
+    return ("CA1-" + days.toString(36) + "-" + packed + "-" + mask.toString(36) + "-" + B36[codeSum(digits, days, mask) % 36]).toUpperCase();
+  }
+  function decodeResult(code) {
+    var m = String(code || "").toLowerCase().replace(/\s+/g, "").match(/^ca1-([0-9a-z]{1,4})-([0-9a-o]{15})-([0-9a-z]{1,3})-([0-9a-z])$/);
+    if (!m) return null;
+    var days = parseInt(m[1], 36), mask = parseInt(m[3], 36), answers = [];
+    for (var i = 0; i < m[2].length; i++) { var v = B36.indexOf(m[2][i]); answers.push(Math.floor(v / 5), v % 5); }
+    answers = answers.slice(0, QUESTIONS.length);
+    if (mask >= Math.pow(2, HABITS.length)) return null;
+    if (B36[codeSum(answers, days, mask) % 36] !== m[4]) return null;
+    var habits = HABITS.filter(function (h, j) { return Math.floor(mask / Math.pow(2, j)) % 2 === 1; }).map(function (h) { return h.id; });
+    return { answers: answers, habits: habits, date: new Date(EPOCH + days * 86400000 + 12 * 3600000).toISOString() };
+  }
+
+  /* ---------- Scoring ---------- */
+  function domainById(id) { for (var i = 0; i < DOMAINS.length; i++) if (DOMAINS[i].id === id) return DOMAINS[i]; return null; }
+
+  function computeScores(answers, habits) {
+    var sums = {}, counts = {};
+    DOMAINS.forEach(function (d) { sums[d.id] = 0; counts[d.id] = 0; });
+    var weekPct = 0;
+    QUESTIONS.forEach(function (q, i) {
+      var a = answers[i];
+      if (a === null || a === undefined) return;
+      if (q.d === "week") { weekPct = a / 4 * 100; return; }
+      sums[q.d] += a; counts[q.d] += 1;
+    });
+    var domains = DOMAINS.map(function (d) {
+      var pct = counts[d.id] ? sums[d.id] / (4 * counts[d.id]) * 100 : 0;
+      return { id: d.id, pct: Math.round(pct) };
+    });
+    var avg = domains.reduce(function (s, d) { return s + d.pct; }, 0) / domains.length;
+    var habitPct = habits.length / HABITS.length * 100;
+    var overall = Math.round(0.75 * avg + 0.15 * habitPct + 0.10 * weekPct);
+    return { overall: overall, domains: domains, habitPct: Math.round(habitPct), weekPct: Math.round(weekPct), avg: Math.round(avg) };
+  }
+
+  function bandFor(score) { for (var i = 0; i < BANDS.length; i++) if (score >= BANDS[i].min) return BANDS[i]; return BANDS[BANDS.length - 1]; }
+  function levelFor(pct) { return pct >= 75 ? "Deep in comfort." : (pct >= 55 ? "In your comfort zone." : (pct >= 35 ? "Stretching." : "Stretching a lot.")); }
+
+  /* ---------- Zone map ---------- */
+  var CX = 220, CY = 220, R_COMFORT = 78, R_STRETCH = 150, R_PANIC = 172;
+  function radiusFor(pct) { return 18 + (100 - pct) * 1.32; }
+  function angleFor(i, n) { return (-90 + i * 360 / n) * Math.PI / 180; }
+
+  function zoneMap(domainScores, opts) {
+    opts = opts || {};
+    var n = domainScores.length, pts = [], dots = "", spokes = "", labels = "";
+    domainScores.forEach(function (ds, i) {
+      var a = angleFor(i, n), r = radiusFor(ds.pct);
+      var x = CX + r * Math.cos(a), y = CY + r * Math.sin(a);
+      pts.push(x.toFixed(1) + "," + y.toFixed(1));
+      spokes += '<line class="spoke" x1="' + CX + '" y1="' + CY + '" x2="' + (CX + R_STRETCH * Math.cos(a)).toFixed(1) + '" y2="' + (CY + R_STRETCH * Math.sin(a)).toFixed(1) + '"/>';
+      dots += '<circle class="dot' + (r <= R_COMFORT ? ' in' : '') + '" cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="6.5"/>';
+      var lr = R_PANIC + 22, lx = CX + lr * Math.cos(a), ly = CY + lr * Math.sin(a);
+      var c = Math.cos(a), anchor = c > 0.25 ? "start" : (c < -0.25 ? "end" : "middle");
+      var dy = Math.sin(a) < -0.5 ? -4 : (Math.sin(a) > 0.5 ? 14 : 4);
+      labels += '<text class="axis" x="' + lx.toFixed(1) + '" y="' + (ly + dy).toFixed(1) + '" text-anchor="' + anchor + '">' + domainById(ds.id).short + '</text>';
+    });
+    var title = opts.title || "Zone map";
+    return '<svg class="zone-svg" viewBox="-60 -18 560 466" role="img" aria-label="' + esc(title) + '">' +
+      '<circle class="z-panic" cx="' + CX + '" cy="' + CY + '" r="' + R_PANIC + '"/>' +
+      '<circle class="z-stretch" cx="' + CX + '" cy="' + CY + '" r="' + R_STRETCH + '"/>' +
+      '<circle class="z-comfort" cx="' + CX + '" cy="' + CY + '" r="' + R_COMFORT + '"/>' +
+      spokes +
+      '<text class="zl" x="' + CX + '" y="' + (CY - R_COMFORT + 16) + '">COMFORT</text>' +
+      '<text class="zl" x="' + CX + '" y="' + (CY - R_STRETCH + 15) + '">STRETCH</text>' +
+      '<text class="zl p" x="' + CX + '" y="' + (CY - R_STRETCH - 7) + '">PANIC</text>' +
+      '<polygon class="shape" points="' + pts.join(" ") + '"/>' + dots + labels + '</svg>';
+  }
+
+  // One spoke of the map, laid flat: middle on the left, outside on the right.
+  function spokeKey(items) {
+    var x0 = 14, k = 332 / R_PANIC, ty = 34, th = 20;
+    function X(r) { return (x0 + r * k).toFixed(1); }
+    var aria = "One spoke of the map laid flat. " + items.map(function (it) { return it.label + " is " + it.pct + "% safe"; }).join(". ") + ".";
+    var s = '<svg class="key-svg" viewBox="0 0 360 114" role="img" aria-label="' + esc(aria) + '">' +
+      '<rect class="k-comfort" x="' + X(0) + '" y="' + ty + '" width="' + (R_COMFORT * k).toFixed(1) + '" height="' + th + '" rx="4"/>' +
+      '<rect class="k-stretch" x="' + X(R_COMFORT) + '" y="' + ty + '" width="' + ((R_STRETCH - R_COMFORT) * k).toFixed(1) + '" height="' + th + '"/>' +
+      '<rect class="k-panic" x="' + X(R_STRETCH) + '" y="' + ty + '" width="' + ((R_PANIC - R_STRETCH) * k).toFixed(1) + '" height="' + th + '" rx="4"/>' +
+      '<text class="k-band" x="' + X(R_COMFORT / 2) + '" y="' + (ty - 8) + '">COMFORT</text>' +
+      '<text class="k-band" x="' + X((R_COMFORT + R_STRETCH) / 2) + '" y="' + (ty - 8) + '">STRETCH</text>' +
+      '<text class="k-band p" x="' + X((R_STRETCH + R_PANIC) / 2) + '" y="' + (ty - 8) + '">PANIC</text>';
+    items.forEach(function (it, j) {
+      var r = radiusFor(it.pct), x = Number(X(r)), ly = j === 0 ? 76 : 94;
+      var anchor = x < 70 ? "start" : (x > 290 ? "end" : "middle"), tx = anchor === "start" ? x - 6 : (anchor === "end" ? x + 6 : x);
+      s += '<line class="k-lead" x1="' + x + '" y1="' + (ty + th / 2) + '" x2="' + x + '" y2="' + (ly - 11) + '"/>' +
+        '<circle class="k-dot' + (r <= R_COMFORT ? ' in' : '') + '" cx="' + x + '" cy="' + (ty + th / 2) + '" r="6"/>' +
+        '<text class="k-lab" x="' + tx.toFixed(1) + '" y="' + ly + '" text-anchor="' + anchor + '">' + esc(it.label + " · " + it.pct + "% safe") + '</text>';
+    });
+    s += '<text class="k-end" x="' + X(0) + '" y="110">← middle of the map</text>' +
+      '<text class="k-end" x="' + X(R_PANIC) + '" y="110" text-anchor="end">outside →</text></svg>';
+    return s;
+  }
+
+  function howtoHtml() { return HOWTO.map(function (h) { return "<li>" + h + "</li>"; }).join(""); }
+
+  // expose for testing
+  window.__comfortAudit = { computeScores: computeScores, bandFor: bandFor, QUESTIONS: QUESTIONS, HABITS: HABITS, DOMAINS: DOMAINS };
+
+  /* ---------- Quiz state ---------- */
+  var state = { step: 0, answers: QUESTIONS.map(function () { return null; }), habits: [] };
+  var el = function (id) { return document.getElementById(id); };
+  var screens = { intro: el("intro"), quiz: el("quiz"), results: el("results") };
+
+  function show(name) {
+    Object.keys(screens).forEach(function (k) { screens[k].hidden = (k !== name); });
+    el("wrap").classList.toggle("wide", name === "results");
+    window.scrollTo(0, 0);
+  }
+
+  function persist() { save(KEY_PROGRESS, state); }
+
+  function areaLabel(q) { return q.d === "week" ? "Your week" : domainById(q.d).name; }
+
+  function renderStep() {
+    var s = state.step;
+    if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
+    el("qcount").textContent = (s + 1) + " of " + TOTAL_STEPS;
+    el("trackfill").style.width = (s / TOTAL_STEPS * 100) + "%";
+    el("track").setAttribute("aria-valuenow", String(s));
+    el("back").textContent = s === 0 ? "Back to start" : "Back";
+    var opts = el("opts");
+    opts.innerHTML = "";
+
+    if (s < QUESTIONS.length) {
+      var q = QUESTIONS[s], scale = SCALES[q.t];
+      el("qarea").textContent = areaLabel(q);
+      el("qtext").textContent = q.q;
+      el("qhint").innerHTML = esc(scale.hint) + '<span class="kbd"> Keys 1–5 work too.</span>';
+      scale.opts.forEach(function (label, i) {
+        var id = "q" + s + "o" + i;
+        var lab = document.createElement("label");
+        lab.className = "opt";
+        lab.setAttribute("for", id);
+        lab.innerHTML = '<input type="radio" name="q' + s + '" id="' + id + '" value="' + i + '"><span class="key" aria-hidden="true">' + (i + 1) + '</span><span class="lbl">' + esc(label) + '</span>';
+        var input = lab.querySelector("input");
+        // A new question starts blank; going back shows the answer you gave.
+        input.checked = state.answers[s] === i;
+        input.addEventListener("change", function () {
+          state.answers[s] = i;
+          el("next").disabled = false;
+          persist();
+        });
+        opts.appendChild(lab);
+      });
+      el("next").textContent = s === QUESTIONS.length - 1 ? "Next: one checklist" : "Next";
+      el("next").disabled = state.answers[s] === null;
+    } else {
+      el("qarea").textContent = "Your comfort habits";
+      el("qtext").textContent = "Which of these do you do regularly? Check every one that fits.";
+      el("qhint").textContent = "These are small ways people keep themselves safe. Most people check at least a few.";
+      HABITS.forEach(function (h, i) {
+        var id = "h" + i;
+        var lab = document.createElement("label");
+        lab.className = "opt check";
+        lab.setAttribute("for", id);
+        lab.innerHTML = '<input type="checkbox" id="' + id + '" value="' + h.id + '"><span class="key" aria-hidden="true">✓</span><span class="lbl">' + esc(h.text) + '</span>';
+        var input = lab.querySelector("input");
+        input.checked = state.habits.indexOf(h.id) !== -1;
+        input.addEventListener("change", function () {
+          var at = state.habits.indexOf(h.id);
+          if (input.checked && at === -1) state.habits.push(h.id);
+          if (!input.checked && at !== -1) state.habits.splice(at, 1);
+          persist();
+        });
+        opts.appendChild(lab);
+      });
+      el("next").textContent = "See my results";
+      el("next").disabled = false;
+    }
+    el("qtext").focus({ preventScroll: true });
+  }
+
+  function goNext() {
+    var s = state.step;
+    if (s < QUESTIONS.length && state.answers[s] === null) return;
+    if (s < TOTAL_STEPS - 1) { state.step++; persist(); renderStep(); window.scrollTo(0, 0); }
+    else finish();
+  }
+  function goBack() {
+    if (state.step === 0) { show("intro"); setupIntro(); return; }
+    state.step--; persist(); renderStep(); window.scrollTo(0, 0);
+  }
+
+  el("next").addEventListener("click", goNext);
+  el("back").addEventListener("click", goBack);
+  document.addEventListener("keydown", function (e) {
+    if (screens.quiz.hidden) return;
+    if (e.altKey || e.ctrlKey || e.metaKey) return;
+    var s = state.step;
+    if (s < QUESTIONS.length && /^[1-5]$/.test(e.key)) {
+      var input = document.getElementById("q" + s + "o" + (Number(e.key) - 1));
+      if (input) { input.checked = true; input.dispatchEvent(new Event("change")); input.focus(); }
+      e.preventDefault();
+    } else if (e.key === "Enter" && e.target.tagName !== "BUTTON") {
+      if (!el("next").disabled) { e.preventDefault(); goNext(); }
+    }
+  });
+
+  /* ---------- Intro ---------- */
+  var EXAMPLE = [
+    { id: "seen", pct: 81 }, { id: "social", pct: 63 }, { id: "asking", pct: 75 }, { id: "body", pct: 88 },
+    { id: "control", pct: 69 }, { id: "honesty", pct: 44 }, { id: "newness", pct: 56 }
+  ];
+  function setupIntro() {
+    el("example-map").innerHTML = zoneMap(EXAMPLE, { title: "Example zone map" });
+    el("example-key").innerHTML = spokeKey([{ label: "Body", pct: 88 }, { label: "Honesty", pct: 44 }]);
+    el("howto-intro").innerHTML = howtoHtml();
+    var saved = load(KEY_PROGRESS);
+    var hasProgress = saved && saved.answers && saved.answers.some(function (a) { return a !== null; });
+    el("resume").hidden = !hasProgress;
+    var hist = loadHistory(), last = hist[hist.length - 1];
+    el("start").textContent = hasProgress ? "Start over" : (last ? "Retake the audit" : "Start the audit");
+    el("returning").hidden = !last;
+    if (last) {
+      var ago = Math.floor((Date.now() - new Date(last.date).getTime()) / 86400000);
+      el("last-line").innerHTML = "Welcome back. Last time (" + esc(fmtDate(last.date)) + ") you were <b>" + last.overall + "% playing it safe</b>." +
+        (ago >= 25 ? " It's been about a month, so it's a good time to retake." : "");
+      el("view-last").hidden = !(last.answers && last.answers.length === QUESTIONS.length);
+    }
+  }
+  el("view-last").addEventListener("click", function () {
+    var hist = loadHistory(), last = hist[hist.length - 1];
+    if (!last || !last.answers) return;
+    state = { step: TOTAL_STEPS - 1, answers: last.answers.slice(), habits: (last.habits || []).slice() };
+    finish(last);
+  });
+  function loadCode() {
+    var st = el("code-status"), r = decodeResult(el("code-in").value);
+    if (!r) { st.textContent = "That code doesn't look right. Check that you copied all of it, starting with CA1."; return; }
+    var sc = computeScores(r.answers, r.habits), hist = loadHistory();
+    var dup = hist.some(function (e) { return e.date.slice(0, 10) === r.date.slice(0, 10) && e.overall === sc.overall; });
+    if (!dup) { hist.push({ date: r.date, overall: sc.overall, domains: sc.domains, answers: r.answers, habits: r.habits }); saveHistory(hist); }
+    setupIntro();
+    st.textContent = "Loaded your " + fmtDate(r.date) + " result: " + sc.overall + "% playing it safe. Take the audit, and your results will show what changed.";
+  }
+  el("code-load").addEventListener("click", loadCode);
+  el("code-in").addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); loadCode(); } });
+  el("start").addEventListener("click", function () {
+    state = { step: 0, answers: QUESTIONS.map(function () { return null; }), habits: [] };
+    persist(); show("quiz"); renderStep();
+  });
+  el("resume").addEventListener("click", function () {
+    var saved = load(KEY_PROGRESS);
+    if (saved && saved.answers && saved.answers.length === QUESTIONS.length) {
+      state = { step: Math.min(saved.step || 0, TOTAL_STEPS - 1), answers: saved.answers, habits: saved.habits || [] };
+    }
+    show("quiz"); renderStep();
+  });
+
+  /* ---------- Ladder state (per viewer, this browser only) ---------- */
+  var ladderState = load(KEY_LADDER) || {};
+  var editing = null; // { dom, r }
+  function rungState(domId) {
+    var st = ladderState[domId];
+    if (!st || st.length !== 4) { st = [0, 1, 2, 3].map(function () { return { v: 0, own: "" }; }); ladderState[domId] = st; }
+    return st;
+  }
+  function suggestedText(dom, r) {
+    var s = rungState(dom.id)[r];
+    return s.own ? s.own : dom.ladder[r][s.v % dom.ladder[r].length];
+  }
+  // Once a step is logged, it keeps the text it was logged with.
+  function stepText(dom, r) { var lg = logs[logKey(dom.id, r)]; return lg && lg.text ? lg.text : suggestedText(dom, r); }
+  function saveLadder() { save(KEY_LADDER, ladderState); }
+
+  /* ---------- Dread log (per viewer, this browser only) ---------- */
+  var KEY_LOG = "comfortAudit.log.v1";
+  var logs = load(KEY_LOG) || {};
+  var logEditing = null; // { dom, r }
+  function logKey(domId, r) { return domId + "-" + r; }
+  function saveLogs() { save(KEY_LOG, logs); }
+  function logEntries() {
+    return Object.keys(logs).map(function (k) { return logs[k]; })
+      .filter(function (e) { return e && (typeof e.before === "number" || typeof e.peak === "number"); })
+      .sort(function (a, b) { return (a.updated || "") < (b.updated || "") ? -1 : 1; });
+  }
+  function dialHtml(name, legend, value) {
+    var s = '<fieldset><legend>' + legend + '</legend><div class="dial">';
+    for (var i = 0; i <= 10; i++) {
+      s += '<label><input type="radio" name="' + name + '" value="' + i + '"' + (value === i ? ' checked' : '') + '><span>' + i + '</span></label>';
+    }
+    return s + '</div></fieldset>';
+  }
+  function checkedVal(name) { var c = document.querySelector('input[name="' + name + '"]:checked'); return c ? Number(c.value) : null; }
+
+  /* ---------- Downloads (PDF, share image) ---------- */
+  // Inside Claude, saves go through the viewer's downloads capability.
+  // On imjustnate.com (any normal page), the browser downloads the file directly.
+  var NATIVE_DL = {
+    native: true,
+    save: function (req) {
+      return new Promise(function (resolve, reject) {
+        try {
+          var blob = req.data instanceof Blob ? req.data : new Blob([req.data]);
+          var url = URL.createObjectURL(blob), a = document.createElement("a");
+          a.href = url; a.download = req.filename; a.rel = "noopener"; a.style.display = "none";
+          document.body.appendChild(a); a.click();
+          setTimeout(function () { try { URL.revokeObjectURL(url); a.remove(); } catch (e) {} }, 8000);
+          resolve({ status: "saved" });
+        } catch (e) { reject({ code: "unavailable" }); }
+      });
+    }
+  };
+  function nativeOrNull() {
+    try { return (typeof URL.createObjectURL === "function" && "download" in document.createElement("a") && window.self === window.top) ? NATIVE_DL : null; }
+    catch (e) { return null; }
+  }
+  var downloadsApi = null, downloadsKnown = false;
+  try {
+    if (window.claude && typeof window.claude.use === "function") {
+      window.claude.use("downloads").then(function (d) { downloadsApi = d || nativeOrNull(); downloadsKnown = true; syncPdf(); },
+        function () { downloadsApi = nativeOrNull(); downloadsKnown = true; syncPdf(); });
+    } else { downloadsApi = nativeOrNull(); downloadsKnown = true; }
+  } catch (e) { downloadsApi = nativeOrNull(); downloadsKnown = true; }
+  function syncPdf() {
+    var sb = el("share-dl");
+    if (sb) sb.hidden = !(downloadsApi && shareBlob);
+    var b = el("pdf"), note = el("pdf-note");
+    if (!b) return;
+    b.hidden = !downloadsApi;
+    if (note) note.hidden = !!downloadsApi || !downloadsKnown;
+  }
+
+  /* ---------- Results ---------- */
+  var R = null; // current results context
+
+  function fmtDate(iso) {
+    try { return new Date(iso).toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" }); } catch (e) { return ""; }
+  }
+
+  function buildPlan(A, B) {
+    return [
+      { wk: "Week 1", label: "Start small", items: [["Bad Dream", A.name, stepText(A, 0)], ["Bad Dream", B.name, stepText(B, 0)]] },
+      { wk: "Week 2", label: "Build", items: [["Small nightmare", A.name, stepText(A, 1)], ["Small nightmare", B.name, stepText(B, 1)]] },
+      { wk: "Week 3", label: "Stretch", items: [["Nightmare", A.name, stepText(A, 2)], ["Nightmare", B.name, stepText(B, 2)]] },
+      { wk: "Week 4", label: "Go big", items: [
+        ["Big nightmare", A.name, stepText(A, 3) + " If week 3 felt like panic rather than a stretch, repeat a Nightmare-level step instead."],
+        ["Retake", "The Comfort Audit", "On day 30, take this audit again and compare. Save the Big nightmare for " + B.name + " for month two."]
+      ] }
+    ];
+  }
+
+  function rungHtml(dom, i) {
+    var r = RUNGS[i], s = rungState(dom.id)[i], n = dom.ladder[i].length;
+    var top = '<div class="rung-top"><span class="rung-name">' + (i + 1) + ' · ' + r.name + ' · ' + r.time + '</span>' +
+      (s.own ? '<span class="rung-count own">Your own</span>' : '<span class="rung-count">Idea ' + (s.v % n + 1) + ' of ' + n + '</span>') + '</div>';
+    if (editing && editing.dom === dom.id && editing.r === i) {
+      var id = "own-" + dom.id + "-" + i;
+      return '<li class="rung editing" data-level="' + i + '">' + top +
+        '<label class="sr" for="' + id + '">Your own ' + r.name + ' for ' + esc(dom.name) + '</label>' +
+        '<textarea class="own-input" id="' + id + '" rows="3" maxlength="240" placeholder="' + esc(r.hint) + '"></textarea>' +
+        '<div class="rung-actions"><button class="btn btn-primary btn-small" type="button" data-act="save" data-dom="' + dom.id + '" data-rung="' + i + '">Save my step</button>' +
+        '<button class="link-btn" type="button" data-act="cancel" data-dom="' + dom.id + '" data-rung="' + i + '">Cancel</button></div></li>';
+    }
+    var da = ' data-dom="' + dom.id + '" data-rung="' + i + '"';
+    var lg = logs[logKey(dom.id, i)];
+    var logged = !!(lg && (typeof lg.before === "number" || typeof lg.peak === "number"));
+    if (logged) top = top.replace(/<span class="rung-count[^>]*>[^<]*<\/span>/, '<span class="rung-count own">Logged</span>');
+    var text = '<p class="rung-text" id="rung-' + dom.id + '-' + i + '">' + esc(stepText(dom, i)) + '</p>';
+
+    if (logEditing && logEditing.dom === dom.id && logEditing.r === i) {
+      var nm = dom.id + "-" + i, cur = lg || {};
+      return '<li class="rung editing" data-level="' + i + '">' + top + text +
+        '<div class="logform">' +
+          dialHtml("lb-" + nm, "Before: how much do you dread it? (0 to 10)", cur.before) +
+          '<label class="lab" for="lw-' + nm + '">The worst thing I think will happen</label>' +
+          '<textarea class="log-ta" id="lw-' + nm + '" rows="2" maxlength="400" placeholder="Be specific. This is the prediction you\'ll check later."></textarea>' +
+          dialHtml("lp-" + nm, "After: how bad did it actually get, at its peak? (0 to 10)", cur.peak) +
+          '<p class="fine">Leave the after part blank until you\'ve done it. Come back and fill it in.</p>' +
+          '<label class="lab" for="lh-' + nm + '">What actually happened</label>' +
+          '<textarea class="log-ta" id="lh-' + nm + '" rows="2" maxlength="400" placeholder="And if the worst did happen: how did you handle it?"></textarea>' +
+          '<div class="rung-actions"><button class="btn btn-primary btn-small" type="button" data-act="logsave"' + da + '>Save</button>' +
+          '<button class="link-btn" type="button" data-act="logcancel"' + da + '>Cancel</button>' +
+          (logged ? '<button class="link-btn" type="button" data-act="logclear"' + da + '>Clear this log</button>' : '') + '</div>' +
+        '</div></li>';
+    }
+
+    var chips = "";
+    if (logged) {
+      chips = '<p class="log-line">' +
+        (typeof lg.peak === "number"
+          ? '<span class="log-chip done">Done' + (typeof lg.before === "number" ? ' · dreaded ' + lg.before + ', got to ' + lg.peak : ' · peak ' + lg.peak + '/10') + '</span>'
+          : '<span class="log-chip">Dread before: ' + lg.before + '/10</span>') + '</p>';
+    }
+    var acts;
+    if (logged) {
+      acts = '<button class="link-btn" type="button" data-act="log"' + da + '>' + (typeof lg.peak === "number" ? "Edit log" : "How did it go?") + '</button>';
+    } else {
+      acts = (s.own
+        ? '<button class="link-btn" type="button" data-act="write"' + da + '>Edit mine</button>' +
+          '<button class="link-btn" type="button" data-act="ideas"' + da + '>Back to the ideas</button>'
+        : '<button class="link-btn" type="button" data-act="shuffle"' + da + ' aria-label="Shuffle to another ' + r.name + ' idea for ' + esc(dom.name) + '">Shuffle</button>' +
+          '<button class="link-btn" type="button" data-act="write"' + da + '>Write my own</button>') +
+        '<button class="link-btn" type="button" data-act="log"' + da + '>Log it</button>';
+    }
+    return '<li class="rung" data-level="' + i + '">' + top + text + chips + '<div class="rung-actions">' + acts + '</div></li>';
+  }
+
+  function ladderHtml(dom, pct) {
+    var rungs = [0, 1, 2, 3].map(function (i) { return rungHtml(dom, i); }).join("");
+    return '<div class="ladder"><h3>' + esc(dom.name) + '<span>' + pct + '% playing it safe</span></h3><ol class="rungs" aria-label="' + esc(dom.name) + ' ladder, from the smallest step to the biggest">' + rungs + '</ol>' +
+      '<p class="ladder-note">Start with the Bad Dream at the top and work your way down. Move to the next step when it feels doable, not easy.</p></div>';
+  }
+
+  function planHtml(A, B) {
+    return buildPlan(A, B).map(function (w) {
+      return '<li><div class="wk">' + w.label + '<b>' + w.wk + '</b></div><ul>' + w.items.map(function (it) {
+        return '<li><span class="kind">' + it[0] + '</span> · ' + esc(it[1]) + ': ' + esc(it[2]) + '</li>';
+      }).join("") + '</ul></li>';
+    }).join("");
+  }
+
+  /* ---------- Unlock: all 7 ladders for newsletter subscribers ---------- */
+  // The word arrives in the Substack welcome email. Only its hash lives here.
+  var KEY_UNLOCK = "comfortAudit.unlocked.v1";
+  var UNLOCK_HASH = "897d9302";
+  var SUBSTACK_URL = "https://imjustnate.substack.com";
+  function fnv(s) {
+    var h = 0x811c9dc5;
+    for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
+    return ("0000000" + h.toString(16)).slice(-8);
+  }
+  function wordOk(s) { return fnv(String(s || "").toLowerCase().replace(/[^a-z]/g, "")) === UNLOCK_HASH; }
+  var unlocked = load(KEY_UNLOCK) === true;
+  function ladderList() {
+    if (!unlocked) return [[R.A, R.sorted[0].pct], [R.B, R.sorted[1].pct]];
+    return R.sorted.map(function (d) { return [domainById(d.id), d.pct]; });
+  }
+  function unlockHtml() {
+    if (unlocked) {
+      return '<p class="unlock-done"><b>All 7 ladders unlocked.</b> Your two safest areas come first, and your 30-day plan uses those two. The other five are there whenever you\'re ready.</p>';
+    }
+    var rest = R.sorted.slice(2).map(function (d) { return domainById(d.id).name; });
+    return '<div class="unlock">' +
+      '<div class="unlock-copy"><span class="eyebrow">Free · 5 more ladders</span>' +
+        '<h3>Get a ladder for every area of your life</h3>' +
+        '<p>You have ladders for your two safest areas. The other five (' + esc(rest.join(", ")) + ') come with my free newsletter: subscribe and the unlock word lands in your inbox within a few minutes. If it\'s not there, check Promotions or spam.</p>' +
+        '<p class="fine">It\'s where I write the full story behind every nightmare I face on camera. Unsubscribe any time.</p></div>' +
+      '<div class="sub-wrap"><iframe class="sub-embed" src="' + SUBSTACK_URL + '/embed" title="Subscribe to I\'m Just Nate" loading="lazy" scrolling="no"></iframe></div>' +
+      '<p class="fine">Box not showing? <a href="' + SUBSTACK_URL + '/subscribe" target="_blank" rel="noopener">Subscribe on Substack</a> instead.</p>' +
+      '<div class="unlock-row"><label class="lab" for="unlock-in">Got the word? Type it here.</label>' +
+        '<div class="code-row"><input id="unlock-in" class="email-in" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Unlock word">' +
+        '<button class="btn btn-primary btn-small" type="button" id="unlock-btn">Unlock my ladders</button></div>' +
+        '<p class="status" id="unlock-status" role="status"></p></div>' +
+    '</div>';
+  }
+  function bindUnlock() {
+    var btn = el("unlock-btn"), inp = el("unlock-in");
+    if (!btn || !inp) return;
+    function tryIt() {
+      if (!wordOk(inp.value)) { el("unlock-status").textContent = "That's not the word. Check your welcome email from I'm Just Nate."; return; }
+      unlocked = true; save(KEY_UNLOCK, true);
+      renderLadders(); renderUnlock();
+      var h = el("ladders").querySelectorAll(".ladder h3")[2];
+      if (h) { h.setAttribute("tabindex", "-1"); h.scrollIntoView({ block: "center" }); h.focus({ preventScroll: true }); }
+    }
+    btn.addEventListener("click", tryIt);
+    inp.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); tryIt(); } });
+  }
+
+  function renderUnlock() {
+    var u = el("unlock-host");
+    if (u) { u.innerHTML = unlockHtml(); bindUnlock(); }
+  }
+
+  function renderLadders() {
+    el("ladders").innerHTML = ladderList().map(function (p) { return ladderHtml(p[0], p[1]); }).join("");
+    el("plan").innerHTML = planHtml(R.A, R.B);
+    if (editing) {
+      var ta = el("own-" + editing.dom + "-" + editing.r);
+      if (ta) { ta.value = rungState(editing.dom)[editing.r].own || ""; ta.focus(); }
+    }
+    if (logEditing) {
+      var nm = logEditing.dom + "-" + logEditing.r, cur = logs[logKey(logEditing.dom, logEditing.r)] || {};
+      var w = el("lw-" + nm), h = el("lh-" + nm);
+      if (w) w.value = cur.worst || "";
+      if (h) h.value = cur.what || "";
+      var first = document.querySelector('input[name="lb-' + nm + '"]:checked') || document.querySelector('input[name="lb-' + nm + '"]');
+      if (first) first.focus();
+    }
+    renderLog();
+  }
+
+  /* ---------- Dread log chart ---------- */
+  var EXAMPLE_LOG = [
+    { label: "Ask a stranger for a recommendation", sub: "Example · Bad Dream", before: 6, peak: 2 },
+    { label: "Go to a meetup where you know no one", sub: "Example · Nightmare", before: 8, peak: 5 },
+    { label: "Give a short toast at dinner", sub: "Example · Small nightmare", before: 7, peak: 7 }
+  ];
+  function chartRows(rows) {
+    return rows.map(function (e) {
+      var dots = "", line = "";
+      if (typeof e.before === "number" && typeof e.peak === "number" && e.before !== e.peak) {
+        var lo = Math.min(e.before, e.peak), hi = Math.max(e.before, e.peak);
+        line = '<span class="dline" style="left:' + lo * 10 + '%;width:' + (hi - lo) * 10 + '%"></span>';
+      }
+      if (typeof e.before === "number") dots += '<span class="ddot pred" style="left:' + e.before * 10 + '%" title="Predicted ' + e.before + '"></span>';
+      if (typeof e.peak === "number") dots += '<span class="ddot peak" style="left:' + e.peak * 10 + '%" title="Actual ' + e.peak + '"></span>';
+      var aria = e.label + ": predicted " + (typeof e.before === "number" ? e.before : "not rated") + ", actual " + (typeof e.peak === "number" ? e.peak : "not done yet") + " out of 10";
+      return '<div class="drow" role="listitem" aria-label="' + esc(aria) + '"><div class="drow-lab">' + esc(e.label) + '<small>' + esc(e.sub) + '</small></div>' +
+        '<div class="dtrack" aria-hidden="true"><span class="dband"></span>' + line + dots + '</div></div>';
+    }).join("");
+  }
+  function chartSummary(rows) {
+    var done = rows.filter(function (e) { return typeof e.before === "number" && typeof e.peak === "number"; });
+    if (!done.length) return "Rate your dread before a step, then come back after to see the gap.";
+    var gap = done.reduce(function (s, e) { return s + (e.before - e.peak); }, 0) / done.length;
+    var g = Math.round(Math.abs(gap) * 10) / 10;
+    if (gap >= 0.5) return "On average, it was <b>" + g + " points less scary</b> than you predicted.";
+    if (gap <= -0.5) return "On average, it was <b>" + g + " points scarier</b> than you predicted. That's useful data too. Try a lower rung next.";
+    return "So far, your predictions have been <b>about right</b>. You got through every one.";
+  }
+  function renderLog() {
+    var host = el("dlog");
+    if (!host) return;
+    var entries = logEntries();
+    var axis = '<div class="daxis" aria-hidden="true"><span>0</span><span>2</span><span>4</span><span>6</span><span>8</span><span>10</span></div>';
+    var legend = '<div class="dlegend"><span><i class="pred"></i>Dread you predicted</span><span><i class="peak"></i>How bad it actually got</span><span><i class="band"></i>Stretch zone, 4 to 7</span></div>';
+    if (!entries.length) { host.innerHTML = ""; return; }
+    var rows = entries.map(function (e) {
+      var dom = domainById(e.dom), rung = RUNGS[e.r] || RUNGS[0];
+      var short = e.text.length > 80 ? e.text.slice(0, 78) + "…" : e.text;
+      return { label: short, sub: rung.name + " · " + (dom ? dom.name : "") + " · " + (typeof e.peak === "number" ? "done " + fmtDate(e.date) : "not done yet"), before: e.before, peak: e.peak };
+    });
+    var doneN = entries.filter(function (e) { return typeof e.peak === "number"; }).length;
+    host.innerHTML = '<div class="dchart"><h3>Your dread log</h3><span class="eyebrow">' + entries.length + ' logged · ' + doneN + ' done · saved in this browser and in your PDF</span>' +
+      '<p class="dsum">' + chartSummary(rows) + '</p>' +
+      '<div class="drows" role="list">' + chartRows(rows) + '</div>' + axis + legend + '</div>';
+  }
+
+  function onLadderClick(e) {
+    var b = e.target.closest("[data-act]");
+    if (!b) return;
+    var domId = b.getAttribute("data-dom"), r = Number(b.getAttribute("data-rung")), dom = domainById(domId);
+    if (!dom) return;
+    var s = rungState(domId)[r], act = b.getAttribute("data-act");
+    if (act === "shuffle") {
+      s.v = (s.v + 1) % dom.ladder[r].length;
+      saveLadder(); renderLadders();
+      var t = el("rung-" + domId + "-" + r); var nb = t && t.parentNode.querySelector('[data-act="shuffle"]');
+      if (nb) nb.focus();
+      return;
+    }
+    if (act === "log") { logEditing = { dom: domId, r: r }; editing = null; renderLadders(); return; }
+    if (act === "logcancel") { logEditing = null; renderLadders(); return; }
+    if (act === "logclear") { delete logs[logKey(domId, r)]; saveLogs(); logEditing = null; renderLadders(); return; }
+    if (act === "logsave") {
+      var nm = domId + "-" + r, key = logKey(domId, r), prevE = logs[key] || {};
+      var before = checkedVal("lb-" + nm), peak = checkedVal("lp-" + nm);
+      var worst = (el("lw-" + nm) || {}).value || "", what = (el("lh-" + nm) || {}).value || "";
+      if (before === null && peak === null && !worst.trim() && !what.trim()) { delete logs[key]; }
+      else {
+        logs[key] = { dom: domId, r: r, text: prevE.text || suggestedText(dom, r), before: before, peak: peak,
+          worst: worst.trim(), what: what.trim(), date: peak !== null ? (prevE.date || new Date().toISOString()) : null, updated: new Date().toISOString() };
+      }
+      saveLogs(); logEditing = null; renderLadders();
+      var t2 = el("rung-" + domId + "-" + r); if (t2) { var lb = t2.parentNode.querySelector('[data-act="log"]'); if (lb) lb.focus(); }
+      return;
+    }
+    if (act === "write") { editing = { dom: domId, r: r }; logEditing = null; renderLadders(); return; }
+    if (act === "cancel") { editing = null; renderLadders(); return; }
+    if (act === "save") {
+      var ta = el("own-" + domId + "-" + r), val = ta ? ta.value.replace(/\s+/g, " ").trim() : "";
+      s.own = val; editing = null; saveLadder(); renderLadders(); return;
+    }
+    if (act === "ideas") { s.own = ""; saveLadder(); renderLadders(); return; }
+  }
+
+  function ladderLines(dom) {
+    return [0, 1, 2, 3].map(function (i) { return (i + 1) + ". " + RUNGS[i].name + " (" + RUNGS[i].time.toLowerCase() + "): " + stepText(dom, i); });
+  }
+
+  function resultsText() {
+    var sc = R.sc, lines = [
+      "My Comfort Audit, " + fmtDate(R.date),
+      sc.overall + "% of my life is lived playing it safe (" + R.band.name + ").",
+      "",
+      "By area, safest first:"
+    ];
+    R.sorted.forEach(function (d) { lines.push("· " + domainById(d.id).name + ": " + d.pct + "% playing it safe, " + (100 - d.pct) + "% pushing myself"); });
+    lines.push("", "Comfort habits checked: " + R.habits.length + " of " + HABITS.length);
+    if (R.proofs.length) { lines.push("", "My other " + R.other + "%, the proof:"); R.proofs.forEach(function (t) { lines.push("· " + t); }); }
+    lines.push("", "My result code (paste it in when I retake): " + R.code);
+    ladderList().forEach(function (p) { lines.push("", "My ladder: " + p[0].name); ladderLines(p[0]).forEach(function (l) { lines.push(l); }); });
+    lines.push("", "My first 30 days");
+    buildPlan(R.A, R.B).forEach(function (w) {
+      lines.push(w.wk + " (" + w.label.toLowerCase() + ")");
+      w.items.forEach(function (it) { lines.push("· " + it[0] + ", " + it[1] + ": " + it[2]); });
+    });
+    return lines.join("\n");
+  }
+
+  /* ---------- Email to yourself (opens the viewer's own mail app; nothing is sent from the page) ---------- */
+  var AUDIT_URL = "https://imjustnate.com/audit";
+  function emailBody() {
+    var sc = R.sc, lines = [
+      "My Comfort Audit, " + fmtDate(R.date),
+      sc.overall + "% of my life is lived playing it safe. The other " + R.other + "% is where I push myself.",
+      "",
+      "My result code: " + R.code,
+      "In 30 days, retake it here and paste the code in at the start to see what changed:",
+      AUDIT_URL
+    ];
+    [R.A, R.B].forEach(function (dom) {
+      lines.push("", "MY LADDER: " + dom.name.toUpperCase());
+      ladderLines(dom).forEach(function (l) { lines.push(l); });
+    });
+    lines.push("", "Before each step, rate your dread from 0 to 10. Aim for 4 to 7. Start with step 1 this week.");
+    if (R.proofs.length) { lines.push("", "Proof I can already do hard things:"); R.proofs.forEach(function (t) { lines.push("- " + t); }); }
+    return lines.join("\n");
+  }
+  function mailHref(to) {
+    to = String(to || "").trim();
+    var addr = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(to) ? encodeURIComponent(to).replace(/%40/g, "@") : "";
+    var subject = "My Comfort Audit: " + R.sc.overall + "% playing it safe (retake on " + fmtDate(new Date(new Date(R.date).getTime() + 30 * 86400000).toISOString()) + ")";
+    return "mailto:" + addr + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(emailBody()).replace(/%0A/g, "%0D%0A");
+  }
+
+  function copyText(text, statusEl, fallbackHost) {
+    function fallback() {
+      statusEl.textContent = "Copying isn't available here. Select the text below and copy it.";
+      fallbackHost.innerHTML = "";
+      var ta = document.createElement("textarea");
+      ta.className = "fallback"; ta.readOnly = true; ta.value = text;
+      ta.setAttribute("aria-label", "Text to copy");
+      fallbackHost.appendChild(ta); ta.focus(); ta.select();
+    }
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () { statusEl.textContent = "Copied."; }, fallback);
+      } else fallback();
+    } catch (e) { fallback(); }
+  }
+
+  /* ---------- Share image (story size, always the night palette) ---------- */
+  var shareBlob = null, shareUrl = null;
+  function wrapLines(g, text, maxW) {
+    var words = text.split(" "), lines = [], cur = "";
+    words.forEach(function (w) { var t = cur ? cur + " " + w : w; if (g.measureText(t).width > maxW && cur) { lines.push(cur); cur = w; } else cur = t; });
+    if (cur) lines.push(cur);
+    return lines;
+  }
+  function drawCard() {
+    var W = 1080, H = 1920, c = document.createElement("canvas"); c.width = W; c.height = H;
+    var g = c.getContext("2d");
+    var BG = "#0f1221", INK = "#edecf6", MUTED = "#a5a8c4", AMBER = "#f2b544", COMF = "#8796dc", PANIC = "#ef7462", LINE = "#2d3356";
+    var FD = '"Bricolage Grotesque", "Avenir Next", system-ui, sans-serif', FB = '"Atkinson Hyperlegible", Verdana, system-ui, sans-serif', FM = '"IBM Plex Mono", ui-monospace, monospace';
+    function spacing(px) { if ("letterSpacing" in g) g.letterSpacing = px; }
+    g.fillStyle = BG; g.fillRect(0, 0, W, H);
+    var MCY = 1105, S = 1.72;
+    var glow = g.createRadialGradient(W / 2, MCY, 30, W / 2, MCY, 640);
+    glow.addColorStop(0, "rgba(242,181,68,0.16)"); glow.addColorStop(1, "rgba(242,181,68,0)");
+    g.fillStyle = glow; g.fillRect(0, 0, W, H);
+    g.textAlign = "center"; g.textBaseline = "alphabetic";
+
+    g.fillStyle = MUTED; g.font = "500 30px " + FM; spacing("7px");
+    g.fillText("THE COMFORT AUDIT", W / 2, 170); spacing("0px");
+
+    var num = String(R.sc.overall);
+    g.font = "800 300px " + FD; var nw = g.measureText(num).width;
+    g.font = "800 130px " + FD; var pw = g.measureText("%").width;
+    var x0 = W / 2 - (nw + pw + 8) / 2;
+    g.textAlign = "left"; g.fillStyle = INK;
+    g.font = "800 300px " + FD; g.fillText(num, x0, 470);
+    g.font = "800 130px " + FD; g.fillText("%", x0 + nw + 8, 470);
+    g.textAlign = "center";
+    g.font = "700 54px " + FB; g.fillStyle = INK;
+    wrapLines(g, "of my life is lived playing it safe.", 900).forEach(function (l, i) { g.fillText(l, W / 2, 565 + i * 66); });
+
+    // zone map, same geometry as the page
+    function P(r, a) { return [W / 2 + r * S * Math.cos(a), MCY + r * S * Math.sin(a)]; }
+    g.lineWidth = 3; g.setLineDash([10, 12]); g.strokeStyle = PANIC; g.fillStyle = "rgba(239,116,98,0.10)";
+    g.beginPath(); g.arc(W / 2, MCY, R_PANIC * S, 0, Math.PI * 2); g.fill(); g.stroke(); g.setLineDash([]);
+    g.lineWidth = 2; g.strokeStyle = "rgba(242,181,68,0.55)"; g.fillStyle = "rgba(242,181,68,0.10)";
+    g.beginPath(); g.arc(W / 2, MCY, R_STRETCH * S, 0, Math.PI * 2); g.fill(); g.stroke();
+    g.lineWidth = 3; g.strokeStyle = COMF; g.fillStyle = "rgba(135,150,220,0.16)";
+    g.beginPath(); g.arc(W / 2, MCY, R_COMFORT * S, 0, Math.PI * 2); g.fill(); g.stroke();
+    var n = R.sc.domains.length, pts = [];
+    g.strokeStyle = LINE; g.lineWidth = 2;
+    R.sc.domains.forEach(function (ds, i) {
+      var a = angleFor(i, n), e = P(R_STRETCH, a);
+      g.beginPath(); g.moveTo(W / 2, MCY); g.lineTo(e[0], e[1]); g.stroke();
+      pts.push({ p: P(radiusFor(ds.pct), a), r: radiusFor(ds.pct), a: a, id: ds.id });
+    });
+    g.font = "500 20px " + FM; spacing("3px"); g.fillStyle = MUTED;
+    g.fillText("COMFORT", W / 2, MCY - R_COMFORT * S + 34);
+    g.fillText("STRETCH", W / 2, MCY - R_STRETCH * S + 32);
+    g.fillStyle = PANIC; g.fillText("PANIC", W / 2, MCY - R_STRETCH * S - 12); spacing("0px");
+    g.beginPath(); pts.forEach(function (q, i) { if (i) g.lineTo(q.p[0], q.p[1]); else g.moveTo(q.p[0], q.p[1]); }); g.closePath();
+    g.fillStyle = "rgba(242,181,68,0.20)"; g.fill(); g.lineWidth = 5; g.strokeStyle = AMBER; g.lineJoin = "round"; g.stroke();
+    pts.forEach(function (q) {
+      g.beginPath(); g.arc(q.p[0], q.p[1], 13, 0, Math.PI * 2);
+      g.fillStyle = q.r <= R_COMFORT ? COMF : AMBER; g.fill(); g.lineWidth = 5; g.strokeStyle = BG; g.stroke();
+      var lr = R_PANIC + 26, lx = W / 2 + lr * S * Math.cos(q.a), ly = MCY + lr * S * Math.sin(q.a);
+      var cs = Math.cos(q.a), sn = Math.sin(q.a);
+      g.textAlign = cs > 0.25 ? "left" : (cs < -0.25 ? "right" : "center");
+      g.fillStyle = INK; g.font = "700 34px " + FB;
+      g.fillText(domainById(q.id).short, lx, ly + (sn < -0.5 ? -6 : (sn > 0.5 ? 30 : 12)));
+    });
+    g.textAlign = "center";
+
+    g.fillStyle = AMBER; g.font = "700 46px " + FB;
+    wrapLines(g, "My other " + R.other + "%: where I feel the nerves and go anyway.", 900).forEach(function (l, i) { g.fillText(l, W / 2, 1560 + i * 58); });
+    g.fillStyle = INK; g.font = "800 72px " + FD; g.fillText("What's yours?", W / 2, 1745);
+    g.fillStyle = MUTED; g.font = "400 34px " + FB;
+    g.fillText("Take the free Comfort Audit at imjustnate.com", W / 2, 1810);
+    g.fillStyle = INK; g.font = "700 36px " + FB; g.fillText("@imjustnatehere", W / 2, 1862);
+    return c;
+  }
+  function makeShareImage() {
+    var img = el("share-img"); if (!img) return;
+    var fontsReady = (document.fonts && document.fonts.load)
+      ? Promise.all([document.fonts.load('800 300px "Bricolage Grotesque"'), document.fonts.load('700 54px "Atkinson Hyperlegible"'), document.fonts.load('400 34px "Atkinson Hyperlegible"'), document.fonts.load('500 30px "IBM Plex Mono"')]).catch(function () {})
+      : Promise.resolve();
+    var timeout = new Promise(function (res) { setTimeout(res, 2500); });
+    Promise.race([fontsReady, timeout]).then(function () {
+      var c = drawCard();
+      c.toBlob(function (blob) {
+        if (!blob) return;
+        shareBlob = blob;
+        if (shareUrl) { try { URL.revokeObjectURL(shareUrl); } catch (e) {} }
+        shareUrl = URL.createObjectURL(blob);
+        img.src = shareUrl; img.hidden = false;
+        syncPdf();
+      }, "image/png");
+    });
+  }
+  function onShareDownload() {
+    var st = el("share-status");
+    if (!downloadsApi || !shareBlob) { st.textContent = "Downloading isn't available in this view. Press and hold the image to save it."; return; }
+    st.textContent = downloadsApi.native ? "Downloading…" : "Confirm the download to save it.";
+    downloadsApi.save({ filename: "My Comfort Audit " + R.sc.overall + ".png", data: shareBlob }).then(function () {
+      st.textContent = downloadsApi.native
+        ? "Downloaded. Post it to your story and tag @imjustnatehere. Nothing showed up? Press and hold the image to save it."
+        : "Saved. Post it to your story and tag @imjustnatehere.";
+    }, function (err) {
+      var c = err && err.code;
+      st.textContent = c === "declined" ? "Download cancelled." : (c === "rate_limited" ? "A save prompt is already open. Finish that one first." : "Downloading isn't available here. Press and hold the image to save it.");
+    });
+  }
+
+  /* ---------- PDF ---------- */
+  function pdfClean(s) {
+    return String(s).replace(/[“”„]/g, '"').replace(/[‘’]/g, "'").replace(/[–—]/g, "-")
+      .replace(/…/g, "...").replace(/·/g, "-").replace(/[←-⇿]/g, "").replace(/[^\x20-\x7E\xA0-\xFF\n]/g, "");
+  }
+
+  function buildPdf() {
+    var JsPDF = window.jspdf && window.jspdf.jsPDF;
+    if (!JsPDF) throw new Error("no-lib");
+    var doc = new JsPDF({ unit: "pt", format: "letter" });
+    var PW = 612, PH = 792, M = 54, CW = PW - 2 * M, BOTTOM = PH - 64, y = M;
+    var INK = [21, 26, 46], MUTED = [82, 88, 115], LINE = [211, 214, 232];
+    var LEVEL = [[76, 92, 176], [176, 145, 112], [226, 160, 40], [196, 70, 58]];
+    function ensure(h) { if (y + h > BOTTOM) { doc.addPage(); y = M; } }
+    function font(size, style, color) { doc.setFont("helvetica", style || "normal"); doc.setFontSize(size); doc.setTextColor(color[0], color[1], color[2]); }
+    function para(s, size, style, color, after, x, w) {
+      font(size, style, color || INK);
+      var lines = doc.splitTextToSize(pdfClean(s), w || CW), lh = size * 1.32;
+      ensure(lines.length * lh);
+      doc.text(lines, x || M, y, { baseline: "top", lineHeightFactor: 1.32 });
+      y += lines.length * lh + (after || 0);
+    }
+    function rule() { doc.setDrawColor(LINE[0], LINE[1], LINE[2]); doc.setLineWidth(0.8); doc.line(M, y, PW - M, y); y += 16; }
+    function box(x, yy, s) { doc.setDrawColor(MUTED[0], MUTED[1], MUTED[2]); doc.setLineWidth(0.8); doc.rect(x, yy, s, s, "S"); }
+
+    var sc = R.sc;
+    para("THE COMFORT AUDIT  -  I'M JUST NATE  -  NIGHTMARES COME TRUE", 8, "bold", MUTED, 8);
+    para("My ladder out of comfort", 24, "bold", INK, 4);
+    para(fmtDate(R.date), 10, "normal", MUTED, 16);
+    para(sc.overall + "% of my life is lived playing it safe.", 16, "bold", INK, 4);
+    para(R.band.name + ". " + R.band.text, 10, "normal", MUTED, 8);
+    para("Where I play it safest: " + R.A.name + " (" + R.sorted[0].pct + "% playing it safe) and " + R.B.name + " (" + R.sorted[1].pct + "% playing it safe). " +
+      "Where I push myself most: " + domainById(R.lowest.id).name + " (" + (100 - R.lowest.pct) + "% pushing myself).", 10, "normal", INK, 12);
+    if (R.proofs.length) {
+      para("My other " + R.other + "%: where I feel the nerves and go anyway. Proof, from my answers:", 10, "bold", INK, 4);
+      R.proofs.forEach(function (t) { para("-  " + t, 10, "normal", INK, 2, M + 6, CW - 6); });
+      y += 10;
+    }
+    para("My result code: " + R.code, 10.5, "bold", INK, 2);
+    para("Paste it in at the start when I retake in 30 days, to see what changed.", 9, "normal", MUTED, 16);
+    rule();
+
+    ladderList().forEach(function (pair, li) {
+      var dom = pair[0];
+      ensure(190);
+      para("Ladder " + (li + 1) + ": " + dom.name + "  (" + pair[1] + "% safe)", 14, "bold", INK, 2);
+      para("Start at rung 1. Climb when a rung feels doable, not easy. Aim for a dread of 4 to 7 out of 10.", 9.5, "normal", MUTED, 10);
+      for (var i = 0; i < 4; i++) {
+        var own = !!rungState(dom.id)[i].own;
+        font(11, "normal", INK);
+        var lines = doc.splitTextToSize(pdfClean(stepText(dom, i)), CW - 32), lh = 14.5;
+        var h = 12 + 10 + 7 + lines.length * lh + 8 + 12 + 10;
+        ensure(h + 8);
+        doc.setDrawColor(LINE[0], LINE[1], LINE[2]); doc.setLineWidth(0.8); doc.roundedRect(M, y, CW, h, 5, 5, "S");
+        var c = LEVEL[i]; doc.setFillColor(c[0], c[1], c[2]); doc.rect(M + 0.5, y + 3, 4, h - 6, "F");
+        font(7.5, "bold", MUTED);
+        doc.text(pdfClean("RUNG " + (i + 1) + "  -  " + RUNGS[i].name.toUpperCase() + "  -  " + RUNGS[i].time.toUpperCase() + (own ? "  -  MY OWN" : "")), M + 16, y + 12, { baseline: "top" });
+        font(11, "normal", INK);
+        doc.text(lines, M + 16, y + 29, { baseline: "top", lineHeightFactor: 1.32 });
+        var ly = y + 29 + lines.length * lh + 8;
+        var lgp = logs[logKey(dom.id, i)] || {}, isDone = typeof lgp.peak === "number";
+        box(M + 16, ly, 9);
+        if (isDone) { doc.setDrawColor(INK[0], INK[1], INK[2]); doc.setLineWidth(1.4); doc.line(M + 18, ly + 4.5, M + 20.5, ly + 7.5); doc.line(M + 20.5, ly + 7.5, M + 24, ly + 1.5); }
+        font(8.5, "normal", MUTED);
+        doc.text("Done", M + 30, ly + 0.5, { baseline: "top" });
+        doc.text("Dread before: " + (typeof lgp.before === "number" ? lgp.before + "/10" : "____ /10"), M + 80, ly + 0.5, { baseline: "top" });
+        doc.text("At its peak: " + (isDone ? lgp.peak + "/10" : "____ /10"), M + 210, ly + 0.5, { baseline: "top" });
+        doc.text("Date: " + (isDone && lgp.date ? pdfClean(fmtDate(lgp.date)) : "__________"), M + 330, ly + 0.5, { baseline: "top" });
+        y += h + 8;
+      }
+      y += 10;
+    });
+
+    ensure(120);
+    rule();
+    para("My first 30 days", 14, "bold", INK, 2);
+    para("Two steps a week, one from each ladder. If a step feels like panic, drop down a rung. If it feels easy, skip up one.", 9.5, "normal", MUTED, 12);
+    buildPlan(R.A, R.B).forEach(function (w) {
+      ensure(110);
+      para(w.wk + "  -  " + w.label, 11, "bold", INK, 4);
+      w.items.forEach(function (it) {
+        font(10, "normal", INK);
+        var lines = doc.splitTextToSize(pdfClean(it[0] + " (" + it[1] + "): " + it[2]), CW - 22), lh = 10 * 1.32;
+        ensure(lines.length * lh + 6);
+        box(M + 2, y + 1.5, 8);
+        doc.text(lines, M + 20, y, { baseline: "top", lineHeightFactor: 1.32 });
+        y += lines.length * lh + 6;
+      });
+      y += 8;
+    });
+
+    ensure(150);
+    rule();
+    para("The dread check, for every step", 14, "bold", INK, 8);
+    ["Before: rate your dread from 0 to 10 and write the worst thing you think will happen.",
+     "Aim for 4 to 7. Under 4 is still comfort. 9 or 10 is panic, so pick a lower rung.",
+     "Do it for real. Try your best. Don't throw it so it can't count.",
+     "After: rate how bad it actually got, and write what happened.",
+     "Compare. The gap is your data. If the worst case did happen, write down how you handled it. That counts most."
+    ].forEach(function (t, i) { para((i + 1) + ".  " + t, 10, "normal", INK, 5, M + 4, CW - 4); });
+
+    var ents = logEntries();
+    if (ents.length) {
+      y += 10; ensure(120); rule();
+      para("My dread log", 14, "bold", INK, 8);
+      ents.forEach(function (e) {
+        var dm = domainById(e.dom), rg = RUNGS[e.r] || RUNGS[0];
+        ensure(70);
+        para(rg.name + " (" + (dm ? dm.name : "") + "): " + e.text, 10.5, "bold", INK, 3);
+        para("Dread before: " + (typeof e.before === "number" ? e.before + "/10" : "-") + "     At its peak: " + (typeof e.peak === "number" ? e.peak + "/10" : "not done yet") + (e.date ? "     Done " + fmtDate(e.date) : ""), 9.5, "normal", MUTED, 3);
+        if (e.worst) para("The worst I expected: " + e.worst, 9.5, "normal", INK, 2);
+        if (e.what) para("What actually happened: " + e.what, 9.5, "normal", INK, 2);
+        y += 8;
+      });
+    }
+
+    var n = doc.getNumberOfPages();
+    for (var p = 1; p <= n; p++) {
+      doc.setPage(p);
+      font(7.5, "normal", MUTED);
+      doc.text("A self-reflection tool, not a psychological test or a diagnosis. Choose steps that stretch you, and skip anything that could hurt you or embarrass someone else.", M, PH - 40, { baseline: "top", maxWidth: CW - 150 });
+      doc.text("@imjustnatehere  -  " + p + " / " + n, PW - M, PH - 40, { baseline: "top", align: "right" });
+    }
+    return doc.output("blob");
+  }
+
+  function onPdf() {
+    var st = el("pdf-status");
+    if (!downloadsApi) { st.textContent = "Downloading isn't available in this view. Copy your plan as text instead."; return; }
+    var blob;
+    try { blob = buildPdf(); } catch (e) { st.textContent = "The PDF couldn't be made in this view. Copy your plan as text instead."; return; }
+    st.textContent = downloadsApi.native ? "Downloading…" : "Confirm the download to save it.";
+    downloadsApi.save({ filename: "My Comfort Audit ladder.pdf", data: blob }).then(function (res) {
+      st.textContent = res && res.status === "delivered" ? "Sent." :
+        (downloadsApi.native ? "Downloaded. Nothing showed up? Open this page in Safari or Chrome and try again, or copy your plan as text." : "Saved.");
+    }, function (err) {
+      var c = err && err.code;
+      st.textContent = c === "declined" ? "Download cancelled." :
+        (c === "rate_limited" ? "A save prompt is already open. Finish that one first." : "Downloading isn't available here. Copy your plan as text instead.");
+    });
+  }
+
+  // replay = a saved history entry to show again (nothing new is saved)
+  function finish(replay) {
+    var answers = state.answers, habits = state.habits;
+    var sc = computeScores(answers, habits);
+    var band = bandFor(sc.overall);
+    var sorted = sc.domains.slice().sort(function (a, b) { return b.pct - a.pct || DOMAINS.indexOf(domainById(a.id)) - DOMAINS.indexOf(domainById(b.id)); });
+    var top = sorted.slice(0, 2).map(function (d) { return d.id; });
+    var lowest = sorted[sorted.length - 1];
+    var A = domainById(sorted[0].id), B = domainById(sorted[1].id);
+    var nowIso = replay ? replay.date : new Date().toISOString();
+    var hist = loadHistory(), prev = null;
+    hist.forEach(function (e) { if (e.date < nowIso && (!replay || e !== replay)) prev = e; });
+    var code = encodeResult(answers, habits, nowIso);
+    var other = 100 - sc.overall;
+    var proofs = proofList(answers);
+    R = { sc: sc, band: band, sorted: sorted, lowest: lowest, A: A, B: B, date: nowIso, habits: habits, code: code, other: other, proofs: proofs };
+    editing = null; logEditing = null;
+
+    var deltaHtml = "";
+    if (prev && typeof prev.overall === "number") {
+      var diff = sc.overall - prev.overall;
+      var word = diff === 0 ? "no change" : (diff < 0 ? Math.abs(diff) + " points less playing it safe" : diff + " points more playing it safe");
+      deltaHtml = '<p class="delta">Last time (' + fmtDate(prev.date) + '): ' + prev.overall + '% · ' + word + '</p>';
+    }
+    var prevPct = {};
+    if (prev && prev.domains) prev.domains.forEach(function (d) { prevPct[d.id] = d.pct; });
+
+    var allLow = sorted[0].pct < 40;
+    var bars = sorted.map(function (d) {
+      var dom = domainById(d.id), inComfort = d.pct >= 55;
+      var tag = "", chg = "";
+      if (top.indexOf(d.id) !== -1 && !allLow) tag = '<span class="tag safe">Safest</span>';
+      else if (d.id === lowest.id) tag = '<span class="tag brave">' + (lowest.pct < 50 ? "Already brave" : "Most stretched") + '</span>';
+      if (typeof prevPct[d.id] === "number" && prevPct[d.id] !== d.pct) {
+        var dd = d.pct - prevPct[d.id];
+        chg = ' <span class="chg' + (dd < 0 ? ' good' : '') + '" title="' + Math.abs(dd) + ' points ' + (dd < 0 ? 'less' : 'more') + ' safe than on ' + fmtDate(prev.date) + '">' + (dd < 0 ? '−' : '+') + Math.abs(dd) + '</span>';
+      }
+      return '<li class="bar"><div class="bar-top"><span class="bar-name">' + esc(dom.name) + tag + '</span>' + chg + '</div>' +
+        '<div class="split" aria-hidden="true"><span class="s-safe" style="width:' + d.pct + '%"></span><span class="s-push" style="width:' + (100 - d.pct) + '%"></span></div>' +
+        '<p class="bar-nums"><span><i class="k-safe"></i><b>' + d.pct + '%</b> playing it safe</span><span><i class="k-push"></i><b>' + (100 - d.pct) + '%</b> pushing yourself</span></p>' +
+        '<p class="bar-desc">' + esc(dom.desc) + '</p></li>';
+    }).join("");
+
+    var habitCards = habits.length ? HABITS.filter(function (h) { return habits.indexOf(h.id) !== -1; }).map(function (h) {
+      return '<article class="habit"><h3>' + esc(h.name) + '</h3><p class="muted">' + esc(h.why) + '</p><p class="try"><b>Try instead:</b> ' + esc(h.tryit) + '</p></article>';
+    }).join("") : "";
+
+    var scaleHtml = "";
+    for (var i = 0; i <= 10; i++) scaleHtml += '<span class="' + (i >= 4 && i <= 7 ? "s" : (i >= 9 ? "p" : "")) + '">' + i + '</span>';
+
+    var lowName = domainById(lowest.id).name;
+    var personal = A.id === lowest.id
+      ? '<p>Your areas are close together. Your safest is <b>' + esc(A.name) + '</b> (' + sorted[0].pct + '% safe).</p>'
+      : '<p>Your safest area is <b>' + esc(A.name) + '</b> (' + sorted[0].pct + '% safe). Its dot sits closest to the middle, so your first ladder starts there. ' +
+        'You stretch most on <b>' + esc(lowName) + '</b> (' + lowest.pct + '% safe). Its dot reaches farthest out.</p>';
+
+    var html =
+      '<header class="res-head">' +
+        '<p class="eyebrow">Your Comfort Audit · ' + fmtDate(nowIso) + '</p>' +
+        '<h1 id="res-title" class="sr">Your results</h1>' +
+        '<div class="score-row"><div class="score" aria-label="Comfort Score ' + sc.overall + ' percent">' + sc.overall + '<small>%</small></div>' +
+        '<div class="band"><span class="eyebrow">Comfort Score</span><span class="band-name">' + band.name + '</span></div></div>' +
+        '<p class="big">This means about <b>' + sc.overall + '% of your life is lived playing it safe.</b> The other ' + other + '% is where you feel the nerves and go anyway.</p>' +
+        '<p class="muted" style="max-width:62ch">' + band.text + '</p>' + deltaHtml +
+        '<a class="jump" href="#your-ladder" id="jump-ladder">How to get less scared: your step-by-step ladder <span aria-hidden="true">↓</span></a>' +
+        (replay ? '<p class="fine">You\'re looking at a saved result from ' + fmtDate(nowIso) + '.</p>' : '') +
+      '</header>' +
+
+      '<section class="sec" aria-labelledby="other-h"><div class="sec-head"><h2 id="other-h">Your other ' + other + '%</h2></div>' +
+        '<p class="other-lead">The part of your life where you <b>feel the nerves and go anyway.</b></p>' +
+        '<div class="truths">' +
+          '<article class="truth"><h3>It isn\'t where you\'re fearless</h3><p>Fear still shows up here. It just doesn\'t get the final say. You feel it, and you do the thing anyway.</p></article>' +
+          '<article class="truth"><h3>It\'s already on the record</h3><p>Every number on this page comes from what you actually did in the last 3 months. So your ' + other + '% isn\'t a hope. It\'s proof you already know how to do hard things.</p></article>' +
+          '<article class="truth"><h3>It\'s what the ladder grows</h3><p>Every step you take moves a little of your ' + sc.overall + '% over to this side. Retake in 30 days and watch this number grow.</p></article>' +
+        '</div>' +
+        '<div class="proof-box"><h3>Your proof</h3>' +
+          (proofs.length
+            ? '<p class="other-note">Straight from your answers:</p><ul class="proof">' + proofs.map(function (t) { return '<li><span>' + esc(t) + '</span></li>'; }).join("") + '</ul>'
+            : '<p class="other-note">Your answers didn\'t turn up much here yet, and that\'s okay. That\'s what the ladder is for. Retake in 30 days and this list will start filling in.</p>') +
+          '<p class="other-note">You don\'t need to get this to 100%. Comfort is where you rest and recover. The goal is to choose your discomfort on purpose, instead of letting comfort choose for you.</p>' +
+        '</div>' +
+      '</section>' +
+
+      '<section class="sec" aria-labelledby="map-h"><div class="sec-head"><h2 id="map-h">Your zone map</h2>' +
+        '<p>Each dot is one area of your life. The closer a dot sits to the middle, the safer you play it there.</p></div>' +
+        '<div class="mapgrid"><div>' + zoneMap(sc.domains, { title: "Your zone map" }) +
+        '<div class="legend" style="justify-content:center;margin-top:10px"><span><i style="background:var(--comfort)"></i>In your comfort zone (playing it safe 55% or more)</span><span><i style="background:var(--accent)"></i>Out in the stretch</span></div></div>' +
+        '<div class="bars-wrap"><p class="bars-note">For each area of your life: how much of the time you play it safe, and how much you push yourself. It comes from your four answers about that area.' +
+          (prev && prev.domains ? ' The small number by each name is the change in playing it safe since ' + fmtDate(prev.date) + '. A minus means you\'re pushing yourself more there.' : '') + '</p>' +
+        '<ul class="bars" aria-label="How safe you play it in each area, safest first">' + bars + '</ul></div></div>' +
+        '<div class="readbox readcard"><h3>How to read your map</h3>' + personal +
+          spokeKey([{ label: A.short, pct: sorted[0].pct }].concat(A.id === lowest.id ? [] : [{ label: domainById(lowest.id).short, pct: lowest.pct }])) +
+          '<ol class="howto">' + howtoHtml() + '</ol></div>' +
+      '</section>' +
+
+      '<section class="sec" aria-labelledby="share-h"><div class="sec-head"><h2 id="share-h">Share your score</h2>' +
+        '<p>A story-sized image of your number and your map. Post it, and ask your friends what theirs is.</p></div>' +
+        '<div class="share"><img class="share-img" id="share-img" hidden width="1080" height="1920" alt="Your share image: ' + sc.overall + '% of my life is lived playing it safe, with your zone map and @imjustnatehere">' +
+          '<div class="share-copy"><div class="actions"><button class="btn btn-primary" type="button" id="share-dl" hidden>Download the image</button>' +
+            '<span class="status" id="share-status" role="status"></span></div>' +
+            '<p class="fine">On your phone, you can also press and hold the image to save it.</p>' +
+            '<div class="caption"><span class="eyebrow">Caption idea</span><p id="cap-text">I just found out ' + sc.overall + '% of my life is lived playing it safe. What\'s yours? Take the free Comfort Audit at imjustnate.com (made by @imjustnatehere).</p></div>' +
+            '<div class="actions"><button class="btn btn-ghost btn-small" type="button" id="copy-cap">Copy the caption</button><span class="status" id="cap-status" role="status"></span></div><div id="cap-fallback"></div>' +
+          '</div></div>' +
+      '</section>' +
+
+      '<section class="sec" aria-labelledby="habits-h"><div class="sec-head"><h2 id="habits-h">Your comfort habits</h2>' +
+        '<p>You checked ' + habits.length + ' of ' + HABITS.length + '. Researchers call these safety behaviors: they make a moment easier, and they also stop you from finding out you would have been fine without them.</p></div>' +
+        (habitCards ? '<div class="habits">' + habitCards + '</div>' : '<p class="empty">You didn\'t check any. Either you face things head on, or your habits are well hidden. Try the checklist again after your next uncomfortable moment and see what you notice.</p>') +
+      '</section>' +
+
+      '<section class="sec" id="your-ladder" aria-labelledby="ladder-h"><div class="sec-head"><h2 id="ladder-h" tabindex="-1">Your ladder: how to get less scared</h2>' +
+        '<p>Fear shrinks the same way a muscle grows: small, real reps, a little heavier each time. Your ladder gives you those reps, built for the two areas where ' +
+        (allLow ? 'you have the most room left' : 'you play it safest') + ': <b>' + esc(A.name) + '</b> and <b>' + esc(B.name) + '</b>. Each ladder has four steps, from a 5-minute Bad Dream down to the nightmare you\'ve been avoiding.</p></div>' +
+        '<div class="readcard howclimb"><h3>How it works</h3><ol class="howto">' +
+          '<li><b>Start with step 1, the Bad Dream.</b> It takes about 5 minutes. Do it for real this week.</li>' +
+          '<li><b>Aim for nervous, not panicked.</b> Before a step, rate your dread from 0 to 10. Somewhere from 4 to 7 is right. If it\'s a 9 or 10, pick something smaller. If it\'s under 4, it\'s too easy, so go bigger.</li>' +
+          '<li><b>Log it.</b> Tap Log it to rate your dread before, then come back afterward and rate how bad it actually got. Most of the time it\'s less bad than you expected, and that gap is what teaches your brain it can handle more.</li>' +
+          '<li><b>Move to the next step when the last one felt doable,</b> not when it feels easy. Don\'t like a step? Tap Shuffle for another idea (there are six for every step), or write your own.</li>' +
+        '</ol><p class="fine">Every step only puts you on the line, never anyone else.</p></div>' +
+        '<div class="ladders" id="ladders"></div>' +
+        '<div id="unlock-host"></div>' +
+        '<div id="dlog"></div>' +
+      '</section>' +
+
+      '<section class="sec" aria-labelledby="plan-h"><div class="sec-head"><h2 id="plan-h">Your first 30 days</h2>' +
+        '<p>Two steps a week, one from each ladder. It updates when you shuffle or write your own. If a step feels like panic, drop down a rung. If it feels easy, skip up one.</p></div>' +
+        '<ol class="plan" id="plan"></ol>' +
+        '<div class="save-row"><div class="actions">' +
+          '<button class="btn btn-primary" type="button" id="pdf" hidden>Download my ladder plan (PDF)</button>' +
+          '<button class="btn btn-ghost" type="button" id="copy-res">Copy my plan as text</button>' +
+          '<span class="status" id="pdf-status" role="status"></span></div>' +
+          '<p>The PDF has your ladders with the steps you picked, a box to tick and dread scores to fill in for every rung, your 30-day plan, and the dread check.</p>' +
+          '<p id="pdf-note" hidden>Downloading isn\'t available in this view. Copy your plan as text instead.</p>' +
+          '<div id="res-fallback"></div>' +
+        '</div>' +
+      '</section>' +
+
+      '<section class="sec" aria-labelledby="code-h"><div class="sec-head"><h2 id="code-h">Keep your results</h2>' +
+        '<p>Save this code, or take a screenshot of it. When you retake in 30 days, paste it in at the start and you\'ll see exactly what changed, on any phone or browser. It\'s printed in your PDF too.</p></div>' +
+        '<div class="code-box"><span class="eyebrow">Your result code</span><code class="code" id="res-code">' + code + '</code>' +
+          '<div class="actions"><button class="btn btn-ghost btn-small" type="button" id="copy-code">Copy code</button><span class="status" id="code-copy-status" role="status"></span></div><div id="code-fallback"></div>' +
+          '<p class="fine">This browser also remembers your results, your ladder and your dread log, but some apps (like the browsers inside TikTok and Instagram) clear that. The code always works.</p>' +
+        '</div>' +
+        '<div class="email-box"><h3>Email it to yourself</h3>' +
+          '<p class="other-note">Your score, your code, your ladder and the link to retake, in one email you can find in 30 days. This opens your email app with everything filled in, and you hit send.</p>' +
+          '<div class="code-row"><label class="sr" for="email-in">Your email address</label>' +
+            '<input id="email-in" class="email-in" type="email" inputmode="email" autocomplete="email" placeholder="you@email.com">' +
+            '<a class="btn btn-primary btn-small" id="email-btn" href="mailto:">Open my email app</a></div>' +
+          '<p class="fine" id="email-note">Didn\'t open? Some apps block it. Tap Copy my plan as text above and paste it into an email to yourself.</p>' +
+        '</div>' +
+      '</section>' +
+
+      '<section class="sec" aria-label="Retake">' +
+        '<div class="actions"><button class="btn btn-ghost" type="button" id="retake">Retake the audit</button></div>' +
+        '<p class="fine">Retake on day 30. If this browser forgot you, paste your result code at the start.</p>' +
+      '</section>' +
+
+      '<section class="sec" aria-label="More about the audit">' +
+        '<details><summary>The thinking behind it</summary><div class="body">' +
+          '<p><b>Comfort, stretch, panic.</b> A common model in experiential education splits life into three zones: comfort (familiar and low risk), stretch (uneasy, and where growth happens) and panic (too much to learn from). This audit maps how much of your life stays in the first one, and the ladder aims you at the second.</p>' +
+          '<p><b>Avoidance keeps fear alive.</b> Each time you skip something, the relief tells your brain that skipping is what kept you safe. Skipping gets easier, and the thing gets scarier.</p>' +
+          '<p><b>Safety habits do it quietly.</b> Leaving early, rehearsing, hiding behind your phone or a joke: psychologists call these safety behaviors. They make a moment easier, but they keep you from learning you would have been fine without them.</p>' +
+          '<p><b>Small steps, repeated.</b> Fear tends to shrink with gradual, repeated approach: starting with what is uncomfortable but doable, and building up.</p>' +
+          '<p><b>Predictions are the data.</b> Fear updates most when what you expected doesn\'t match what happened. And sometimes the nightmare does come true. Getting through it, and seeing that you did, is the most convincing data of all.</p>' +
+        '</div></details>' +
+        '<details><summary>How your score is calculated</summary><div class="body">' +
+          '<p>Each answer scores from 0 (you go for it) to 4 (you play it safe). An area\'s number is its points out of 16, as a percentage: how safe you play it there.</p>' +
+          '<p>Your Comfort Score blends three things: the average of your seven areas (75%), the share of the 12 comfort habits you checked (15%), and how little of your week goes to anything that makes you nervous (10%).</p>' +
+          '<p>Yours: areas averaged ' + sc.avg + '% safe, habits ' + sc.habitPct + '%, week ' + sc.weekPct + '%. That gives ' + sc.overall + '%.</p>' +
+          '<p>It\'s an estimate from your own answers, not a measurement. It\'s most useful compared against itself: take it again after 30 days.</p>' +
+        '</div></details>' +
+      '</section>' +
+
+      '<footer class="foot">' +
+        '<p><b>This is a self-reflection tool, not a psychological test or a diagnosis.</b> If fear or anxiety keeps you from work, relationships or everyday life, a licensed therapist can help, and asking for that is a brave step in itself. Choose steps that stretch you, and skip anything that could hurt you or embarrass someone else.</p>' +
+        '<p>Your answers stay in this browser. Nothing is sent anywhere.</p>' +
+        '<p>Made by I\'m Just Nate · Nightmares Come True · @imjustnatehere · <a href="https://imjustnate.com/">imjustnate.com</a> · <a href="' + SUBSTACK_URL + '" target="_blank" rel="noopener">Newsletter</a></p>' +
+      '</footer>';
+
+    screens.results.innerHTML = html;
+    show("results");
+    renderLadders();
+    renderUnlock();
+    syncPdf();
+
+    el("ladders").addEventListener("click", onLadderClick);
+    el("pdf").addEventListener("click", onPdf);
+    el("jump-ladder").addEventListener("click", function (e) {
+      e.preventDefault();
+      var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      el("your-ladder").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+      el("ladder-h").focus({ preventScroll: true });
+    });
+    function syncEmail() { el("email-btn").setAttribute("href", mailHref(el("email-in").value)); }
+    el("email-in").addEventListener("input", syncEmail);
+    el("email-btn").addEventListener("click", syncEmail);
+    syncEmail();
+    el("copy-res").addEventListener("click", function () { copyText(resultsText(), el("pdf-status"), el("res-fallback")); });
+    el("copy-code").addEventListener("click", function () { copyText(code, el("code-copy-status"), el("code-fallback")); });
+    el("copy-cap").addEventListener("click", function () { copyText(el("cap-text").textContent, el("cap-status"), el("cap-fallback")); });
+    el("share-dl").addEventListener("click", onShareDownload);
+    shareBlob = null;
+    makeShareImage();
+    el("retake").addEventListener("click", function () {
+      state = { step: 0, answers: QUESTIONS.map(function () { return null; }), habits: [] };
+      persist(); show("quiz"); renderStep();
+    });
+
+    if (!replay) {
+      hist.push({ date: nowIso, overall: sc.overall, domains: sc.domains, answers: answers.slice(), habits: habits.slice() });
+      saveHistory(hist);
+      save(KEY_LAST, { overall: sc.overall, date: nowIso, domains: sc.domains });
+      drop(KEY_PROGRESS);
+    }
+    var head = screens.results.querySelector(".score");
+    if (head) { head.setAttribute("tabindex", "-1"); head.focus({ preventScroll: true }); }
+  }
+
+  // expose the PDF builder and unlock check for testing
+  window.__comfortAudit.buildPdf = function () { return buildPdf(); };
+  window.__comfortAudit.wordOk = wordOk;
+
+  // Arriving from the welcome email link: /audit?unlock=<word>
+  var arrivedUnlocked = false;
+  (function () {
+    var m = /[?&]unlock=([^&#]*)/.exec(location.search || "");
+    if (!m) return;
+    var ok = false;
+    try { ok = wordOk(decodeURIComponent(m[1])); } catch (e) {}
+    try { history.replaceState(null, "", location.pathname + location.hash); } catch (e) {}
+    if (!ok) return;
+    unlocked = true; save(KEY_UNLOCK, true); arrivedUnlocked = true;
+  })();
+
+  setupIntro();
+
+  if (arrivedUnlocked) {
+    var hist0 = loadHistory(), last0 = hist0[hist0.length - 1];
+    if (last0 && last0.answers && last0.answers.length === QUESTIONS.length) {
+      state = { step: TOTAL_STEPS - 1, answers: last0.answers.slice(), habits: (last0.habits || []).slice() };
+      finish(last0);
+      var lh = el("ladders") && el("ladders").querySelectorAll(".ladder h3")[2];
+      var target = lh || el("your-ladder");
+      if (target) { target.setAttribute("tabindex", "-1"); target.scrollIntoView({ block: "start" }); target.focus({ preventScroll: true }); }
+    } else {
+      el("unlock-note").hidden = false;
+      el("restore").open = true;
+    }
+  }
+})();
+</script>
+</body>
+</html>

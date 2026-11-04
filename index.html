@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>I'm Just Nate · Nightmares Come True</title>
+<meta name="description" content="I'm Nate. I find the things that genuinely scare me and do them on camera. Take the free Comfort Audit and read the full story behind every nightmare.">
+<link rel="canonical" href="https://imjustnate.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="I'm Just Nate">
+<meta property="og:title" content="I'm Just Nate · Nightmares Come True">
+<meta property="og:description" content="Making my nightmares come true, on purpose, on camera. Take the free Comfort Audit.">
+<meta property="og:url" content="https://imjustnate.com/">
+<meta property="og:image" content="https://imjustnate.com/og-home.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0f1221">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root {
+  --bg: #0f1221; --surface: #171b2f; --surface-2: #1f2440; --line: #2d3356;
+  --ink: #edecf6; --muted: #a5a8c4; --accent: #f2b544; --accent-text: #f2b544; --on-accent: #1b1405;
+  --comfort: #8796dc; --panic: #ef7462; --stretch-soft: rgba(242, 181, 68, 0.10);
+  --font-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Atkinson Hyperlegible", "Verdana", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --radius: 16px;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #f2f3f9; --surface: #ffffff; --surface-2: #e8eaf4; --line: #d3d6e8;
+    --ink: #151a2e; --muted: #525873; --accent-text: #8a5300; --comfort: #4c5cb0; --panic: #c4463a;
+    --stretch-soft: rgba(242, 181, 68, 0.16);
+    color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #f2f3f9; --surface: #ffffff; --surface-2: #e8eaf4; --line: #d3d6e8;
+  --ink: #151a2e; --muted: #525873; --accent-text: #8a5300; --comfort: #4c5cb0; --panic: #c4463a;
+  --stretch-soft: rgba(242, 181, 68, 0.16);
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 1.0625rem/1.6 var(--font-body); -webkit-font-smoothing: antialiased; }
+a { color: var(--accent-text); }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.08; margin: 0; letter-spacing: -0.015em; text-wrap: balance; }
+p { margin: 0; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 max(16px, env(safe-area-inset-left, 0px)) 0 max(16px, env(safe-area-inset-right, 0px)); }
+
+/* Top bar */
+.top { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 20px; }
+.mark { font: 800 1.25rem/1 var(--font-display); color: var(--ink); text-decoration: none; letter-spacing: -0.02em; display: inline-flex; align-items: center; gap: 10px; }
+.mark svg { width: 28px; height: 28px; flex: none; }
+.nav { display: flex; gap: 6px 18px; flex-wrap: wrap; justify-content: flex-end; }
+.nav a { color: var(--muted); text-decoration: none; font-size: 0.95rem; }
+.nav a:hover { color: var(--ink); }
+
+/* Hero */
+.hero { position: relative; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 32px; align-items: center; padding-block: 40px 56px; }
+.eyebrow { font: 500 0.78rem/1.4 var(--font-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-text); }
+.hero h1 { font-size: clamp(2.5rem, 7.2vw, 4.6rem); font-weight: 800; margin-top: 14px; }
+.hero h1 em { font-style: normal; color: var(--accent-text); }
+.lede { margin-top: 20px; font-size: 1.2rem; color: var(--muted); max-width: 40ch; }
+.lede b { color: var(--ink); font-weight: 700; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0.75em 1.4em; border-radius: 999px; font: 700 1.05rem/1.2 var(--font-body); text-decoration: none; border: 2px solid transparent; }
+.btn-primary { background: var(--accent); color: var(--on-accent); }
+.btn-ghost { color: var(--ink); border-color: var(--line); }
+@media (hover: hover) { .btn-primary:hover { filter: brightness(1.06); } .btn-ghost:hover { border-color: var(--accent); } }
+.rings { width: 100%; max-width: 420px; justify-self: center; aspect-ratio: 1; }
+.rings .dot { animation: drift 7s ease-in-out infinite alternate; transform-origin: 210px 210px; }
+@keyframes drift { from { transform: rotate(0deg); } to { transform: rotate(16deg); } }
+
+/* Cards */
+.cards { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; padding-bottom: 56px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; display: grid; gap: 14px; align-content: start; }
+.card.feature { border: 2px solid var(--accent); background: linear-gradient(160deg, var(--stretch-soft), transparent 60%), var(--surface); }
+.card h2 { font-size: clamp(1.7rem, 4vw, 2.2rem); }
+.card p { color: var(--muted); max-width: 52ch; }
+.gets { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.gets li { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 10px; align-items: baseline; }
+.gets li::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); transform: translateY(-1px); }
+.fine { font-size: 0.875rem; color: var(--muted); }
+.sub-wrap { border-radius: 12px; overflow: hidden; background: #fff; }
+.sub-embed { display: block; width: 100%; height: 300px; border: 0; background: #fff; }
+
+/* Watch */
+.watch { border-top: 1px solid var(--line); padding-block: 40px; display: grid; gap: 18px; }
+.watch h2 { font-size: clamp(1.5rem, 3.6vw, 2rem); }
+.socials { display: flex; flex-wrap: wrap; gap: 12px; }
+.social { display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0.6em 1.1em; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); color: var(--ink); text-decoration: none; font-weight: 700; }
+.social svg { width: 22px; height: 22px; flex: none; }
+.social span { font: 500 0.85rem var(--font-mono); color: var(--muted); }
+@media (hover: hover) { .social:hover { border-color: var(--accent); } }
+
+.foot { border-top: 1px solid var(--line); padding-block: 24px 40px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px; font-size: 0.875rem; color: var(--muted); }
+
+@media (max-width: 760px) {
+  .hero { grid-template-columns: minmax(0, 1fr); padding-block: 16px 40px; gap: 8px; }
+  .rings { order: -1; max-width: 220px; justify-self: start; margin-left: -10px; }
+  .cards { grid-template-columns: minmax(0, 1fr); }
+  .card { padding: 20px; }
+  .hero-actions .btn { flex: 1 1 100%; }
+  .nav a.hide-sm { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .rings .dot { animation: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="/" aria-label="I'm Just Nate, home">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="28" fill="none" stroke="#ef7462" stroke-opacity=".55" stroke-width="4"/><circle cx="32" cy="32" r="18" fill="none" stroke="#f2b544" stroke-opacity=".85" stroke-width="4"/><circle cx="32" cy="32" r="8" fill="#8796dc"/><circle cx="48" cy="20" r="5" fill="#f2b544"/></svg>
+      i'm just nate
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="/audit/">Comfort Audit</a>
+      <a href="https://imjustnate.substack.com" rel="noopener">Newsletter</a>
+      <a class="hide-sm" href="#watch">Watch</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-h">
+      <div>
+        <p class="eyebrow">Nightmares Come True</p>
+        <h1 id="hero-h">I'm making my nightmares <em>come true.</em> On purpose. On camera.</h1>
+        <p class="lede">For most of my life, my go-to line was <b>“I'm just Nate. I can't do that.”</b> So now I find the things that genuinely scare me and do them anyway. Some go well. Some go badly. Everything gets posted.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="/audit/">Take the free Comfort Audit</a>
+          <a class="btn btn-ghost" href="https://imjustnate.substack.com" rel="noopener">Read the full story</a>
+        </div>
+      </div>
+      <svg class="rings" viewBox="0 0 420 420" role="img" aria-label="Three rings: comfort in the middle, stretch around it, panic on the outside, with one dot out in the stretch">
+        <circle cx="210" cy="210" r="196" fill="rgba(239,116,98,0.06)" stroke="#ef7462" stroke-opacity=".45" stroke-width="2" stroke-dasharray="3 9" stroke-linecap="round"/>
+        <circle cx="210" cy="210" r="138" fill="rgba(242,181,68,0.07)" stroke="#f2b544" stroke-opacity=".7" stroke-width="2"/>
+        <circle cx="210" cy="210" r="74" fill="rgba(135,150,220,0.22)" stroke="#8796dc" stroke-width="2"/>
+        <text x="210" y="215" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" letter-spacing="2" fill="#8796dc">COMFORT</text>
+        <text x="210" y="98" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="2" fill="#f2b544" fill-opacity=".85">STRETCH</text>
+        <text x="210" y="34" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="2" fill="#ef7462" fill-opacity=".8">PANIC</text>
+        <g class="dot"><circle cx="318" cy="128" r="13" fill="#f2b544"/><circle cx="318" cy="128" r="22" fill="none" stroke="#f2b544" stroke-opacity=".35" stroke-width="2"/></g>
+      </svg>
+    </section>
+
+    <section class="cards" aria-label="Start here">
+      <article class="card feature" aria-labelledby="audit-h">
+        <p class="eyebrow">Free · about 6 minutes</p>
+        <h2 id="audit-h">The Comfort Audit</h2>
+        <p>How much of your life runs on comfort? Answer 29 questions about what you actually did in the last 3 months and find out.</p>
+        <ul class="gets">
+          <li>Your Comfort Score, from 0 to 100%</li>
+          <li>A map of the seven areas where you play it safe</li>
+          <li>A step-by-step ladder out, from a 5-minute Bad Dream to a real nightmare</li>
+        </ul>
+        <div><a class="btn btn-primary" href="/audit/">Take the Comfort Audit</a></div>
+        <p class="fine">Your answers stay in your browser. Nothing is sent anywhere.</p>
+      </article>
+
+      <article class="card" aria-labelledby="news-h">
+        <p class="eyebrow">The newsletter · free</p>
+        <h2 id="news-h">The full story</h2>
+        <p>The videos are the highlight reel. This is the rest: what happened before and after the camera, what I was afraid of, what actually happened, and what I'm learning about fear along the way.</p>
+        <div class="sub-wrap"><iframe class="sub-embed" src="https://imjustnate.substack.com/embed" title="Subscribe to I'm Just Nate" loading="lazy" scrolling="no"></iframe></div>
+        <p class="fine">Box not showing? <a href="https://imjustnate.substack.com/subscribe" rel="noopener">Subscribe on Substack</a>. Subscribers also get the unlock word for all 7 Comfort Audit ladders.</p>
+      </article>
+    </section>
+
+    <section class="watch" id="watch" aria-labelledby="watch-h">
+      <h2 id="watch-h">Watch the nightmares</h2>
+      <div class="socials">
+        <a class="social" href="https://www.instagram.com/imjustnatehere/" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          Instagram <span>@imjustnatehere</span></a>
+        <a class="social" href="https://www.tiktok.com/@imjustnatehere" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M16.6 3c.4 2.2 1.9 3.8 4.1 4v3.1c-1.5 0-2.9-.4-4.1-1.2v6.3c0 3.3-2.6 5.8-5.9 5.8S4.8 18.5 4.8 15.2s2.6-5.8 5.9-5.8c.3 0 .6 0 .9.1v3.2c-.3-.1-.6-.2-.9-.2-1.5 0-2.7 1.2-2.7 2.7s1.2 2.7 2.7 2.7 2.8-1.2 2.8-2.7V3h3.1z"/></svg>
+          TikTok <span>@imjustnatehere</span></a>
+        <a class="social" href="https://www.youtube.com/@imjustnatehere" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M22 8.2c-.2-1.6-1-2.7-2.6-2.9C16.9 5 12 5 12 5s-4.9 0-7.4.3C3 5.5 2.2 6.6 2 8.2 1.8 9.6 1.8 12 1.8 12s0 2.4.2 3.8c.2 1.6 1 2.7 2.6 2.9 2.5.3 7.4.3 7.4.3s4.9 0 7.4-.3c1.6-.2 2.4-1.3 2.6-2.9.2-1.4.2-3.8.2-3.8s0-2.4-.2-3.8zM10 15.1V8.9l5.2 3.1-5.2 3.1z"/></svg>
+          YouTube <span>@imjustnatehere</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p>© 2026 I'm Just Nate · Nightmares Come True</p>
+    <p><a href="/audit/">Comfort Audit</a> · <a href="https://imjustnate.substack.com" rel="noopener">Newsletter</a></p>
+  </footer>
+</div>
+</body>
+</html>
