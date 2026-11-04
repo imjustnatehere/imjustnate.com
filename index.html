@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>i'm just nate · Nightmares Come True</title>
-<meta name="description" content="I'm Nate. I find the things that genuinely scare me and do them on camera. Take the free Comfort Audit and read the full story behind every nightmare.">
+<meta name="description" content="I'm Nate. I find the things that genuinely scare me and do them on camera. Take the free Comfort Audit and get the full story behind every nightmare in a free video newsletter.">
 <link rel="canonical" href="https://imjustnate.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="i'm just nate">
@@ -49,10 +49,10 @@ h1, h2, h3, p { margin: 0; }
 
 /* ===== Viewfinder ===== */
 .hero { display: grid; position: relative; isolation: isolate; }
-.ambient { position: absolute; z-index: -1; left: 0; right: 0; top: 0; height: calc(100% + 120px); overflow: hidden; pointer-events: none;
+.ambient { position: absolute; z-index: -1; left: 0; right: 0; top: 0; height: calc(100% + 200px); overflow: hidden; pointer-events: none;
   -webkit-mask: linear-gradient(180deg, #000 55%, transparent); mask: linear-gradient(180deg, #000 55%, transparent); }
 .ambient img { position: absolute; left: 50%; top: 0; width: 120%; height: 100%; margin-left: -60%; object-fit: cover; object-position: 50% 30%;
-  filter: blur(70px) saturate(1.6) brightness(1.25); opacity: 0.7; will-change: transform; }
+  filter: blur(70px) saturate(1.9) brightness(1.7); opacity: 0.95; will-change: transform; }
 .vf { position: relative; overflow: hidden; background: #000; height: min(84svh, 720px); min-height: 520px; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
 .scene { position: absolute; left: 0; top: 0; width: 100%; height: 100%; will-change: transform; transform-origin: 50% 40%; }
 .layer { position: absolute; inset: -4%; width: 108%; height: 108%; object-fit: cover; object-position: 50% 28%; will-change: transform; pointer-events: none; -webkit-user-drag: none; }
@@ -63,7 +63,10 @@ h1, h2, h3, p { margin: 0; }
 .af i:nth-child(1) { left: 0; top: 0; border-right: 0; border-bottom: 0; } .af i:nth-child(2) { right: 0; top: 0; border-left: 0; border-bottom: 0; }
 .af i:nth-child(3) { left: 0; bottom: 0; border-right: 0; border-top: 0; } .af i:nth-child(4) { right: 0; bottom: 0; border-left: 0; border-top: 0; }
 .af span { position: absolute; left: 0; top: -20px; font-size: 11px; white-space: nowrap; color: #fff; }
-.af.on { opacity: 0.9; transition: opacity 0.3s; }
+.af { transition: opacity 0.5s; }
+.af.on { opacity: 0.9; transition: opacity 0.2s; }
+.af.snapin { animation: snapin 0.3s ease-out both; }
+@keyframes snapin { 0% { transform: scale(1.25); opacity: 0; } 100% { transform: scale(1); opacity: 0.9; } }
 .af.hunt { animation: hunt 1.1s ease-out both; }
 @keyframes hunt { 0% { transform: scale(1.5); opacity: 0; } 25% { transform: scale(0.88); opacity: 1; } 45% { transform: scale(1.08); } 60% { transform: scale(0.97); opacity: 0.4; } 70% { opacity: 1; } 100% { transform: scale(1); opacity: 0.9; } }
 .af.locked i { border-color: #8dff9a; } .af.locked span { color: #8dff9a; }
@@ -88,12 +91,26 @@ h1, h2, h3, p { margin: 0; }
 .date { right: 18px; bottom: 22px; font-size: 12px !important; opacity: 0.85; }
 .hint { left: 50%; top: 78px; transform: translateX(-50%); font-size: 11px !important; white-space: nowrap; opacity: 0.85; transition: opacity 0.6s; }
 .hint.gone { opacity: 0; }
+.shoot { left: 50%; top: 100px; transform: translateX(-50%); display: flex; align-items: center; gap: 8px; white-space: nowrap; font-size: 11px !important; color: #fff;
+  padding: 7px 12px; border: 1px solid rgba(255,255,255,0.55); border-radius: 999px; background: rgba(0,0,0,0.45); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+  opacity: 0; transition: opacity 0.5s; }
+.shoot i { width: 8px; height: 8px; border-radius: 50%; background: var(--rec); box-shadow: 0 0 6px var(--rec); animation: blink 1.2s steps(1) infinite; }
+.shoot.show { opacity: 1; }
 .br { position: absolute; width: 24px; height: 24px; border: 2px solid rgba(255, 255, 255, 0.75); }
 .b1 { top: 70px; left: 16px; border-right: 0; border-bottom: 0; } .b2 { top: 70px; right: 16px; border-left: 0; border-bottom: 0; }
 .b3 { bottom: 236px; left: 16px; border-right: 0; border-top: 0; } .b4 { bottom: 236px; right: 16px; border-left: 0; border-top: 0; }
 .title { position: absolute; z-index: 3; left: 18px; right: 18px; bottom: 54px; }
 .title h1 { font: 800 clamp(2.9rem, 13.5vw, 3.7rem)/0.9 var(--font-body); letter-spacing: -0.045em; word-spacing: 0.1em; text-transform: none; }
 .title p { margin-top: 10px; font-size: 1rem; line-height: 1.45; color: #dcdbd4; max-width: 30ch; }
+
+/* Big red call to action */
+.cta { display: flex; align-items: center; gap: 14px; margin-top: 18px; padding: 21px 20px; border-radius: 6px; background: #e1261c; color: #fff; text-decoration: none;
+  font-size: 15px; font-weight: 700; letter-spacing: 0.08em; line-height: 1.2;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.08), 0 12px 40px -10px rgba(255,59,48,0.65); transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease; }
+.cta b { font-weight: 400; font-size: 13px; animation: blink 1.2s steps(1) infinite; }
+.cta span { margin-left: auto; font-size: 11px; font-weight: 500; opacity: 0.9; white-space: nowrap; }
+@media (hover: hover) { .cta:hover { background: #ff3b30; transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(255,255,255,0.12), 0 18px 50px -10px rgba(255,59,48,0.8); } }
+.cta:active { transform: translateY(0); }
 
 /* VCR menu */
 .menu { list-style: none; margin: 0; padding: 18px 0 8px; }
@@ -128,11 +145,13 @@ h1, h2, h3, p { margin: 0; }
 .sample .legend .k1 { background: #8796dc; } .sample .legend .k2 { background: #f2b544; }
 .tape .label { display: flex; justify-content: space-between; font-size: 12px; line-height: 1; color: var(--muted); }
 .tape .label b { font-weight: 400; color: var(--rec); }
+.badge { align-self: flex-start; display: inline-flex; align-items: center; gap: 9px; padding: 9px 13px; border-radius: 999px; border: 1px solid rgba(255,59,48,0.55); background: rgba(255,59,48,0.12); color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; }
+.badge i { width: 8px; height: 8px; border-radius: 50%; background: var(--rec); box-shadow: 0 0 6px var(--rec); }
 .tape h2 { font: 700 1.75rem/1.05 var(--font-body); letter-spacing: -0.02em; }
 .tape p { color: #bdbcb6; }
-.tape .go { align-self: flex-start; display: inline-flex; gap: 10px; align-items: center; font-size: 13px; font-weight: 700; line-height: 1.2; text-decoration: none; padding: 14px 18px; border: 1px solid #f4f3ee; border-radius: 4px; background: #f4f3ee; color: #060606; }
-.tape .go b { font-weight: 400; color: var(--rec); }
-@media (hover: hover) { .tape .go:hover { background: #fff; } }
+.tape .go { align-self: stretch; display: flex; gap: 12px; align-items: center; font-size: 14px; font-weight: 700; line-height: 1.2; text-decoration: none; padding: 17px 18px; border-radius: 6px; background: #e1261c; color: #fff; box-shadow: 0 10px 34px -12px rgba(255,59,48,0.6); transition: background 0.15s ease, transform 0.15s ease; }
+.tape .go b { font-weight: 400; color: #fff; font-size: 12px; }
+@media (hover: hover) { .tape .go:hover { background: #ff3b30; transform: translateY(-1px); } }
 .tape .fine { font-size: 0.85rem; color: var(--muted); }
 .tape .fine a { color: var(--ink); }
 .screen { border: 1px solid var(--line); border-radius: 6px; overflow: hidden; background: #fff; }
@@ -155,21 +174,22 @@ h1, h2, h3, p { margin: 0; }
   .top nav a:hover { color: var(--ink); }
   .hero { grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr); gap: 56px; align-items: center; padding-bottom: 20px; }
   .vf { height: min(82vh, 780px); min-height: 560px; border-radius: 8px; box-shadow: 0 0 0 1px rgba(255,255,255,0.06), 0 40px 120px -30px rgba(0,0,0,0.9); }
-  .ambient { left: -10%; right: 45%; top: -8%; height: 116%; -webkit-mask: radial-gradient(closest-side, #000 40%, transparent); mask: radial-gradient(closest-side, #000 40%, transparent); }
-  .ambient img { width: 100%; margin-left: -50%; opacity: 0.85; }
+  .ambient { left: -14%; right: 40%; top: -12%; height: 124%; -webkit-mask: radial-gradient(closest-side, #000 55%, transparent); mask: radial-gradient(closest-side, #000 55%, transparent); }
+  .ambient img { width: 100%; margin-left: -50%; opacity: 1; }
   .title { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; left: 0; bottom: 0; }
   .side { display: grid; gap: 18px; }
   .side h1 { font: 800 clamp(3.6rem, 6vw, 5.8rem)/0.88 var(--font-body); letter-spacing: -0.05em; word-spacing: 0.12em; text-transform: none; }
   .side .sub { font-size: 1.3rem; color: #d2d1ca; max-width: 26ch; line-height: 1.4; }
   .menu { padding-top: 6px; }
   .menu a { font-size: 15px; }
+  .cta { font-size: 17px; padding: 24px 24px; margin-top: 10px; }
   .tapes { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; padding-top: 46px; align-items: stretch; }
   .tape.news { grid-row: span 1; }
   .b3, .b4 { bottom: 52px; }
   .hud .osd { font-size: 14px; }
 }
 @media (max-width: 899px) { .side .heading { display: none; } .hero .side { padding: 0 max(18px, env(safe-area-inset-left, 0px)); } .hero { margin: 0 calc(-1 * max(18px, env(safe-area-inset-left, 0px))); } }
-@media (prefers-reduced-motion: reduce) { .rec i, .top .mark i, .menu a:hover b, .next > p.osd i { animation: none; } .hint { display: none; } .af.hunt { animation: none; } .flash.go { animation-duration: 0.25s; } }
+@media (prefers-reduced-motion: reduce) { .rec i, .top .mark i, .menu a:hover b, .next > p.osd i, .cta b, .shoot i { animation: none; } .cta, .tape .go { transition: none; } .hint { display: none; } .af.hunt { animation: none; } .flash.go { animation-duration: 0.25s; } }
 </style>
 </head>
 <body>
@@ -177,7 +197,7 @@ h1, h2, h3, p { margin: 0; }
 <div class="wrap">
   <header class="top osd">
     <a class="mark glow" href="/"><i aria-hidden="true"></i>i'm just nate</a>
-    <nav aria-label="Main"><a href="/audit/">Free Comfort Audit</a><a href="https://imjustnate.substack.com" rel="noopener">Free newsletter</a><a href="#watch">Watch</a></nav>
+    <nav aria-label="Main"><a href="/audit/">Free Comfort Audit</a><a href="https://imjustnate.substack.com" rel="noopener">Free video newsletter</a><a href="#watch">Watch</a></nav>
   </header>
 
   <main>
@@ -201,6 +221,7 @@ h1, h2, h3, p { margin: 0; }
           <div class="osd glow bat">▮▮▯ SP</div>
           <i class="br b1"></i><i class="br b2"></i><i class="br b3"></i><i class="br b4"></i>
           <div class="osd glow hint" id="hint">◀ drag to move the camera ▶</div>
+          <div class="osd shoot" id="shoot"><i></i><span id="shoottxt">Tap to take a photo</span></div>
           <div class="osd glow date" id="date"></div>
         </div>
         <div class="title glow">
@@ -212,9 +233,9 @@ h1, h2, h3, p { margin: 0; }
       <div class="side">
         <h1 class="osd glow heading" aria-hidden="true">i'm just nate</h1>
         <p class="sub heading">making my nightmares come true. on purpose. on camera. everything gets posted, however it goes.</p>
+        <a class="cta osd" href="/audit/"><b aria-hidden="true">▶</b>Take your free Comfort Audit<span>Free · 6 min</span></a>
         <ul class="menu osd">
-          <li><a href="/audit/"><b aria-hidden="true">▶</b>Take your free Comfort Audit<span>6 min</span></a></li>
-          <li><a href="https://imjustnate.substack.com" rel="noopener"><b aria-hidden="true">▶</b>Read the full story<span>free on Substack</span></a></li>
+          <li><a href="https://imjustnate.substack.com" rel="noopener"><b aria-hidden="true">▶</b>The full story<span>free video newsletter</span></a></li>
           <li><a href="#watch"><b aria-hidden="true">▶</b>Watch the nightmares<span>@imjustnatehere</span></a></li>
         </ul>
       </div>
@@ -243,9 +264,10 @@ h1, h2, h3, p { margin: 0; }
       </article>
 
       <article class="tape news" aria-labelledby="t2">
-        <p class="label osd"><span>Tape 02 · free newsletter</span><b>●</b></p>
+        <p class="label osd"><span>Tape 02</span><b>●</b></p>
+        <p class="badge osd"><i aria-hidden="true"></i>Free Substack video newsletter</p>
         <h2 id="t2">The full story</h2>
-        <p>The videos are the highlight reel. This is the rest: what I was afraid of, what actually happened, and what I'm learning along the way. It's a free Substack newsletter, straight to your inbox.</p>
+        <p>The short videos are the highlight reel. The video newsletter is the rest: what I was afraid of, what actually happened, and what I'm learning along the way, straight to your inbox.</p>
         <div class="screen push"><iframe src="https://imjustnate.substack.com/embed" title="Subscribe to i'm just nate" loading="lazy" scrolling="no"></iframe></div>
         <p class="fine">Free, no card needed. Box not showing? <a href="https://imjustnate.substack.com/subscribe" rel="noopener">Subscribe free on Substack</a>. Subscribers get the unlock word for all 7 Comfort Audit ladders.</p>
       </article>
@@ -305,7 +327,10 @@ h1, h2, h3, p { margin: 0; }
 
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var finePointer = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-  hint.textContent = finePointer ? "◀ move your mouse · click for flash ▶" : "◀ drag to move · tap for flash ▶";
+  hint.textContent = finePointer ? "◀ move your mouse ▶" : "◀ drag to move the camera ▶";
+  var shoot = document.getElementById("shoot");
+  document.getElementById("shoottxt").textContent = finePointer ? "Click to take a photo" : "Tap to take a photo";
+  setTimeout(function () { if (!shots) shoot.classList.add("show"); }, 2600);
 
   // ---- Focus box: sits on his face and rides along with him ----
   var fgImg = fg.querySelector("img"), af = document.getElementById("af"), afLabel = document.getElementById("aflabel");
@@ -320,14 +345,18 @@ h1, h2, h3, p { margin: 0; }
   placeAF();
   window.addEventListener("resize", placeAF);
   if (fgImg.complete) placeAF(); else fgImg.addEventListener("load", placeAF);
-  function lockFocus() {
-    af.classList.remove("locked"); afLabel.textContent = "AF";
+  // Shows up, hunts, locks, then gets out of the way. Comes back for a moment with every photo.
+  var afTimers = [];
+  function lockFocus(quick) {
+    afTimers.forEach(clearTimeout); afTimers = [];
+    af.classList.remove("locked", "hunt"); afLabel.textContent = "AF";
     af.classList.add("on");
-    if (!reduce) { af.classList.remove("hunt"); void af.offsetWidth; af.classList.add("hunt"); }
-    setTimeout(function () { af.classList.add("locked"); afLabel.textContent = "AF ● LOCK"; }, reduce ? 0 : 1000);
-    setTimeout(function () { af.classList.remove("locked"); afLabel.textContent = "AF"; }, reduce ? 1500 : 2600);
+    if (!reduce) { void af.offsetWidth; af.classList.add(quick ? "snapin" : "hunt"); }
+    afTimers.push(setTimeout(function () { af.classList.add("locked"); afLabel.textContent = "AF ● LOCK"; }, reduce ? 0 : (quick ? 250 : 1000)));
+    afTimers.push(setTimeout(function () { af.classList.remove("on"); }, reduce ? 1200 : (quick ? 1300 : 2300)));
+    afTimers.push(setTimeout(function () { af.classList.remove("locked", "hunt", "snapin"); afLabel.textContent = "AF"; }, reduce ? 1600 : (quick ? 1800 : 2800)));
   }
-  setTimeout(lockFocus, 500);
+  setTimeout(function () { lockFocus(false); }, 500);
 
   // ---- Tap or click for a camera flash ----
   var flash = document.getElementById("flash"), snap = document.getElementById("snap"), shots = 0, downX = 0, downY = 0, downT = 0, snapT = null;
@@ -338,7 +367,8 @@ h1, h2, h3, p { margin: 0; }
     flash.classList.remove("go"); void flash.offsetWidth; flash.classList.add("go");
     snap.textContent = "● PHOTO " + ("00" + shots).slice(-3);
     snap.classList.add("show"); clearTimeout(snapT); snapT = setTimeout(function () { snap.classList.remove("show"); }, 1300);
-    lockFocus();
+    shoot.classList.remove("show");
+    lockFocus(true);
   });
 
   if (reduce) return;
@@ -349,7 +379,7 @@ h1, h2, h3, p { margin: 0; }
   function clamp(v) { return v < -1 ? -1 : (v > 1 ? 1 : v); }
   function touched() {
     lastInput = performance.now();
-    if (!interacted) { interacted = true; hint.classList.add("gone"); }
+    if (!interacted) { interacted = true; setTimeout(function () { hint.classList.add("gone"); }, Math.max(0, 3500 - (performance.now() - t0))); }
   }
   if (finePointer) {
     window.addEventListener("pointermove", function (e) {
