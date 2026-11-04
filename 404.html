@@ -3,32 +3,33 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Page not found · I'm Just Nate</title>
+<title>No signal · i'm just nate</title>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<meta name="theme-color" content="#0f1221">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,800&display=swap">
+<meta name="theme-color" content="#060606">
+<meta name="color-scheme" content="dark">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;700&family=VT323&display=swap">
 <style>
-:root { --bg: #0f1221; --ink: #edecf6; --muted: #a5a8c4; --accent: #f2b544; --line: #2d3356; color-scheme: dark; }
-@media (prefers-color-scheme: light) { :root { --bg: #f2f3f9; --ink: #151a2e; --muted: #525873; --line: #d3d6e8; color-scheme: light; } }
 * { box-sizing: border-box; }
-body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: var(--bg); color: var(--ink); font: 1.0625rem/1.6 "Atkinson Hyperlegible", Verdana, system-ui, sans-serif; padding: 24px 16px; }
+body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #060606; color: #f4f3ee; font: 1.0625rem/1.55 "Inter Tight", "Helvetica Neue", Arial, sans-serif; padding: 24px 18px; }
 main { max-width: 34rem; display: grid; gap: 16px; }
-h1 { font: 800 clamp(2.2rem, 8vw, 3.4rem)/1.05 "Bricolage Grotesque", system-ui, sans-serif; margin: 0; letter-spacing: -0.015em; }
-p { margin: 0; color: var(--muted); }
-.row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
-a.btn { display: inline-flex; align-items: center; min-height: 48px; padding: 0.7em 1.3em; border-radius: 999px; font-weight: 700; text-decoration: none; }
-.p { background: var(--accent); color: #1b1405; }
-.g { border: 2px solid var(--line); color: var(--ink); }
+.osd { font-family: "VT323", ui-monospace, monospace; text-transform: uppercase; letter-spacing: 0.04em; text-shadow: 0 0 4px rgba(255,255,255,0.45); }
+.blue { font-size: 1.5rem; color: #9d9c96; }
+h1 { font: 400 clamp(3.4rem, 14vw, 5.6rem)/0.85 "VT323", ui-monospace, monospace; margin: 0; text-shadow: 0 0 8px rgba(255,255,255,0.3); }
+p { margin: 0; color: #bdbcb6; }
+.menu { list-style: none; margin: 8px 0 0; padding: 0; }
+.menu a { display: flex; gap: 14px; padding: 12px 0; border-bottom: 1px dashed #333; text-decoration: none; color: #f4f3ee; font-size: 1.6rem; line-height: 1; }
+.menu a b { font-weight: 400; color: #ff3b30; }
 </style>
 </head>
 <body>
 <main>
-  <h1>This page doesn't exist.</h1>
-  <p>Honestly, a small nightmare of its own. Here's where you probably meant to go:</p>
-  <div class="row">
-    <a class="btn p" href="/audit/">Take the Comfort Audit</a>
-    <a class="btn g" href="/">Go to the home page</a>
-  </div>
+  <p class="osd blue">■ Stop · 00:00:00:00</p>
+  <h1>no signal</h1>
+  <p>This page doesn't exist. Honestly, a small nightmare of its own.</p>
+  <ul class="menu osd">
+    <li><a href="/audit/"><b>▶</b>Play: the comfort audit</a></li>
+    <li><a href="/"><b>▶</b>Back to i'm just nate</a></li>
+  </ul>
 </main>
 </body>
 </html>

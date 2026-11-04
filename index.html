@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>I'm Just Nate · Nightmares Come True</title>
+<title>i'm just nate · Nightmares Come True</title>
 <meta name="description" content="I'm Nate. I find the things that genuinely scare me and do them on camera. Take the free Comfort Audit and read the full story behind every nightmare.">
 <link rel="canonical" href="https://imjustnate.com/">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="I'm Just Nate">
-<meta property="og:title" content="I'm Just Nate · Nightmares Come True">
+<meta property="og:site_name" content="i'm just nate">
+<meta property="og:title" content="i'm just nate · Nightmares Come True">
 <meta property="og:description" content="Making my nightmares come true, on purpose, on camera. Take the free Comfort Audit.">
 <meta property="og:url" content="https://imjustnate.com/">
 <meta property="og:image" content="https://imjustnate.com/og-home.png">
@@ -16,198 +16,275 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<meta name="theme-color" content="#0f1221">
+<meta name="theme-color" content="#060606">
+<meta name="color-scheme" content="dark">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;600;700&family=VT323&display=swap">
+<link rel="preload" as="image" href="/nate-bg.webp" type="image/webp">
+<link rel="preload" as="image" href="/nate-fg.webp" type="image/webp">
 <style>
+/* Camcorder: black body, white on-screen-display type, one red REC accent. */
 :root {
-  --bg: #0f1221; --surface: #171b2f; --surface-2: #1f2440; --line: #2d3356;
-  --ink: #edecf6; --muted: #a5a8c4; --accent: #f2b544; --accent-text: #f2b544; --on-accent: #1b1405;
-  --comfort: #8796dc; --panic: #ef7462; --stretch-soft: rgba(242, 181, 68, 0.10);
-  --font-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
-  --font-body: "Atkinson Hyperlegible", "Verdana", "Segoe UI", system-ui, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
-  --radius: 16px;
+  --bg: #060606; --surface: #0f0f0f; --surface-2: #171717; --line: #262626;
+  --ink: #f4f3ee; --muted: #9d9c96; --rec: #ff3b30; --osd: #ffffff;
+  --font-osd: "VT323", ui-monospace, Menlo, monospace;
+  --font-body: "Inter Tight", "Helvetica Neue", Arial, system-ui, sans-serif;
   color-scheme: dark;
 }
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) {
-    --bg: #f2f3f9; --surface: #ffffff; --surface-2: #e8eaf4; --line: #d3d6e8;
-    --ink: #151a2e; --muted: #525873; --accent-text: #8a5300; --comfort: #4c5cb0; --panic: #c4463a;
-    --stretch-soft: rgba(242, 181, 68, 0.16);
-    color-scheme: light;
-  }
-}
-:root[data-theme="light"] {
-  --bg: #f2f3f9; --surface: #ffffff; --surface-2: #e8eaf4; --line: #d3d6e8;
-  --ink: #151a2e; --muted: #525873; --accent-text: #8a5300; --comfort: #4c5cb0; --panic: #c4463a;
-  --stretch-soft: rgba(242, 181, 68, 0.16);
-  color-scheme: light;
-}
 * { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
-body { margin: 0; background: var(--bg); color: var(--ink); font: 1.0625rem/1.6 var(--font-body); -webkit-font-smoothing: antialiased; }
-a { color: var(--accent-text); }
-h1, h2, h3 { font-family: var(--font-display); line-height: 1.08; margin: 0; letter-spacing: -0.015em; text-wrap: balance; }
-p { margin: 0; }
-:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+html { -webkit-text-size-adjust: 100%; background: var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 1.0625rem/1.55 var(--font-body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3, p { margin: 0; }
+:focus-visible { outline: 2px solid var(--rec); outline-offset: 3px; }
+.osd { font-family: var(--font-osd); font-weight: 400; letter-spacing: 0.04em; text-transform: uppercase; }
+.glow { text-shadow: 0 0 4px rgba(255, 255, 255, 0.45), 1px 1px 0 rgba(0, 0, 0, 0.55); }
+.grain { position: fixed; inset: 0; pointer-events: none; z-index: 60; opacity: 0.12; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 max(18px, env(safe-area-inset-left, 0px)) 0 max(18px, env(safe-area-inset-right, 0px)); }
 
-.wrap { max-width: 1040px; margin: 0 auto; padding: 0 max(16px, env(safe-area-inset-left, 0px)) 0 max(16px, env(safe-area-inset-right, 0px)); }
+/* Top bar (computer only; on phones the viewfinder is the top) */
+.top { display: none; }
 
-/* Top bar */
-.top { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 20px; }
-.mark { font: 800 1.25rem/1 var(--font-display); color: var(--ink); text-decoration: none; letter-spacing: -0.02em; display: inline-flex; align-items: center; gap: 10px; }
-.mark svg { width: 28px; height: 28px; flex: none; }
-.nav { display: flex; gap: 6px 18px; flex-wrap: wrap; justify-content: flex-end; }
-.nav a { color: var(--muted); text-decoration: none; font-size: 0.95rem; }
-.nav a:hover { color: var(--ink); }
+/* ===== Viewfinder ===== */
+.hero { display: grid; }
+.vf { position: relative; overflow: hidden; background: #000; height: min(84svh, 720px); min-height: 520px; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+.scene { position: absolute; left: 0; top: 0; width: 100%; height: 100%; will-change: transform; transform-origin: 50% 40%; }
+.layer { position: absolute; inset: -4%; width: 108%; height: 108%; object-fit: cover; object-position: 50% 28%; will-change: transform; pointer-events: none; -webkit-user-drag: none; }
+.layer.fg { filter: contrast(1.04); }
+.af { position: absolute; border: 1.5px solid rgba(255, 255, 255, 0.8); width: 30%; aspect-ratio: 1; left: 34.5%; top: 20%; pointer-events: none; opacity: 0.85;
+  -webkit-mask: linear-gradient(#000 0 0) top left / 22% 22% no-repeat, linear-gradient(#000 0 0) top right / 22% 22% no-repeat, linear-gradient(#000 0 0) bottom left / 22% 22% no-repeat, linear-gradient(#000 0 0) bottom right / 22% 22% no-repeat;
+          mask: linear-gradient(#000 0 0) top left / 22% 22% no-repeat, linear-gradient(#000 0 0) top right / 22% 22% no-repeat, linear-gradient(#000 0 0) bottom left / 22% 22% no-repeat, linear-gradient(#000 0 0) bottom right / 22% 22% no-repeat; }
+.vf::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1;
+  background: linear-gradient(180deg, rgba(0,0,0,0.45), transparent 20%, transparent 52%, rgba(0,0,0,0.9) 100%); }
+.hud { position: absolute; inset: 0; z-index: 2; pointer-events: none; color: var(--osd); }
+.hud .osd { position: absolute; font-size: 25px; line-height: 1; }
+.rec { top: 18px; left: 18px; display: flex; align-items: center; gap: 8px; }
+.rec i { width: 12px; height: 12px; border-radius: 50%; background: var(--rec); box-shadow: 0 0 8px var(--rec); animation: blink 1.6s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.num { top: 18px; right: 18px; }
+.tc { top: 48px; left: 18px; font-size: 21px !important; opacity: 0.92; }
+.bat { top: 48px; right: 18px; font-size: 21px !important; }
+.date { right: 18px; bottom: 22px; font-size: 20px !important; opacity: 0.85; }
+.hint { left: 50%; top: 86px; transform: translateX(-50%); font-size: 20px !important; white-space: nowrap; opacity: 0.85; transition: opacity 0.6s; }
+.hint.gone { opacity: 0; }
+.br { position: absolute; width: 24px; height: 24px; border: 2px solid rgba(255, 255, 255, 0.75); }
+.b1 { top: 82px; left: 16px; border-right: 0; border-bottom: 0; } .b2 { top: 82px; right: 16px; border-left: 0; border-bottom: 0; }
+.b3 { bottom: 236px; left: 16px; border-right: 0; border-top: 0; } .b4 { bottom: 236px; right: 16px; border-left: 0; border-top: 0; }
+.title { position: absolute; z-index: 3; left: 18px; right: 18px; bottom: 54px; }
+.title h1 { font: 400 clamp(3.4rem, 15vw, 4.6rem)/0.86 var(--font-osd); letter-spacing: 0.01em; text-transform: none; }
+.title p { margin-top: 10px; font-size: 1rem; line-height: 1.45; color: #dcdbd4; max-width: 30ch; }
 
-/* Hero */
-.hero { position: relative; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 32px; align-items: center; padding-block: 40px 56px; }
-.eyebrow { font: 500 0.78rem/1.4 var(--font-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-text); }
-.hero h1 { font-size: clamp(2.5rem, 7.2vw, 4.6rem); font-weight: 800; margin-top: 14px; }
-.hero h1 em { font-style: normal; color: var(--accent-text); }
-.lede { margin-top: 20px; font-size: 1.2rem; color: var(--muted); max-width: 40ch; }
-.lede b { color: var(--ink); font-weight: 700; }
-.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0.75em 1.4em; border-radius: 999px; font: 700 1.05rem/1.2 var(--font-body); text-decoration: none; border: 2px solid transparent; }
-.btn-primary { background: var(--accent); color: var(--on-accent); }
-.btn-ghost { color: var(--ink); border-color: var(--line); }
-@media (hover: hover) { .btn-primary:hover { filter: brightness(1.06); } .btn-ghost:hover { border-color: var(--accent); } }
-.portrait { position: relative; margin: 0; justify-self: center; width: 100%; max-width: 380px; padding: 28px; }
-.portrait .halo { position: absolute; left: 50%; top: 50%; width: 136%; height: auto; aspect-ratio: 1; transform: translate(-50%, -50%); overflow: visible; pointer-events: none; }
-.portrait .halo .dot { animation: drift 7s ease-in-out infinite alternate; transform-origin: 210px 210px; }
-@keyframes drift { from { transform: rotate(0deg); } to { transform: rotate(14deg); } }
-.portrait picture { position: relative; display: block; transform: rotate(-2deg); }
-.portrait img { display: block; width: 100%; height: auto; border-radius: 16px; border: 6px solid #f4efe4; box-shadow: 0 28px 60px -18px rgba(0, 0, 0, 0.65); background: #222; }
-.portrait figcaption { position: relative; margin-top: 14px; text-align: center; font: 500 0.8rem/1 var(--font-mono); letter-spacing: 0.1em; color: var(--muted); }
+/* VCR menu */
+.menu { list-style: none; margin: 0; padding: 18px 0 8px; }
+.menu a { display: flex; align-items: center; gap: 14px; padding: 13px 0; border-bottom: 1px dashed #333; text-decoration: none; font-size: 26px; line-height: 1; }
+.menu a b { font-weight: 400; color: var(--rec); width: 16px; }
+.menu a span { margin-left: auto; font-size: 18px; color: var(--muted); }
+@media (hover: hover) { .menu a:hover b { animation: blink 0.8s steps(1) infinite; } .menu a:hover { color: #fff; } }
 
-/* Cards */
-.cards { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; padding-bottom: 56px; }
-.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; display: grid; gap: 14px; align-content: start; }
-.card.feature { border: 2px solid var(--accent); background: linear-gradient(160deg, var(--stretch-soft), transparent 60%), var(--surface); }
-.card h2 { font-size: clamp(1.7rem, 4vw, 2.2rem); }
-.card p { color: var(--muted); max-width: 52ch; }
-.gets { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
-.gets li { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 10px; align-items: baseline; }
-.gets li::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); transform: translateY(-1px); }
-.fine { font-size: 0.875rem; color: var(--muted); }
-.sub-wrap { border-radius: 12px; overflow: hidden; background: #fff; }
-.sub-embed { display: block; width: 100%; height: 300px; border: 0; background: #fff; }
+/* Tapes */
+.tapes { display: grid; gap: 14px; padding: 34px 0 10px; }
+.tape { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 20px 18px 22px; display: grid; gap: 12px; align-content: start; position: relative; min-width: 0; }
+.tape .label { display: flex; justify-content: space-between; font-size: 21px; line-height: 1; color: var(--muted); }
+.tape .label b { font-weight: 400; color: var(--rec); }
+.tape h2 { font: 700 1.75rem/1.05 var(--font-body); letter-spacing: -0.02em; }
+.tape p { color: #bdbcb6; }
+.tape .go { justify-self: start; display: inline-flex; gap: 10px; align-items: center; font-size: 25px; line-height: 1; text-decoration: none; padding: 12px 16px 11px; border: 1px solid #f4f3ee; border-radius: 4px; background: #f4f3ee; color: #060606; }
+.tape .go b { font-weight: 400; color: var(--rec); }
+@media (hover: hover) { .tape .go:hover { background: #fff; } }
+.tape .fine { font-size: 0.85rem; color: var(--muted); }
+.tape .fine a { color: var(--ink); }
+.screen { border: 1px solid var(--line); border-radius: 6px; overflow: hidden; background: #fff; }
+.screen iframe { display: block; width: 100%; height: 300px; border: 0; background: #fff; }
+.socials { list-style: none; margin: 0; padding: 0; display: grid; }
+.socials a { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px dashed #333; text-decoration: none; font-size: 24px; line-height: 1; }
+.socials a span { font-size: 18px; color: var(--muted); min-width: 0; overflow-wrap: anywhere; text-align: right; }
 
-/* Watch */
-.watch { border-top: 1px solid var(--line); padding-block: 40px; display: grid; gap: 18px; }
-.watch h2 { font-size: clamp(1.5rem, 3.6vw, 2rem); }
-.socials { display: flex; flex-wrap: wrap; gap: 12px; }
-.social { display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0.6em 1.1em; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); color: var(--ink); text-decoration: none; font-weight: 700; }
-.social svg { width: 22px; height: 22px; flex: none; }
-.social span { font: 500 0.85rem var(--font-mono); color: var(--muted); }
-@media (hover: hover) { .social:hover { border-color: var(--accent); } }
+.foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px; padding: 30px 0 calc(34px + env(safe-area-inset-bottom, 0px)); font-size: 20px; color: var(--muted); border-top: 1px solid var(--line); margin-top: 26px; }
+.foot a { text-decoration: none; }
+.foot a:hover { color: var(--ink); }
 
-.foot { border-top: 1px solid var(--line); padding-block: 24px 40px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px; font-size: 0.875rem; color: var(--muted); }
-
-@media (max-width: 760px) {
-  /* Phone: headline first, then photo beside the intro, so the main button stays near the top */
-  .hero { grid-template-columns: 124px minmax(0, 1fr); grid-template-areas: "eyebrow eyebrow" "title title" "photo lede" "actions actions"; padding-block: 12px 40px; gap: 0 18px; align-items: start; }
-  .hero-copy { display: contents; }
-  .hero .eyebrow { grid-area: eyebrow; }
-  .hero h1 { grid-area: title; margin-bottom: 20px; }
-  .hero .lede { grid-area: lede; margin-top: 0; font-size: 1.02rem; line-height: 1.5; }
-  .hero .hero-actions { grid-area: actions; }
-  .portrait { grid-area: photo; max-width: none; width: 124px; padding: 4px 0 0; justify-self: start; }
-  .portrait .halo, .portrait figcaption { display: none; }
-  .portrait img { border-width: 4px; border-radius: 10px; }
-  .cards { grid-template-columns: minmax(0, 1fr); }
-  .card { padding: 20px; }
-  .hero-actions .btn { flex: 1 1 100%; }
-  .nav a.hide-sm { display: none; }
+/* ===== Computer ===== */
+@media (min-width: 900px) {
+  .top { display: flex; justify-content: space-between; align-items: center; padding-block: 18px; }
+  .top .mark { font-size: 30px; text-decoration: none; text-transform: none; }
+  .top .mark i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--rec); box-shadow: 0 0 8px var(--rec); margin-right: 10px; vertical-align: 3px; animation: blink 1.6s steps(1) infinite; }
+  .top nav { display: flex; gap: 26px; font-size: 22px; }
+  .top nav a { text-decoration: none; color: var(--muted); }
+  .top nav a:hover { color: var(--ink); }
+  .hero { grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr); gap: 56px; align-items: center; padding-bottom: 20px; }
+  .vf { height: min(82vh, 780px); min-height: 560px; border-radius: 8px; }
+  .title { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; left: 0; bottom: 0; }
+  .side { display: grid; gap: 18px; }
+  .side h1 { font: 400 clamp(4rem, 6.2vw, 6.4rem)/0.86 var(--font-osd); text-transform: none; }
+  .side .sub { font-size: 1.3rem; color: #d2d1ca; max-width: 26ch; line-height: 1.4; }
+  .menu { padding-top: 6px; }
+  .menu a { font-size: 30px; }
+  .tapes { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; padding-top: 46px; align-items: start; }
+  .tape.news { grid-row: span 1; }
+  .b3, .b4 { bottom: 56px; }
 }
-@media (prefers-reduced-motion: reduce) { .portrait .halo .dot { animation: none; } }
+@media (max-width: 899px) { .side .heading { display: none; } .hero .side { padding: 0 max(18px, env(safe-area-inset-left, 0px)); } .hero { margin: 0 calc(-1 * max(18px, env(safe-area-inset-left, 0px))); } }
+@media (prefers-reduced-motion: reduce) { .rec i, .top .mark i, .menu a:hover b { animation: none; } .hint { display: none; } }
 </style>
 </head>
 <body>
+<div class="grain" aria-hidden="true"></div>
 <div class="wrap">
-  <header class="top">
-    <a class="mark" href="/" aria-label="I'm Just Nate, home">
-      <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="28" fill="none" stroke="#ef7462" stroke-opacity=".55" stroke-width="4"/><circle cx="32" cy="32" r="18" fill="none" stroke="#f2b544" stroke-opacity=".85" stroke-width="4"/><circle cx="32" cy="32" r="8" fill="#8796dc"/><circle cx="48" cy="20" r="5" fill="#f2b544"/></svg>
-      i'm just nate
-    </a>
-    <nav class="nav" aria-label="Main">
-      <a href="/audit/">Comfort Audit</a>
-      <a href="https://imjustnate.substack.com" rel="noopener">Newsletter</a>
-      <a class="hide-sm" href="#watch">Watch</a>
-    </nav>
+  <header class="top osd">
+    <a class="mark glow" href="/"><i aria-hidden="true"></i>i'm just nate</a>
+    <nav aria-label="Main"><a href="/audit/">The Comfort Audit</a><a href="https://imjustnate.substack.com" rel="noopener">The full story</a><a href="#watch">Watch</a></nav>
   </header>
 
   <main>
     <section class="hero" aria-labelledby="hero-h">
-      <div class="hero-copy">
-        <p class="eyebrow">Nightmares Come True</p>
-        <h1 id="hero-h">I'm making my nightmares <em>come true.</em> On purpose. On camera.</h1>
-        <p class="lede">For most of my life, my go-to line was <b>“I'm just Nate. I can't do that.”</b> So now I find the things that genuinely scare me and do them anyway. Some go well. Some go badly. Everything gets posted.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="/audit/">Take the free Comfort Audit</a>
-          <a class="btn btn-ghost" href="https://imjustnate.substack.com" rel="noopener">Read the full story</a>
+      <div class="vf" id="vf">
+        <div class="scene" id="scene">
+          <img class="layer bg" id="lbg" src="/nate-bg.webp" alt="" width="1000" height="1363" draggable="false">
+          <div class="layer fg-wrap" id="lfg" style="object-fit:initial">
+            <img class="layer fg" src="/nate-fg.webp" alt="Nate in a flash-lit selfie, looking straight at the camera" width="1000" height="1363" draggable="false" style="inset:0;width:100%;height:100%">
+          </div>
+        </div>
+        <div class="hud" aria-hidden="true">
+          <div class="osd glow rec"><i></i>REC</div>
+          <div class="osd glow num" id="num">Nightmare #1</div>
+          <div class="osd glow tc" id="tc">00:00:00:00</div>
+          <div class="osd glow bat">▮▮▯ SP</div>
+          <i class="br b1"></i><i class="br b2"></i><i class="br b3"></i><i class="br b4"></i>
+          <div class="osd glow hint" id="hint">◀ drag to move the camera ▶</div>
+          <div class="osd glow date" id="date"></div>
+        </div>
+        <div class="title glow">
+          <h1 class="osd" id="hero-h">i'm just nate</h1>
+          <p>making my nightmares come true. on purpose. on camera. everything gets posted.</p>
         </div>
       </div>
-      <figure class="portrait">
-        <svg class="halo" viewBox="0 0 420 420" aria-hidden="true">
-          <circle cx="210" cy="210" r="204" fill="none" stroke="#ef7462" stroke-opacity=".45" stroke-width="2" stroke-dasharray="3 9" stroke-linecap="round"/>
-          <circle cx="210" cy="210" r="150" fill="none" stroke="#f2b544" stroke-opacity=".6" stroke-width="2"/>
-          <g class="dot"><circle cx="377" cy="93" r="12" fill="#f2b544"/><circle cx="377" cy="93" r="21" fill="none" stroke="#f2b544" stroke-opacity=".35" stroke-width="2"/></g>
-        </svg>
-        <picture>
-          <source type="image/webp" srcset="/nate-600.webp 600w, /nate-1000.webp 1000w" sizes="(max-width: 760px) 62vw, 380px">
-          <img src="/nate-1000.jpg" srcset="/nate-600.jpg 600w, /nate-1000.jpg 1000w" sizes="(max-width: 760px) 62vw, 380px" width="1000" height="1363" alt="Nate in a flash-lit selfie, looking straight at the camera" fetchpriority="high">
-        </picture>
-        <figcaption>@imjustnatehere</figcaption>
-      </figure>
-    </section>
 
-    <section class="cards" aria-label="Start here">
-      <article class="card feature" aria-labelledby="audit-h">
-        <p class="eyebrow">Free · about 6 minutes</p>
-        <h2 id="audit-h">The Comfort Audit</h2>
-        <p>How much of your life runs on comfort? Answer 29 questions about what you actually did in the last 3 months and find out.</p>
-        <ul class="gets">
-          <li>Your Comfort Score, from 0 to 100%</li>
-          <li>A map of the seven areas where you play it safe</li>
-          <li>A step-by-step ladder out, from a 5-minute Bad Dream to a real nightmare</li>
+      <div class="side">
+        <h1 class="osd glow heading" aria-hidden="true">i'm just nate</h1>
+        <p class="sub heading">making my nightmares come true. on purpose. on camera. everything gets posted, however it goes.</p>
+        <ul class="menu osd">
+          <li><a href="/audit/"><b aria-hidden="true">▶</b>Play: the comfort audit<span>free</span></a></li>
+          <li><a href="https://imjustnate.substack.com" rel="noopener"><b aria-hidden="true">▶</b>Read: the full story<span>newsletter</span></a></li>
+          <li><a href="#watch"><b aria-hidden="true">▶</b>Watch: @imjustnatehere</a></li>
         </ul>
-        <div><a class="btn btn-primary" href="/audit/">Take the Comfort Audit</a></div>
-        <p class="fine">Your answers stay in your browser. Nothing is sent anywhere.</p>
-      </article>
-
-      <article class="card" aria-labelledby="news-h">
-        <p class="eyebrow">The newsletter · free</p>
-        <h2 id="news-h">The full story</h2>
-        <p>The videos are the highlight reel. This is the rest: what happened before and after the camera, what I was afraid of, what actually happened, and what I'm learning about fear along the way.</p>
-        <div class="sub-wrap"><iframe class="sub-embed" src="https://imjustnate.substack.com/embed" title="Subscribe to I'm Just Nate" loading="lazy" scrolling="no"></iframe></div>
-        <p class="fine">Box not showing? <a href="https://imjustnate.substack.com/subscribe" rel="noopener">Subscribe on Substack</a>. Subscribers also get the unlock word for all 7 Comfort Audit ladders.</p>
-      </article>
+      </div>
     </section>
 
-    <section class="watch" id="watch" aria-labelledby="watch-h">
-      <h2 id="watch-h">Watch the nightmares</h2>
-      <div class="socials">
-        <a class="social" href="https://www.instagram.com/imjustnatehere/" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-          Instagram <span>@imjustnatehere</span></a>
-        <a class="social" href="https://www.tiktok.com/@imjustnatehere" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M16.6 3c.4 2.2 1.9 3.8 4.1 4v3.1c-1.5 0-2.9-.4-4.1-1.2v6.3c0 3.3-2.6 5.8-5.9 5.8S4.8 18.5 4.8 15.2s2.6-5.8 5.9-5.8c.3 0 .6 0 .9.1v3.2c-.3-.1-.6-.2-.9-.2-1.5 0-2.7 1.2-2.7 2.7s1.2 2.7 2.7 2.7 2.8-1.2 2.8-2.7V3h3.1z"/></svg>
-          TikTok <span>@imjustnatehere</span></a>
-        <a class="social" href="https://www.youtube.com/@imjustnatehere" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M22 8.2c-.2-1.6-1-2.7-2.6-2.9C16.9 5 12 5 12 5s-4.9 0-7.4.3C3 5.5 2.2 6.6 2 8.2 1.8 9.6 1.8 12 1.8 12s0 2.4.2 3.8c.2 1.6 1 2.7 2.6 2.9 2.5.3 7.4.3 7.4.3s4.9 0 7.4-.3c1.6-.2 2.4-1.3 2.6-2.9.2-1.4.2-3.8.2-3.8s0-2.4-.2-3.8zM10 15.1V8.9l5.2 3.1-5.2 3.1z"/></svg>
-          YouTube <span>@imjustnatehere</span></a>
-      </div>
+    <section class="tapes" aria-label="Start here">
+      <article class="tape" aria-labelledby="t1">
+        <p class="label osd"><span>Tape 01</span><b>●</b></p>
+        <h2 id="t1">The Comfort Audit</h2>
+        <p>How much of your life runs on comfort? 29 questions about what you actually did in the last 3 months. You get your score, a map of where you play it safe, and a ladder out.</p>
+        <a class="go osd" href="/audit/"><b aria-hidden="true">▶</b>Start the audit</a>
+        <p class="fine">Free · about 6 minutes · your answers stay on your phone</p>
+      </article>
+
+      <article class="tape news" aria-labelledby="t2">
+        <p class="label osd"><span>Tape 02</span><b>●</b></p>
+        <h2 id="t2">The full story</h2>
+        <p>The videos are the highlight reel. This is the rest: what I was afraid of, what actually happened, and what I'm learning along the way.</p>
+        <div class="screen"><iframe src="https://imjustnate.substack.com/embed" title="Subscribe to i'm just nate" loading="lazy" scrolling="no"></iframe></div>
+        <p class="fine">Box not showing? <a href="https://imjustnate.substack.com/subscribe" rel="noopener">Subscribe on Substack</a>. Subscribers get the unlock word for all 7 Comfort Audit ladders.</p>
+      </article>
+
+      <article class="tape" id="watch" aria-labelledby="t3">
+        <p class="label osd"><span>Tape 03</span><b>●</b></p>
+        <h2 id="t3">Watch the nightmares</h2>
+        <ul class="socials osd">
+          <li><a href="https://www.instagram.com/imjustnatehere/" rel="noopener">Instagram<span>@imjustnatehere ▶</span></a></li>
+          <li><a href="https://www.tiktok.com/@imjustnatehere" rel="noopener">TikTok<span>@imjustnatehere ▶</span></a></li>
+          <li><a href="https://www.youtube.com/@imjustnatehere" rel="noopener">YouTube<span>@imjustnatehere ▶</span></a></li>
+        </ul>
+      </article>
     </section>
   </main>
 
-  <footer class="foot">
-    <p>© 2026 I'm Just Nate · Nightmares Come True</p>
-    <p><a href="/audit/">Comfort Audit</a> · <a href="https://imjustnate.substack.com" rel="noopener">Newsletter</a></p>
+  <footer class="foot osd">
+    <span>■ Stop · © 2026 i'm just nate</span>
+    <a href="#" id="eject">⏏ Eject (back to top)</a>
   </footer>
 </div>
+
+<script>
+(function () {
+  // ---- Edit this when the series moves on ----
+  var NIGHTMARE_LABEL = "Nightmare #1";
+
+  var vf = document.getElementById("vf"), scene = document.getElementById("scene");
+  var bg = document.getElementById("lbg"), fg = document.getElementById("lfg");
+  var hint = document.getElementById("hint");
+  document.getElementById("num").textContent = NIGHTMARE_LABEL;
+
+  // Date stamp and running timecode, like a real camcorder
+  try {
+    var d = new Date(), m = ["JAN.", "FEB.", "MAR.", "APR.", "MAY", "JUN.", "JUL.", "AUG.", "SEP.", "OCT.", "NOV.", "DEC."][d.getMonth()];
+    document.getElementById("date").textContent = m + " " + d.getDate() + " " + d.getFullYear();
+  } catch (e) {}
+  var t0 = performance.now(), tcEl = document.getElementById("tc");
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
+  function tick() {
+    var s = (performance.now() - t0) / 1000, f = Math.floor((s % 1) * 24);
+    tcEl.textContent = pad(Math.floor(s / 3600)) + ":" + pad(Math.floor(s / 60) % 60) + ":" + pad(Math.floor(s) % 60) + ":" + pad(f);
+  }
+  setInterval(tick, 1000 / 12);
+
+  document.getElementById("eject").addEventListener("click", function (e) { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); });
+
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var finePointer = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  hint.textContent = finePointer ? "◀ move your mouse ▶" : "◀ drag to move the camera ▶";
+  if (reduce) return;
+
+  // ---- The moving camera ----
+  // tx/ty: where the camera wants to be (-1..1). x/y: where it is, eased toward the target.
+  var tx = 0, ty = 0, x = 0, y = 0, lastInput = -1e9, interacted = false;
+  function clamp(v) { return v < -1 ? -1 : (v > 1 ? 1 : v); }
+  function touched() {
+    lastInput = performance.now();
+    if (!interacted) { interacted = true; hint.classList.add("gone"); }
+  }
+  if (finePointer) {
+    window.addEventListener("pointermove", function (e) {
+      if (e.pointerType !== "mouse") return;
+      var r = vf.getBoundingClientRect();
+      tx = clamp((e.clientX - (r.left + r.width / 2)) / (r.width * 0.75));
+      ty = clamp((e.clientY - (r.top + r.height / 2)) / (r.height * 0.75));
+      touched();
+    }, { passive: true });
+  }
+  // Drag on the viewfinder (finger or mouse). Vertical swipes still scroll the page.
+  var dragging = false, sx = 0, stx = 0;
+  vf.addEventListener("pointerdown", function (e) { dragging = true; sx = e.clientX; stx = tx; touched(); });
+  window.addEventListener("pointermove", function (e) {
+    if (!dragging) return;
+    tx = clamp(stx + (e.clientX - sx) / (vf.clientWidth * 0.45));
+    touched();
+  }, { passive: true });
+  function end() { dragging = false; }
+  window.addEventListener("pointerup", end); window.addEventListener("pointercancel", end);
+
+  var visible = true;
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible) requestAnimationFrame(frame); }).observe(vf);
+  }
+  function frame(now) {
+    if (!visible) return;
+    // Hold still for a moment after input, then drift like a handheld camera.
+    if (now - lastInput > 2200 && !dragging) {
+      var k = now / 1000;
+      tx = Math.sin(k * 0.45) * 0.32 + Math.sin(k * 1.3) * 0.04;
+      ty = Math.cos(k * 0.33) * 0.18;
+    }
+    x += (tx - x) * 0.07; y += (ty - y) * 0.07;
+    bg.style.transform = "translate3d(" + (x * 16).toFixed(2) + "px," + (y * 9).toFixed(2) + "px,0) scale(1.04)";
+    fg.style.transform = "translate3d(" + (x * -5).toFixed(2) + "px," + (y * -3).toFixed(2) + "px,0)";
+    scene.style.transform = "perspective(1100px) rotateY(" + (x * -5).toFixed(2) + "deg) rotateX(" + (y * 3).toFixed(2) + "deg) scale(1.03)";
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
 </body>
 </html>
