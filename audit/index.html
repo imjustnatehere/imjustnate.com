@@ -480,7 +480,7 @@ h1, h2, h3 { letter-spacing: -0.02em; }
     <div class="intro-head">
       <p class="eyebrow">A self-check from <a href="https://imjustnate.com/">I'm Just Nate</a> · Nightmares Come True</p>
       <h1 id="intro-title">How much of your life runs on <em>comfort</em>?</h1>
-      <p class="lede">29 questions and one checklist, about 6 minutes. You find out how much of your life you spend playing it safe, where you do it most, and get a 30-day ladder to climb out.</p>
+      <p class="lede">30 quick steps (29 questions and one checklist), about 6 minutes. You find out how much of your life you spend playing it safe, where you do it most, and get a 30-day ladder to climb out.</p>
       <div class="intro-actions">
         <button class="btn btn-primary" id="start" type="button">Start the audit</button>
         <button class="btn btn-ghost" id="resume" type="button" hidden>Continue where you left off</button>
@@ -532,6 +532,7 @@ h1, h2, h3 { letter-spacing: -0.02em; }
     <div class="rules">
       <h2>Before you start</h2>
       <ul>
+        <li>Answer the way a friend who knows you well would answer for you. Everyone rates themselves a little braver than they are.</li>
         <li>Answer for the last 3 months. What you actually did, not what you would do.</li>
         <li>There are no good or bad scores. Comfort keeps you safe; too much of it keeps you small.</li>
         <li>Go with your first answer. You can always go back.</li>
@@ -781,29 +782,29 @@ h1, h2, h3 { letter-spacing: -0.02em; }
 
   // p = the "proof" line shown when an answer lands on the brave end. {when} fills in "this week", "this month" or "in the last 3 months".
   var QUESTIONS = [
-    { d: "seen", t: "recency", q: "When did you last perform, present or speak up in front of a group? A toast, a pitch, a song or an opinion in a meeting all count.",
-      p: "You spoke up or performed in front of a group {when}." },
+    { d: "seen", t: "recency", q: "When did you last perform, present or speak up in front of a group in a way that made you nervous? A toast, a pitch, a song or a hard opinion in a meeting all count.",
+      p: "You spoke up or performed in front of a group {when}, nerves and all." },
     { d: "seen", t: "avoid", q: "When there's a chance to be the center of attention (a toast, the dance floor, a turn at the mic), how often do you find a way out of it?",
       p: "When there's a chance to be the center of attention, you rarely duck out of it." },
     { d: "seen", t: "like", q: "I would rather do something badly in private than decently where people can see.",
       p: "You'd rather try something where people can see than hide it." },
-    { d: "seen", t: "recency", q: "When did you last share something you made (writing, music, art, an idea) with people whose opinion matters to you?",
+    { d: "seen", t: "recency", q: "When did you last share something you made (writing, music, art, an idea) with people whose opinion matters to you, and felt nervous about it?",
       p: "You shared something you made with people whose opinion matters to you {when}." },
 
-    { d: "social", t: "recency", q: "When did you last start a conversation with a stranger that went past small talk?",
+    { d: "social", t: "recency", q: "When did you last start a conversation with a stranger that went past small talk, one you had to work up to?",
       p: "You had a real conversation with a stranger {when}." },
     { d: "social", t: "avoid", q: "When you're invited somewhere you won't know many people, how often do you skip it?",
       p: "You show up even when you won't know many people there." },
-    { d: "social", t: "recency", q: "When did you last go to something social on your own: an event, a class, a meetup?",
-      p: "You went to something social on your own {when}." },
+    { d: "social", t: "recency", q: "When did you last go to something social on your own where you didn't know anyone: an event, a class, a meetup?",
+      p: "You went to something on your own where you didn't know anyone {when}." },
     { d: "social", t: "like", q: "At social events, I mostly stay with the people I came with.",
       p: "At events, you leave the people you came with and meet new ones." },
 
-    { d: "asking", t: "recency", q: "When did you last ask for something you weren't sure you'd get? A discount, a favor, a raise or a date all count.",
+    { d: "asking", t: "recency", q: "When did you last ask for something you weren't sure you'd get, and felt nervous asking? A discount, a favor, a raise or a date all count.",
       p: "You asked for something you weren't sure you'd get {when}." },
     { d: "asking", t: "avoid", q: "How often do you decide not to ask because you assume the answer would be no?",
       p: "You ask even when you think the answer might be no." },
-    { d: "asking", t: "recency", q: "When did you last send a message, pitch or application to someone who might ignore it?",
+    { d: "asking", t: "recency", q: "When did you last send a message, pitch or application you were nervous to send, to someone who might ignore it?",
       p: "You sent a message, pitch or application that could have been ignored {when}." },
     { d: "asking", t: "avoid", q: "When an order, a bill or a piece of work isn't what you asked for, how often do you let it go rather than say something?",
       p: "You speak up when something isn't what you asked for." },
@@ -819,7 +820,7 @@ h1, h2, h3 { letter-spacing: -0.02em; }
 
     { d: "control", t: "avoid", q: "How often do you need to know the plan (where, who, how long) before you'll say yes?",
       p: "You say yes before you know the whole plan." },
-    { d: "control", t: "recency", q: "When did you last let someone else make a real decision for you (the plan, the order, the route) without overriding it?",
+    { d: "control", t: "recency", q: "When did you last let someone else make a real decision you'd rather have made yourself (the plan, the order, the route), without overriding it?",
       p: "You let someone else make a real decision for you {when}." },
     { d: "control", t: "avoid", q: "When you don't know what to expect, how often do you reach for your phone to check, research or escape?",
       p: "You can sit in not knowing without reaching for your phone." },
@@ -830,13 +831,13 @@ h1, h2, h3 { letter-spacing: -0.02em; }
       p: "You told someone how you really felt {when}, even though it was hard to say." },
     { d: "honesty", t: "avoid", q: "When someone asks how you are, how often do you give the easy answer instead of the true one?",
       p: "You give the true answer when people ask how you are." },
-    { d: "honesty", t: "recency", q: "When did you last admit out loud that you'd failed at something, or didn't know something?",
+    { d: "honesty", t: "recency", q: "When did you last admit out loud that you'd failed at something, or didn't know something, when it was embarrassing to admit?",
       p: "You admitted out loud that you'd failed or didn't know something {when}." },
     { d: "honesty", t: "like", q: "When things get personal, I use a joke to change the subject.",
       p: "You let things get personal without joking your way out." },
 
-    { d: "newness", t: "recency", q: "When did you last do something for the very first time?",
-      p: "You did something for the very first time {when}." },
+    { d: "newness", t: "recency", q: "When did you last do something for the very first time that made you nervous? A new restaurant doesn't count.",
+      p: "You did something new that made you nervous {when}." },
     { d: "newness", t: "avoid", q: "How often do you skip trying something because you'd be bad at it at first?",
       p: "You try things even when you'll be bad at them at first." },
     { d: "newness", t: "recency", q: "When did you last take a class or lesson where you were the least experienced person there?",
@@ -844,7 +845,7 @@ h1, h2, h3 { letter-spacing: -0.02em; }
     { d: "newness", t: "like", q: "Most of my weeks look almost exactly the same.",
       p: "Your weeks don't all look the same." },
 
-    { d: "week", t: "week", q: "In a typical week, how much time do you spend doing something that makes you at least a little nervous?",
+    { d: "week", t: "week", q: "In a typical week, how much time do you spend doing something that makes you genuinely nervous? Busy or stressed doesn't count.",
       p: "You spend {hours} a week doing things that make you nervous." }
   ];
 
@@ -936,7 +937,14 @@ h1, h2, h3 { letter-spacing: -0.02em; }
       if (last && typeof last.overall === "number" && last.date) h.push(last);
     }
     return h.filter(function (e) { return e && typeof e.overall === "number" && typeof e.date === "string"; })
+      .map(rescore)
       .sort(function (a, b) { return a.date < b.date ? -1 : (a.date > b.date ? 1 : 0); });
+  }
+  // Results saved before the scoring changed are recalculated from their answers.
+  function rescore(e) {
+    if (!e.answers || e.answers.length !== QUESTIONS.length) return e;
+    var sc = computeScores(e.answers, e.habits || []);
+    return { date: e.date, overall: sc.overall, domains: sc.domains, answers: e.answers, habits: e.habits || [] };
   }
   function saveHistory(h) {
     h.sort(function (a, b) { return a.date < b.date ? -1 : (a.date > b.date ? 1 : 0); });
@@ -970,6 +978,15 @@ h1, h2, h3 { letter-spacing: -0.02em; }
   /* ---------- Scoring ---------- */
   function domainById(id) { for (var i = 0; i < DOMAINS.length; i++) if (DOMAINS[i].id === id) return DOMAINS[i]; return null; }
 
+  // Points per answer (0 = you go for it, 4 = you play it safe). Doing something only now and then
+  // still counts mostly as comfort, so the middle answers lean toward the safe end.
+  var POINTS = {
+    recency: [0, 1.6, 2.7, 3.6, 4],
+    avoid:   [0, 1.3, 2.6, 3.5, 4],
+    like:    [0, 1.3, 2.6, 3.5, 4],
+    week:    [0, 1.3, 2.6, 3.5, 4]
+  };
+  var HABITS_FULL = 6; // checking 6 or more comfort habits counts as fully cushioned
   function computeScores(answers, habits) {
     var sums = {}, counts = {};
     DOMAINS.forEach(function (d) { sums[d.id] = 0; counts[d.id] = 0; });
@@ -977,16 +994,17 @@ h1, h2, h3 { letter-spacing: -0.02em; }
     QUESTIONS.forEach(function (q, i) {
       var a = answers[i];
       if (a === null || a === undefined) return;
-      if (q.d === "week") { weekPct = a / 4 * 100; return; }
-      sums[q.d] += a; counts[q.d] += 1;
+      var pts = (POINTS[q.t] || POINTS.like)[a];
+      if (q.d === "week") { weekPct = pts / 4 * 100; return; }
+      sums[q.d] += pts; counts[q.d] += 1;
     });
     var domains = DOMAINS.map(function (d) {
       var pct = counts[d.id] ? sums[d.id] / (4 * counts[d.id]) * 100 : 0;
       return { id: d.id, pct: Math.round(pct) };
     });
     var avg = domains.reduce(function (s, d) { return s + d.pct; }, 0) / domains.length;
-    var habitPct = habits.length / HABITS.length * 100;
-    var overall = Math.round(0.75 * avg + 0.15 * habitPct + 0.10 * weekPct);
+    var habitPct = Math.min(habits.length / HABITS_FULL, 1) * 100;
+    var overall = Math.round(0.72 * avg + 0.18 * habitPct + 0.10 * weekPct);
     return { overall: overall, domains: domains, habitPct: Math.round(habitPct), weekPct: Math.round(weekPct), avg: Math.round(avg) };
   }
 
@@ -2008,8 +2026,8 @@ h1, h2, h3 { letter-spacing: -0.02em; }
           '<p><b>Predictions are the data.</b> Fear updates most when what you expected doesn\'t match what happened. And sometimes the nightmare does come true. Getting through it, and seeing that you did, is the most convincing data of all.</p>' +
         '</div></details>' +
         '<details><summary>How your score is calculated</summary><div class="body">' +
-          '<p>Each answer scores from 0 (you go for it) to 4 (you play it safe). An area\'s number is its points out of 16, as a percentage: how safe you play it there.</p>' +
-          '<p>Your Comfort Score blends three things: the average of your seven areas (75%), the share of the 12 comfort habits you checked (15%), and how little of your week goes to anything that makes you nervous (10%).</p>' +
+          '<p>Each answer scores from 0 (you go for it) to 4 (you play it safe). The middle answers lean toward safe on purpose: doing something only now and then still counts mostly as comfort. An area\'s number is its points out of 16, as a percentage: how safe you play it there.</p>' +
+          '<p>Your Comfort Score blends three things: the average of your seven areas (72%), how many comfort habits you checked (18%; six or more counts as fully cushioned), and how little of your week goes to anything that makes you genuinely nervous (10%).</p>' +
           '<p>Yours: areas averaged ' + sc.avg + '% safe, habits ' + sc.habitPct + '%, week ' + sc.weekPct + '%. That gives ' + sc.overall + '%.</p>' +
           '<p>It\'s an estimate from your own answers, not a measurement. It\'s most useful compared against itself: take it again after 30 days.</p>' +
         '</div></details>' +
