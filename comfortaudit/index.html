@@ -19,7 +19,7 @@
 <meta name="theme-color" content="#0f1221">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@500;700&family=IBM+Plex+Mono:wght@500&family=Saira+Semi+Condensed:wght@800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@500;700&family=Saira+Semi+Condensed:wght@800&display=swap">
 <style>
 /* Layout: one calm column, like a page read in bed by a nightlight. Concentric zone rings are the signature graphic. */
 :root {
@@ -230,8 +230,6 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
 .score small { font-size: 0.42em; letter-spacing: 0; }
 .band { display: grid; gap: 6px; padding-bottom: 8px; }
 .band-name { font-family: var(--font-display); font-size: var(--step-2); font-weight: 700; color: var(--accent-text); }
-.res-head p.big { font-size: var(--step-1); max-width: 42ch; }
-.res-head p.big b { color: var(--accent-text); }
 .delta { font-family: var(--font-mono); font-size: var(--step--1); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; justify-self: start; }
 .sec { display: grid; gap: 20px; }
 .sec-head { display: grid; gap: 8px; }
@@ -257,8 +255,6 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
 .bar { display: grid; gap: 6px; }
 .bar-top { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; flex-wrap: wrap; }
 .bar-name { font-weight: 700; }
-.push-line { font-size: var(--step-1); max-width: 46ch; }
-.push-line b { color: var(--accent-text); }
 .bar-name .tag { display: block; width: fit-content; margin: 6px 0 2px; white-space: normal; } /* label sits on its own line under the area name */
 .bar-pct { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 .bar-track { height: 10px; border-radius: 6px; background: var(--surface-2); overflow: hidden; }
@@ -480,6 +476,50 @@ h1, h2, h3 { letter-spacing: -0.02em; }
 .recbar span { margin-left: auto; font: 500 0.68rem/1 var(--font-osd); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-shadow: none; }
 @keyframes recblink { 50% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .recbar i { animation: none; } }
+
+/* ===== Type: one short scale for the whole audit =====
+   display (the score) · title · section heading · card heading · body · small · mono label · button */
+:root {
+  --font-mono: var(--font-osd);
+  --t-title: clamp(1.9rem, 7.5vw, 2.4rem);
+  --t-h2: clamp(1.4rem, 5vw, 1.6rem);
+  --t-h3: 1.15rem;
+  --t-body: 1.0625rem;
+  --t-small: 0.875rem;
+  --t-label: 0.72rem;
+  --t-btn: 0.8rem;
+}
+body { font-size: var(--t-body); }
+.intro h1, .ready h2, .band-name { font-size: var(--t-title); font-weight: 800; }
+.sec-head h2, .unlock h3, #qtext { font-size: var(--t-h2); font-weight: 800; }
+#qtext { font-weight: 700; }
+.truth h3, .habit h3, .ladder h3, .readbox h3, .howclimb h3, .email-box h3, .dchart h3, .rules h2, summary,
+.gets b, .plan .wk b, .dsum, .lede, .res-head .lead { font-size: var(--t-h3); }
+.lede, .res-head .lead { font-weight: 400; line-height: 1.5; }
+.sec-head p, .res-head .muted, .howclimb .howto, .jump, .unlock-copy p, .ready-lede, .plan ul, .rung-text { font-size: var(--t-body); }
+.fine, .howto, .bars-note, .bar-desc, .bar-nums, .legend, .habit p, .truth p, .other-note, .ladder-note, .save-row p,
+.caption, .status, .foot, .qhint, .gets span, .drow-lab, .dlegend, .unlock-row .lab, .logform legend, .logform .lab,
+.log-ta, .restore summary, .link-btn, .empty, .example-copy p { font-size: var(--t-small); }
+.eyebrow, .tag, .rung-name, .rung-count, .chg, .log-chip, .scale span, .daxis, .scale-cap, .plan .wk, .ladder h3 span,
+.example .stamp, .recbar span, .opt .key, .dial span, .drow-lab small, .bar-nums b {
+  font-family: var(--font-osd); font-size: var(--t-label); font-weight: 500; letter-spacing: 0.08em;
+}
+.bar-nums b { font-size: inherit; letter-spacing: 0; font-weight: 700; }
+.btn, .btn-small { font-size: var(--t-btn); }
+.code { font-size: var(--t-body); }
+
+/* Results header: big score, big score name, one lead sentence */
+.res-head { gap: 14px; }
+.score-row { align-items: center; gap: 6px 22px; }
+.band { gap: 4px; padding-bottom: 0; }
+.band-name { font-family: var(--font-display); letter-spacing: -0.02em; text-transform: none; line-height: 1; color: var(--accent-text); }
+.res-head .lead { max-width: 44ch; }
+.res-head .lead b { color: var(--ink); font-weight: 700; }
+.res-head .lead b.up { color: var(--accent-text); }
+.res-head .muted { max-width: 52ch; }
+.jump span { font-size: 1em; }
+.mapgrid { align-items: start; }
+@media (min-width: 721px) { .mapgrid > div:first-child { position: sticky; top: 16px; } }
 </style>
 <style>[hidden]{display:none!important} body{margin:0}</style>
 </head>
@@ -492,13 +532,13 @@ h1, h2, h3 { letter-spacing: -0.02em; }
     <div class="intro-head">
       <p class="eyebrow">A self-check from <a href="https://imjustnate.com/">I'm Just Nate</a> · Nightmares Come True</p>
       <h1 id="intro-title">How much of your life runs on <em>comfort</em>?</h1>
-      <p class="lede">30 quick steps (29 questions and one checklist), about 6 minutes. You find out how much of your life you spend playing it safe, where you do it most, and get a 30-day ladder to climb out.</p>
+      <p class="lede">30 quick steps (29 questions and a checklist), about 6 minutes. See how much of your life you spend playing it safe, where you do it most, and get a 30-day ladder out.</p>
       <div class="intro-actions">
         <button class="btn btn-primary" id="start" type="button">Start the audit</button>
         <button class="btn btn-ghost" id="resume" type="button" hidden>Continue where you left off</button>
       </div>
-      <p class="fine">Your answers never leave this browser. Nothing is sent anywhere.</p>
-      <p class="unlock-note" id="unlock-note" hidden><b>Your other five ladders are unlocked.</b> Take the audit to see all seven. Taken it before on another phone or browser? Bring back your result with your code below.</p>
+      <p class="fine">Your answers never leave this browser.</p>
+      <p class="unlock-note" id="unlock-note" hidden><b>All 7 ladders unlocked.</b> Take the audit to see them. Taken it before on another phone or browser? Paste your result code below.</p>
       <div class="returning" id="returning" hidden>
         <p id="last-line"></p>
         <button class="btn btn-ghost btn-small" id="view-last" type="button">See my last results</button>
@@ -506,7 +546,7 @@ h1, h2, h3 { letter-spacing: -0.02em; }
       <details class="restore" id="restore">
         <summary>Retaking? Bring back your last result</summary>
         <div class="body">
-          <p class="fine">Paste the result code from your last audit. It's on your results page and in your PDF. When you finish, you'll see what changed.</p>
+          <p class="fine">Paste the code from your last results page or PDF. When you finish, you'll see what changed.</p>
           <div class="code-row">
             <label class="sr" for="code-in">Result code</label>
             <input id="code-in" class="code-in" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="CA1-…">
@@ -518,10 +558,10 @@ h1, h2, h3 { letter-spacing: -0.02em; }
     </div>
 
     <ul class="gets" aria-label="What you get">
-      <li><b>Comfort Score</b><span>How much of your life you spend playing it safe, from 0 to 100%.</span></li>
+      <li><b>Comfort Score</b><span>How much of your life you spend playing it safe.</span></li>
       <li><b>Zone map</b><span>Seven areas of life, and how safe you play it in each.</span></li>
       <li><b>Your comfort habits</b><span>The quiet ways you keep yourself safe, and what to try instead.</span></li>
-      <li><b>A 30-day ladder</b><span>Steps from a 5-minute Bad Dream up to a real nightmare. Shuffle them, write your own, log how each one went, and download it as a PDF.</span></li>
+      <li><b>A 30-day ladder</b><span>Steps from a 5-minute Bad Dream up to a real nightmare. Shuffle, write your own, log how it went, save as a PDF.</span></li>
     </ul>
 
     <div class="example" aria-label="Example result">
@@ -530,14 +570,14 @@ h1, h2, h3 { letter-spacing: -0.02em; }
         <div class="example-copy">
           <span class="stamp">Example result</span>
           <div class="example-num">68<small>%</small></div>
-          <p><b>Padded.</b> 68% of this person's life is lived playing it safe. Their dots sit closest to the middle for Body and Being seen, where they play it safest. Honesty reaches farthest out, into the nervous ring.</p>
+          <p><b>Padded.</b> 68% of this person's life is lived playing it safe. Body and Being seen sit closest to the middle. Honesty reaches farthest out.</p>
         </div>
       </div>
       <div class="readbox">
         <h3>How to read the map</h3>
         <ol class="howto" id="howto-intro"></ol>
         <div id="example-key"></div>
-        <p class="fine">That's one spoke of the map laid flat, from the middle (left) to the outside (right). Body is 88% safe, so its dot sits deep in comfort. Honesty is 44% safe, so its dot reaches out into the nervous ring.</p>
+        <p class="fine">One spoke of the map laid flat, middle on the left. Body (88% safe) sits deep in comfort. Honesty (44% safe) reaches into the nervous ring.</p>
       </div>
     </div>
 
@@ -579,7 +619,7 @@ h1, h2, h3 { letter-spacing: -0.02em; }
     <div class="ready-head">
       <div class="ready-top"><p class="eyebrow">Done · 30 of 30</p><button class="link-btn" id="ready-skip" type="button">Skip to my results →</button></div>
       <h2 id="ready-title" tabindex="-1">Your results are ready.</h2>
-      <p class="ready-lede">Want the full story too? My free video newsletter on Substack follows every nightmare I put myself through, start to finish. Subscribers also get ladders for all 7 areas of life, not just the 2 on your results.</p>
+      <p class="ready-lede">Want the full story? My free video newsletter on Substack follows every nightmare I put myself through. Subscribers also get ladders for all 7 areas, not just your 2.</p>
     </div>
     <div class="ready-sub">
       <div class="sub-wrap"><iframe class="sub-embed" id="ready-embed" data-src="https://imjustnate.substack.com/embed" title="Subscribe to I'm Just Nate" scrolling="no"></iframe></div>
@@ -922,10 +962,10 @@ h1, h2, h3 { letter-spacing: -0.02em; }
   ];
 
   var BANDS = [
-    { min: 80, name: "Fully cocooned", text: "Almost everything in your life is arranged to keep you safe. That isn't a flaw. It's a system that works, right up until it starts keeping out the life you want." },
-    { min: 65, name: "Padded", text: "You mostly do what you already know you can do. The courage is there; it just rarely gets called on. A few nervous things done on purpose each month would change the shape of your year." },
-    { min: 50, name: "Mostly cozy", text: "You step outside your comfort zone sometimes, usually when life makes you. The next move is stepping out on purpose, before you're forced to." },
-    { min: 30, name: "Pushing often", text: "You step outside your comfort zone more than most people. Your growth is in the one or two areas you still play safe." },
+    { min: 80, name: "Fully cocooned", text: "Almost everything in your life is set up to keep you safe. That works, right up until it keeps out the life you want." },
+    { min: 65, name: "Padded", text: "You mostly stick to what you know you can do. The courage is there; it just rarely gets called on. A few nervous things a month, on purpose, would change your year." },
+    { min: 50, name: "Mostly cozy", text: "You step out of your comfort zone sometimes, usually when life makes you. Next: step out on purpose, before you're forced to." },
+    { min: 30, name: "Pushing often", text: "You push yourself more than most people. Your growth is in the one or two areas you still play safe." },
     { min: 0, name: "Out there most days", text: "Discomfort is a regular part of your week. Make sure you're choosing it rather than drowning in it. Rest counts too." }
   ];
 
@@ -937,11 +977,11 @@ h1, h2, h3 { letter-spacing: -0.02em; }
   ];
 
   var HOWTO = [
-    "<b>Each spoke is one area of life.</b> There are seven, like Being seen or Asking.",
-    "<b>Each area gets a number: how safe you play it there.</b> It comes from your four answers about that area. 100% safe means you avoid it every time. 0% means you go for it every time.",
-    "<b>The safer you play it, the closer the dot sits to the middle.</b> A big number pulls the dot in. A small number pushes it out.",
-    "<b>The rings are the zones.</b> The blue middle circle is comfort (55% safe or more). The amber ring is nervous: where you push yourself, and where growth happens. The dashed outer ring is panic, too much to learn from. No dot lands there; it's a reminder not to aim for it.",
-    "<b>The shape is your reach.</b> A small, tight shape means most of life stays in comfort. Points that reach into the amber ring are where you already push yourself."
+    "<b>Each spoke is an area of life.</b> Seven in all.",
+    "<b>Each area gets a number: how safe you play it.</b> 100% means you always avoid it. 0% means you always go for it.",
+    "<b>Safer means closer to the middle.</b> A big number pulls the dot in; a small one pushes it out.",
+    "<b>The rings are the zones.</b> Blue middle: comfort (55% safe or more). Amber: nervous, where you push yourself and grow. Dashed outer ring: panic, too much to learn from. Don't aim for it.",
+    "<b>The shape is your reach.</b> Small and tight means most of life stays in comfort. Points in the amber ring are where you already push yourself."
   ];
 
   var TEMPLATE = "Step:\nDread before, 0–10:\nThe worst thing I think will happen:\n\nWhat actually happened:\nDread at its peak, 0–10:\nHow I handled it:\nWould I do it again?";
@@ -1415,7 +1455,7 @@ h1, h2, h3 { letter-spacing: -0.02em; }
   function ladderHtml(dom, pct) {
     var rungs = [0, 1, 2, 3].map(function (i) { return rungHtml(dom, i); }).join("");
     return '<div class="ladder"><h3>' + esc(dom.name) + '<span>' + pct + '% playing it safe</span></h3><ol class="rungs" aria-label="' + esc(dom.name) + ' ladder, from the smallest step to the biggest">' + rungs + '</ol>' +
-      '<p class="ladder-note">Start with the Bad Dream at the top and work your way down. Move to the next step when it feels doable, not easy.</p></div>';
+      '<p class="ladder-note">Start at the top and work your way down.</p></div>';
   }
 
   function planHtml(A, B) {
@@ -1444,14 +1484,14 @@ h1, h2, h3 { letter-spacing: -0.02em; }
   }
   function unlockHtml() {
     if (unlocked) {
-      return '<p class="unlock-done"><b>All 7 ladders unlocked.</b> Your two safest areas come first, and your 30-day plan uses those two. The other five are there whenever you\'re ready.</p>';
+      return '<p class="unlock-done"><b>All 7 ladders unlocked.</b> Your two least comfortable areas come first, and your 30-day plan uses those. The other five are there when you\'re ready.</p>';
     }
     var rest = R.sorted.slice(2).map(function (d) { return domainById(d.id).name; });
     return '<div class="unlock">' +
       '<div class="unlock-copy"><span class="eyebrow">Free · 5 more ladders</span>' +
         '<h3>Get a ladder for every area of your life</h3>' +
-        '<p>You have ladders for your two safest areas. The other five (' + esc(rest.join(", ")) + ') come free with my video newsletter on Substack. Subscribe (it\'s free, no card needed) and the unlock word lands in your inbox within a few minutes. If it\'s not there, check Promotions or spam.</p>' +
-        '<p class="fine">It\'s the full story behind every nightmare I face on camera, in video. Unsubscribe any time.</p></div>' +
+        '<p>You have ladders for your two least comfortable areas. The other five (' + esc(rest.join(", ")) + ') come free with my video newsletter on Substack. Subscribe and the unlock word lands in your inbox in a few minutes (check Promotions or spam).</p>' +
+        '<p class="fine">The full story behind every nightmare I face on camera. Free, unsubscribe anytime.</p></div>' +
       '<div class="sub-wrap"><iframe class="sub-embed" src="' + SUBSTACK_URL + '/embed" title="Subscribe to I\'m Just Nate" loading="lazy" scrolling="no"></iframe></div>' +
       '<p class="fine">Box not showing? <a href="' + SUBSTACK_URL + '/subscribe" target="_blank" rel="noopener">Subscribe free on Substack</a> instead.</p>' +
       '<div class="unlock-row"><label class="lab" for="unlock-in">Got the word? Type it here.</label>' +
@@ -1749,7 +1789,7 @@ h1, h2, h3 { letter-spacing: -0.02em; }
     st.textContent = downloadsApi.native ? "Downloading…" : "Confirm the download to save it.";
     downloadsApi.save({ filename: "My Comfort Audit " + R.sc.overall + ".png", data: shareBlob }).then(function () {
       st.textContent = downloadsApi.native
-        ? "Downloaded. Post it to your story and tag @imjustnatehere. Nothing showed up? Press and hold the image to save it."
+        ? "Downloaded. Post it and tag @imjustnatehere. Nothing showed up? Press and hold the image to save it."
         : "Saved. Post it to your story and tag @imjustnatehere.";
     }, function (err) {
       var c = err && err.code;
@@ -1887,7 +1927,7 @@ h1, h2, h3 { letter-spacing: -0.02em; }
     st.textContent = downloadsApi.native ? "Downloading…" : "Confirm the download to save it.";
     downloadsApi.save({ filename: "My Comfort Audit ladder.pdf", data: blob }).then(function (res) {
       st.textContent = res && res.status === "delivered" ? "Sent." :
-        (downloadsApi.native ? "Downloaded. Nothing showed up? Open this page in Safari or Chrome and try again, or copy your plan as text." : "Saved.");
+        (downloadsApi.native ? "Downloaded. Nothing showed up? Open this page in Safari or Chrome, or tap Copy as text." : "Saved.");
     }, function (err) {
       var c = err && err.code;
       st.textContent = c === "declined" ? "Download cancelled." :
@@ -1914,12 +1954,12 @@ h1, h2, h3 { letter-spacing: -0.02em; }
     editing = null; logEditing = null;
 
     // The goal is framed as the pushing-yourself number going up.
-    var pushLine = 'You push yourself <b>' + other + '%</b> of the time. The goal is to get that number up.';
+    var pushLine = 'You push yourself <b class="up">' + other + '%</b> of the time. The goal: get that number up.';
     if (prev && typeof prev.overall === "number") {
       var pushPrev = 100 - prev.overall, pd0 = other - pushPrev, when = fmtDate(prev.date);
-      pushLine = 'You push yourself <b>' + other + '%</b> of the time' +
-        (pd0 === 0 ? ', the same as last time (' + when + ').' : ', ' + (pd0 > 0 ? 'up' : 'down') + ' from ' + pushPrev + '% last time (' + when + ').') +
-        ' The goal is to keep that number going up.';
+      pushLine = 'You push yourself <b class="up">' + other + '%</b> of the time' +
+        (pd0 === 0 ? ', same as on ' + when + '.' : ', ' + (pd0 > 0 ? 'up' : 'down') + ' from ' + pushPrev + '% on ' + when + '.') +
+        ' Keep it going up.';
     }
     var prevPct = {};
     if (prev && prev.domains) prev.domains.forEach(function (d) { prevPct[d.id] = d.pct; });
@@ -1949,9 +1989,9 @@ h1, h2, h3 { letter-spacing: -0.02em; }
 
     var lowName = domainById(lowest.id).name;
     var personal = A.id === lowest.id
-      ? '<p>Your areas are close together. Your safest is <b>' + esc(A.name) + '</b> (' + sorted[0].pct + '% safe).</p>'
-      : '<p>Your safest area is <b>' + esc(A.name) + '</b> (' + sorted[0].pct + '% safe). Its dot sits closest to the middle, so your first ladder starts there. ' +
-        'You push yourself most in <b>' + esc(lowName) + '</b> (' + lowest.pct + '% safe). Its dot reaches farthest out.</p>';
+      ? '<p>Your areas are close together. You\'re least comfortable in <b>' + esc(A.name) + '</b> (' + sorted[0].pct + '% safe).</p>'
+      : '<p>You\'re least comfortable in <b>' + esc(A.name) + '</b> (' + sorted[0].pct + '% safe): its dot sits closest to the middle, so your first ladder starts there. ' +
+        'You push yourself most in <b>' + esc(lowName) + '</b> (' + lowest.pct + '% safe): its dot reaches farthest out.</p>';
 
     var html =
       '<header class="res-head">' +
@@ -1959,116 +1999,115 @@ h1, h2, h3 { letter-spacing: -0.02em; }
         '<h1 id="res-title" class="sr">Your results</h1>' +
         '<div class="score-row"><div class="score" aria-label="Comfort Score ' + sc.overall + ' percent">' + sc.overall + '<small>%</small></div>' +
         '<div class="band"><span class="eyebrow">Comfort Score</span><span class="band-name">' + band.name + '</span></div></div>' +
-        '<p class="big">This means about <b>' + sc.overall + '% of your life is lived playing it safe.</b></p>' +
-        '<p class="push-line">' + pushLine + '</p>' +
-        '<p class="muted" style="max-width:62ch">' + band.text + '</p>' +
-        '<a class="jump" href="#your-ladder" id="jump-ladder">How to get less scared: your step-by-step ladder <span aria-hidden="true">↓</span></a>' +
-        (replay ? '<p class="fine">You\'re looking at a saved result from ' + fmtDate(nowIso) + '.</p>' : '') +
+        '<p class="lead"><b>' + sc.overall + '%</b> of your life is lived playing it safe. ' + pushLine + '</p>' +
+        '<p class="muted">' + band.text + '</p>' +
+        '<a class="jump" href="#your-ladder" id="jump-ladder">How to get less scared: your ladder <span aria-hidden="true">↓</span></a>' +
+        (replay ? '<p class="fine">A saved result from ' + fmtDate(nowIso) + '.</p>' : '') +
       '</header>' +
 
-      '<section class="sec" aria-labelledby="other-h"><div class="sec-head"><h2 id="other-h">The ' + other + '% where you push yourself</h2></div>' +
-        '<p class="other-lead">The part of your life where you <b>feel the nerves and go anyway.</b></p>' +
-        '<div class="truths">' +
-          '<article class="truth"><h3>It isn\'t where you\'re fearless</h3><p>Fear still shows up here. It just doesn\'t get the final say. You feel it, and you do the thing anyway.</p></article>' +
-          '<article class="truth"><h3>It\'s already on the record</h3><p>Every number on this page comes from what you actually did in the last 3 months. So your ' + other + '% isn\'t a hope. It\'s proof you already know how to do hard things.</p></article>' +
-          '<article class="truth"><h3>It\'s what the ladder grows</h3><p>Every step you take moves a little of your ' + sc.overall + '% over to this side. Retake in 30 days and watch this number grow.</p></article>' +
-        '</div>' +
-        '<p class="other-note">You don\'t need to get this to 100%. Comfort is where you rest and recover. The goal is to choose your discomfort on purpose, instead of letting comfort choose for you.</p>' +
-      '</section>' +
-
       '<section class="sec" aria-labelledby="map-h"><div class="sec-head"><h2 id="map-h">Your zone map</h2>' +
-        '<p>Each dot is one area of your life. The closer a dot sits to the middle, the safer you play it there.</p></div>' +
+        '<p>Each dot is an area of your life. The closer to the middle, the safer you play it.</p></div>' +
         '<div class="mapgrid"><div>' + zoneMap(sc.domains, { title: "Your zone map" }) +
-        '<div class="legend" style="justify-content:center;margin-top:10px"><span><i style="background:var(--comfort)"></i>In your comfort zone (playing it safe 55% or more)</span><span><i style="background:var(--accent)"></i>Pushing yourself</span></div></div>' +
-        '<div class="bars-wrap"><p class="bars-note">For each area of your life: how much of the time you play it safe, and how much you push yourself. It comes from your four answers about that area.' +
-          (prev && prev.domains ? ' The small number by each name is how much more (+) or less (−) you push yourself there than on ' + fmtDate(prev.date) + '.' : '') + '</p>' +
-        '<ul class="bars" aria-label="How safe you play it in each area, safest first">' + bars + '</ul></div></div>' +
+        '<div class="legend" style="justify-content:center;margin-top:10px"><span><i style="background:var(--comfort)"></i>Comfort zone (55% safe or more)</span><span><i style="background:var(--accent)"></i>Pushing yourself</span></div></div>' +
+        '<div class="bars-wrap"><p class="bars-note">How much you play it safe vs. push yourself in each area, from your four answers about it.' +
+          (prev && prev.domains ? ' The small number is the change in pushing yourself since ' + fmtDate(prev.date) + '.' : '') + '</p>' +
+        '<ul class="bars" aria-label="How safe you play it in each area, least comfortable first">' + bars + '</ul></div></div>' +
         '<div class="readbox readcard"><h3>How to read your map</h3>' + personal +
           spokeKey([{ label: A.short, pct: sorted[0].pct }].concat(A.id === lowest.id ? [] : [{ label: domainById(lowest.id).short, pct: lowest.pct }])) +
           '<ol class="howto">' + howtoHtml() + '</ol></div>' +
       '</section>' +
 
       '<section class="sec" id="your-ladder" aria-labelledby="ladder-h"><div class="sec-head"><h2 id="ladder-h" tabindex="-1">Your ladder: how to get less scared</h2>' +
-        '<p>Fear shrinks the same way a muscle grows: small, real reps, a little heavier each time. Your ladder gives you those reps, built for the two areas where ' +
-        (allLow ? 'you have the most room left' : 'you play it safest') + ': <b>' + esc(A.name) + '</b> and <b>' + esc(B.name) + '</b>. Each ladder has four steps, from a 5-minute Bad Dream down to the nightmare you\'ve been avoiding.</p></div>' +
+        '<p>Fear shrinks the way a muscle grows: small reps, a little heavier each time. Your ladders are for the two areas where ' +
+        (allLow ? 'you have the most room left' : 'you\'re least comfortable') + ': <b>' + esc(A.name) + '</b> and <b>' + esc(B.name) + '</b>. Four steps each, from a 5-minute Bad Dream to the nightmare you\'ve been avoiding.</p></div>' +
         '<div class="readcard howclimb"><h3>How it works</h3><ol class="howto">' +
-          '<li><b>Start with step 1, the Bad Dream.</b> It takes about 5 minutes. Do it for real this week.</li>' +
-          '<li><b>Aim for nervous, not panicked.</b> Before a step, rate your dread from 0 to 10. Somewhere from 4 to 7 is right. If it\'s a 9 or 10, pick something smaller. If it\'s under 4, it\'s too easy, so go bigger.</li>' +
-          '<li><b>Log it.</b> Tap Log it to rate your dread before, then come back afterward and rate how bad it actually got. Most of the time it\'s less bad than you expected, and that gap is what teaches your brain it can handle more.</li>' +
-          '<li><b>Move to the next step when the last one felt doable,</b> not when it feels easy. Don\'t like a step? Tap Shuffle for another idea (there are six for every step), or write your own.</li>' +
-        '</ol><p class="fine">Every step only puts you on the line, never anyone else.</p></div>' +
+          '<li><b>Start with the Bad Dream.</b> About 5 minutes. Do it this week.</li>' +
+          '<li><b>Aim for nervous, not panicked.</b> Rate your dread from 0 to 10 first. 4 to 7 is right. A 9 or 10? Go smaller. Under 4? Go bigger.</li>' +
+          '<li><b>Log it.</b> Tap Log it to rate your dread before, then how bad it actually got. It\'s usually less than you expected, and that gap teaches your brain it can handle more.</li>' +
+          '<li><b>Move on when the last step felt doable,</b> not easy. Don\'t like a step? Tap Shuffle (six ideas per step) or write your own.</li>' +
+        '</ol><p class="fine">Every step puts only you on the line, never anyone else.</p></div>' +
         '<div class="ladders" id="ladders"></div>' +
         '<div id="unlock-host"></div>' +
         '<div id="dlog"></div>' +
       '</section>' +
 
+      '<section class="sec" aria-labelledby="other-h"><div class="sec-head"><h2 id="other-h">The ' + other + '% where you push yourself</h2>' +
+        '<p>Where you feel the nerves and go anyway.</p></div>' +
+        '<div class="truths">' +
+          '<article class="truth"><h3>It isn\'t where you\'re fearless</h3><p>Fear still shows up. It just doesn\'t get the final say.</p></article>' +
+          '<article class="truth"><h3>It\'s already on the record</h3><p>It comes from what you actually did in the last 3 months. Proof you can do hard things.</p></article>' +
+          '<article class="truth"><h3>It\'s what the ladder grows</h3><p>Every step moves a little of your ' + sc.overall + '% over here. Retake in 30 days and watch it grow.</p></article>' +
+        '</div>' +
+        '<p class="other-note">You don\'t need 100%. Comfort is where you rest. The goal is to choose your discomfort, instead of letting comfort choose for you.</p>' +
+      '</section>' +
+
       '<section class="sec" aria-labelledby="share-h"><div class="sec-head"><h2 id="share-h">Share your score</h2>' +
-        '<p>A story-sized image of your number and your map. Post it, and ask your friends what theirs is.</p></div>' +
+        '<p>Post your number and map, and ask your friends what theirs is.</p></div>' +
         '<div class="share"><img class="share-img" id="share-img" hidden width="1080" height="1920" alt="Your share image: ' + sc.overall + '% of my life is lived playing it safe, with your zone map and @imjustnatehere">' +
           '<div class="share-copy"><div class="actions"><button class="btn btn-primary" type="button" id="share-dl" hidden>Download the image</button>' +
             '<span class="status" id="share-status" role="status"></span></div>' +
-            '<p class="fine">On your phone, you can also press and hold the image to save it.</p>' +
+            '<p class="fine">On a phone, you can also press and hold the image to save it.</p>' +
             '<div class="caption"><span class="eyebrow">Caption idea</span><p id="cap-text">I just found out ' + sc.overall + '% of my life is lived playing it safe. What\'s yours? Take the free Comfort Audit at imjustnate.com/comfortaudit (made by @imjustnatehere).</p></div>' +
             '<div class="actions"><button class="btn btn-ghost btn-small" type="button" id="copy-cap">Copy the caption</button><span class="status" id="cap-status" role="status"></span></div><div id="cap-fallback"></div>' +
           '</div></div>' +
       '</section>' +
 
       '<section class="sec" aria-labelledby="habits-h"><div class="sec-head"><h2 id="habits-h">Your comfort habits</h2>' +
-        '<p>You checked ' + habits.length + ' of ' + HABITS.length + '. Researchers call these safety behaviors: they make a moment easier, and they also stop you from finding out you would have been fine without them.</p></div>' +
-        (habitCards ? '<div class="habits">' + habitCards + '</div>' : '<p class="empty">You didn\'t check any. Either you face things head on, or your habits are well hidden. Try the checklist again after your next uncomfortable moment and see what you notice.</p>') +
+        '<p>You checked ' + habits.length + ' of ' + HABITS.length + '. They make a moment easier, but they also stop you from finding out you\'d have been fine without them.</p></div>' +
+        (habitCards ? '<div class="habits">' + habitCards + '</div>' : '<p class="empty">None checked. Either you face things head on, or your habits are well hidden. Try again after your next uncomfortable moment.</p>') +
       '</section>' +
 
       '<section class="sec" aria-labelledby="plan-h"><div class="sec-head"><h2 id="plan-h">Your first 30 days</h2>' +
-        '<p>Two steps a week, one from each ladder. It updates when you shuffle or write your own. If a step feels like panic, drop down a rung. If it feels easy, skip up one.</p></div>' +
+        '<p>Two steps a week, one from each ladder. If a step feels like panic, drop down a rung. If it feels easy, skip up one.</p></div>' +
         '<ol class="plan" id="plan"></ol>' +
         '<div class="save-row"><div class="actions">' +
-          '<button class="btn btn-primary" type="button" id="pdf" hidden>Download my ladder plan (PDF)</button>' +
-          '<button class="btn btn-ghost" type="button" id="copy-res">Copy my plan as text</button>' +
+          '<button class="btn btn-primary" type="button" id="pdf" hidden>Download my plan (PDF)</button>' +
+          '<button class="btn btn-ghost" type="button" id="copy-res">Copy as text</button>' +
           '<span class="status" id="pdf-status" role="status"></span></div>' +
-          '<p>The PDF has your ladders with the steps you picked, a box to tick and dread scores to fill in for every rung, your 30-day plan, and the dread check.</p>' +
-          '<p id="pdf-note" hidden>Downloading isn\'t available in this view. Copy your plan as text instead.</p>' +
+          '<p>Your ladders with boxes to tick, dread scores for each rung, and your 30-day plan.</p>' +
+          '<p id="pdf-note" hidden>Downloads don\'t work in this view. Copy it as text instead.</p>' +
           '<div id="res-fallback"></div>' +
         '</div>' +
       '</section>' +
 
       '<section class="sec" aria-labelledby="code-h"><div class="sec-head"><h2 id="code-h">Keep your results</h2>' +
-        '<p>Save this code, or take a screenshot of it. When you retake in 30 days, paste it in at the start and you\'ll see exactly what changed, on any phone or browser. It\'s printed in your PDF too.</p></div>' +
+        '<p>Save this code or screenshot it. Paste it in when you retake in 30 days to see what changed, on any phone or browser. It\'s in your PDF too.</p></div>' +
         '<div class="code-box"><span class="eyebrow">Your result code</span><code class="code" id="res-code">' + code + '</code>' +
           '<div class="actions"><button class="btn btn-ghost btn-small" type="button" id="copy-code">Copy code</button><span class="status" id="code-copy-status" role="status"></span></div><div id="code-fallback"></div>' +
-          '<p class="fine">This browser also remembers your results, your ladder and your dread log, but some apps (like the browsers inside TikTok and Instagram) clear that. The code always works.</p>' +
+          '<p class="fine">This browser remembers your results too, but some apps (like the browsers inside Instagram and TikTok) clear that. The code always works.</p>' +
         '</div>' +
         '<div class="email-box"><h3>Email it to yourself</h3>' +
-          '<p class="other-note">Your score, your code, your ladder and the link to retake, in one email you can find in 30 days. This opens your email app with everything filled in, and you hit send.</p>' +
+          '<p class="other-note">Your score, code, ladder and retake link in one email. This opens your email app, ready to send.</p>' +
           '<div class="code-row"><label class="sr" for="email-in">Your email address</label>' +
             '<input id="email-in" class="email-in" type="email" inputmode="email" autocomplete="email" placeholder="you@email.com">' +
             '<a class="btn btn-primary btn-small" id="email-btn" href="mailto:">Open my email app</a></div>' +
-          '<p class="fine" id="email-note">Didn\'t open? Some apps block it. Tap Copy my plan as text above and paste it into an email to yourself.</p>' +
+          '<p class="fine" id="email-note">Didn\'t open? Some apps block it. Tap Copy as text above and email it to yourself.</p>' +
         '</div>' +
       '</section>' +
 
       '<section class="sec" aria-label="Retake">' +
         '<div class="actions"><button class="btn btn-ghost" type="button" id="retake">Retake the audit</button></div>' +
-        '<p class="fine">Retake on day 30. If this browser forgot you, paste your result code at the start.</p>' +
+        '<p class="fine">Retake on day 30. New phone or browser? Paste your result code at the start.</p>' +
       '</section>' +
 
       '<section class="sec" aria-label="More about the audit">' +
         '<details><summary>The thinking behind it</summary><div class="body">' +
-          '<p><b>Comfort, nervous, panic.</b> A common model in experiential education splits life into three zones: comfort (familiar and low risk), a nervous middle zone where growth happens (often called the stretch zone) and panic (too much to learn from). This audit maps how much of your life stays in the first one, and the ladder aims you at the second.</p>' +
-          '<p><b>Avoidance keeps fear alive.</b> Each time you skip something, the relief tells your brain that skipping is what kept you safe. Skipping gets easier, and the thing gets scarier.</p>' +
-          '<p><b>Safety habits do it quietly.</b> Leaving early, rehearsing, hiding behind your phone or a joke: psychologists call these safety behaviors. They make a moment easier, but they keep you from learning you would have been fine without them.</p>' +
-          '<p><b>Small steps, repeated.</b> Fear tends to shrink with gradual, repeated approach: starting with what is uncomfortable but doable, and building up.</p>' +
-          '<p><b>Predictions are the data.</b> Fear updates most when what you expected doesn\'t match what happened. And sometimes the nightmare does come true. Getting through it, and seeing that you did, is the most convincing data of all.</p>' +
+          '<p><b>Comfort, nervous, panic.</b> A common model in experiential education splits life into three zones: comfort (familiar, low risk), a nervous middle where growth happens (often called the stretch zone) and panic (too much to learn from). This audit measures the first; the ladder aims you at the second.</p>' +
+          '<p><b>Avoidance keeps fear alive.</b> Each time you skip something, the relief teaches your brain that skipping kept you safe. Skipping gets easier, and the thing gets scarier.</p>' +
+          '<p><b>Safety habits do it quietly.</b> Leaving early, rehearsing, hiding behind your phone or a joke: psychologists call these safety behaviors. They keep you from learning you\'d have been fine without them.</p>' +
+          '<p><b>Small steps, repeated.</b> Fear tends to shrink with gradual, repeated approach: start with uncomfortable but doable, then build.</p>' +
+          '<p><b>Predictions are the data.</b> Fear updates most when what happened doesn\'t match what you expected. And if the nightmare does come true, getting through it is the most convincing data of all.</p>' +
         '</div></details>' +
         '<details><summary>How your score is calculated</summary><div class="body">' +
-          '<p>Each answer scores from 0 (you go for it) to 4 (you play it safe). The middle answers lean toward safe on purpose: doing something only now and then still counts mostly as comfort. An area\'s number is its points out of 16, as a percentage: how safe you play it there.</p>' +
-          '<p>Your Comfort Score blends three things: the average of your seven areas (72%), how many comfort habits you checked (18%; six or more counts as fully cushioned), and how little of your week goes to anything that makes you genuinely nervous (10%).</p>' +
-          '<p>Yours: areas averaged ' + sc.avg + '% safe, habits ' + sc.habitPct + '%, week ' + sc.weekPct + '%. That gives ' + sc.overall + '%.</p>' +
-          '<p>It\'s an estimate from your own answers, not a measurement. It\'s most useful compared against itself: take it again after 30 days.</p>' +
+          '<p>Each answer scores from 0 (you go for it) to 4 (you play it safe). Middle answers lean safe on purpose: doing something now and then still counts mostly as comfort. An area\'s number is its points out of 16, as a percentage.</p>' +
+          '<p>Your Comfort Score blends your seven areas (72%), your comfort habits (18%; six or more counts as fully cushioned) and how little of your week makes you genuinely nervous (10%).</p>' +
+          '<p>Yours: areas ' + sc.avg + '% safe, habits ' + sc.habitPct + '%, week ' + sc.weekPct + '%. Total: ' + sc.overall + '%.</p>' +
+          '<p>It\'s an estimate from your own answers, most useful compared against itself. Retake after 30 days.</p>' +
         '</div></details>' +
       '</section>' +
 
       '<footer class="foot">' +
-        '<p><b>This is a self-reflection tool, not a psychological test or a diagnosis.</b> If fear or anxiety keeps you from work, relationships or everyday life, a licensed therapist can help, and asking for that is a brave step in itself. Choose steps that push you, and skip anything that could hurt you or embarrass someone else.</p>' +
+        '<p><b>This is a self-reflection tool, not a psychological test or a diagnosis.</b> If fear or anxiety gets in the way of work, relationships or daily life, a licensed therapist can help, and asking is a brave step in itself. Choose steps that push you, and skip anything that could hurt you or embarrass someone else.</p>' +
         '<p>Your answers stay in this browser. Nothing is sent anywhere.</p>' +
         '<p>Made by I\'m Just Nate · Nightmares Come True · @imjustnatehere · <a href="https://imjustnate.com/">imjustnate.com</a> · <a href="' + SUBSTACK_URL + '" target="_blank" rel="noopener">Newsletter</a></p>' +
       '</footer>';
