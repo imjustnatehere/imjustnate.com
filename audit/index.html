@@ -257,6 +257,8 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
 .bar { display: grid; gap: 6px; }
 .bar-top { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; flex-wrap: wrap; }
 .bar-name { font-weight: 700; }
+.push-line { font-size: var(--step-1); max-width: 46ch; }
+.push-line b { color: var(--accent-text); }
 .bar-name .tag { display: block; width: fit-content; margin: 6px 0 2px; white-space: normal; } /* label sits on its own line under the area name */
 .bar-pct { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 .bar-track { height: 10px; border-radius: 6px; background: var(--surface-2); overflow: hidden; }
@@ -528,14 +530,14 @@ h1, h2, h3 { letter-spacing: -0.02em; }
         <div class="example-copy">
           <span class="stamp">Example result</span>
           <div class="example-num">68<small>%</small></div>
-          <p><b>Padded.</b> 68% of this person's life is lived playing it safe. Their dots sit closest to the middle for Body and Being seen, where they play it safest. Honesty reaches farthest out, into the stretch.</p>
+          <p><b>Padded.</b> 68% of this person's life is lived playing it safe. Their dots sit closest to the middle for Body and Being seen, where they play it safest. Honesty reaches farthest out, into the nervous ring.</p>
         </div>
       </div>
       <div class="readbox">
         <h3>How to read the map</h3>
         <ol class="howto" id="howto-intro"></ol>
         <div id="example-key"></div>
-        <p class="fine">That's one spoke of the map laid flat, from the middle (left) to the outside (right). Body is 88% safe, so its dot sits deep in comfort. Honesty is 44% safe, so its dot reaches out into the stretch.</p>
+        <p class="fine">That's one spoke of the map laid flat, from the middle (left) to the outside (right). Body is 88% safe, so its dot sits deep in comfort. Honesty is 44% safe, so its dot reaches out into the nervous ring.</p>
       </div>
     </div>
 
@@ -921,10 +923,10 @@ h1, h2, h3 { letter-spacing: -0.02em; }
 
   var BANDS = [
     { min: 80, name: "Fully cocooned", text: "Almost everything in your life is arranged to keep you safe. That isn't a flaw. It's a system that works, right up until it starts keeping out the life you want." },
-    { min: 65, name: "Padded", text: "You mostly do what you already know you can do. The courage is there; it just rarely gets called on. A few planned stretches a month would change the shape of your year." },
+    { min: 65, name: "Padded", text: "You mostly do what you already know you can do. The courage is there; it just rarely gets called on. A few nervous things done on purpose each month would change the shape of your year." },
     { min: 50, name: "Mostly cozy", text: "You step outside your comfort zone sometimes, usually when life makes you. The next move is stepping out on purpose, before you're forced to." },
-    { min: 30, name: "Stretching often", text: "You step outside your comfort zone more than most people. Your growth is in the one or two areas you still play safe." },
-    { min: 0, name: "Living in the stretch", text: "Discomfort is a regular part of your week. Make sure you're choosing it rather than drowning in it. Rest counts too." }
+    { min: 30, name: "Pushing often", text: "You step outside your comfort zone more than most people. Your growth is in the one or two areas you still play safe." },
+    { min: 0, name: "Out there most days", text: "Discomfort is a regular part of your week. Make sure you're choosing it rather than drowning in it. Rest counts too." }
   ];
 
   var RUNGS = [
@@ -938,8 +940,8 @@ h1, h2, h3 { letter-spacing: -0.02em; }
     "<b>Each spoke is one area of life.</b> There are seven, like Being seen or Asking.",
     "<b>Each area gets a number: how safe you play it there.</b> It comes from your four answers about that area. 100% safe means you avoid it every time. 0% means you go for it every time.",
     "<b>The safer you play it, the closer the dot sits to the middle.</b> A big number pulls the dot in. A small number pushes it out.",
-    "<b>The rings are the zones.</b> The blue middle circle is comfort (55% safe or more). The amber ring is stretch, where growth happens. The dashed outer ring is panic, too much to learn from. No dot lands there; it's a reminder not to aim for it.",
-    "<b>The shape is your reach.</b> A small, tight shape means most of life stays in comfort. Points that reach into the amber ring are where you already stretch."
+    "<b>The rings are the zones.</b> The blue middle circle is comfort (55% safe or more). The amber ring is nervous: where you push yourself, and where growth happens. The dashed outer ring is panic, too much to learn from. No dot lands there; it's a reminder not to aim for it.",
+    "<b>The shape is your reach.</b> A small, tight shape means most of life stays in comfort. Points that reach into the amber ring are where you already push yourself."
   ];
 
   var TEMPLATE = "Step:\nDread before, 0–10:\nThe worst thing I think will happen:\n\nWhat actually happened:\nDread at its peak, 0–10:\nHow I handled it:\nWould I do it again?";
@@ -1037,7 +1039,7 @@ h1, h2, h3 { letter-spacing: -0.02em; }
   }
 
   function bandFor(score) { for (var i = 0; i < BANDS.length; i++) if (score >= BANDS[i].min) return BANDS[i]; return BANDS[BANDS.length - 1]; }
-  function levelFor(pct) { return pct >= 75 ? "Deep in comfort." : (pct >= 55 ? "In your comfort zone." : (pct >= 35 ? "Stretching." : "Stretching a lot.")); }
+  function levelFor(pct) { return pct >= 75 ? "Deep in comfort." : (pct >= 55 ? "In your comfort zone." : (pct >= 35 ? "Pushing yourself." : "Pushing yourself a lot.")); }
 
   /* ---------- Zone map ---------- */
   var CX = 220, CY = 220, R_COMFORT = 78, R_STRETCH = 150, R_PANIC = 172;
@@ -1065,7 +1067,7 @@ h1, h2, h3 { letter-spacing: -0.02em; }
       '<circle class="z-comfort" cx="' + CX + '" cy="' + CY + '" r="' + R_COMFORT + '"/>' +
       spokes +
       '<text class="zl" x="' + CX + '" y="' + (CY - R_COMFORT + 16) + '">COMFORT</text>' +
-      '<text class="zl" x="' + CX + '" y="' + (CY - R_STRETCH + 15) + '">STRETCH</text>' +
+      '<text class="zl" x="' + CX + '" y="' + (CY - R_STRETCH + 15) + '">NERVOUS</text>' +
       '<text class="zl p" x="' + CX + '" y="' + (CY - R_STRETCH - 7) + '">PANIC</text>' +
       '<polygon class="shape" points="' + pts.join(" ") + '"/>' + dots + labels + '</svg>';
   }
@@ -1080,7 +1082,7 @@ h1, h2, h3 { letter-spacing: -0.02em; }
       '<rect class="k-stretch" x="' + X(R_COMFORT) + '" y="' + ty + '" width="' + ((R_STRETCH - R_COMFORT) * k).toFixed(1) + '" height="' + th + '"/>' +
       '<rect class="k-panic" x="' + X(R_STRETCH) + '" y="' + ty + '" width="' + ((R_PANIC - R_STRETCH) * k).toFixed(1) + '" height="' + th + '" rx="4"/>' +
       '<text class="k-band" x="' + X(R_COMFORT / 2) + '" y="' + (ty - 8) + '">COMFORT</text>' +
-      '<text class="k-band" x="' + X((R_COMFORT + R_STRETCH) / 2) + '" y="' + (ty - 8) + '">STRETCH</text>' +
+      '<text class="k-band" x="' + X((R_COMFORT + R_STRETCH) / 2) + '" y="' + (ty - 8) + '">NERVOUS</text>' +
       '<text class="k-band p" x="' + X((R_STRETCH + R_PANIC) / 2) + '" y="' + (ty - 8) + '">PANIC</text>';
     items.forEach(function (it, j) {
       var r = radiusFor(it.pct), x = Number(X(r)), ly = j === 0 ? 76 : 94;
@@ -1346,9 +1348,9 @@ h1, h2, h3 { letter-spacing: -0.02em; }
     return [
       { wk: "Week 1", label: "Start small", items: [["Bad Dream", A.name, stepText(A, 0)], ["Bad Dream", B.name, stepText(B, 0)]] },
       { wk: "Week 2", label: "Build", items: [["Small nightmare", A.name, stepText(A, 1)], ["Small nightmare", B.name, stepText(B, 1)]] },
-      { wk: "Week 3", label: "Stretch", items: [["Nightmare", A.name, stepText(A, 2)], ["Nightmare", B.name, stepText(B, 2)]] },
+      { wk: "Week 3", label: "Push further", items: [["Nightmare", A.name, stepText(A, 2)], ["Nightmare", B.name, stepText(B, 2)]] },
       { wk: "Week 4", label: "Go big", items: [
-        ["Big nightmare", A.name, stepText(A, 3) + " If week 3 felt like panic rather than a stretch, repeat a Nightmare-level step instead."],
+        ["Big nightmare", A.name, stepText(A, 3) + " If week 3 felt like panic rather than nervous, repeat a Nightmare-level step instead."],
         ["Retake", "The Comfort Audit", "On day 30, take this audit again and compare. Save the Big nightmare for " + B.name + " for month two."]
       ] }
     ];
@@ -1529,7 +1531,7 @@ h1, h2, h3 { letter-spacing: -0.02em; }
     if (!host) return;
     var entries = logEntries();
     var axis = '<div class="daxis" aria-hidden="true"><span>0</span><span>2</span><span>4</span><span>6</span><span>8</span><span>10</span></div>';
-    var legend = '<div class="dlegend"><span><i class="pred"></i>Dread you predicted</span><span><i class="peak"></i>How bad it actually got</span><span><i class="band"></i>Stretch zone, 4 to 7</span></div>';
+    var legend = '<div class="dlegend"><span><i class="pred"></i>Dread you predicted</span><span><i class="peak"></i>How bad it actually got</span><span><i class="band"></i>Nervous zone, 4 to 7</span></div>';
     if (!entries.length) { host.innerHTML = ""; return; }
     var rows = entries.map(function (e) {
       var dom = domainById(e.dom), rung = RUNGS[e.r] || RUNGS[0];
@@ -1588,6 +1590,7 @@ h1, h2, h3 { letter-spacing: -0.02em; }
     var sc = R.sc, lines = [
       "My Comfort Audit, " + fmtDate(R.date),
       sc.overall + "% of my life is lived playing it safe (" + R.band.name + ").",
+      "I push myself " + R.other + "% of the time. The goal is to get that number up.",
       "",
       "By area, safest first:"
     ];
@@ -1699,7 +1702,7 @@ h1, h2, h3 { letter-spacing: -0.02em; }
     });
     g.font = "500 18px " + FM; spacing("4px"); g.fillStyle = MUTED;
     g.fillText("COMFORT", W / 2, MCY - R_COMFORT * S + 34);
-    g.fillText("STRETCH", W / 2, MCY - R_STRETCH * S + 32);
+    g.fillText("NERVOUS", W / 2, MCY - R_STRETCH * S + 32);
     g.fillStyle = PANIC; g.fillText("PANIC", W / 2, MCY - R_STRETCH * S - 12); spacing("0px");
     g.beginPath(); pts.forEach(function (q, i) { if (i) g.lineTo(q.p[0], q.p[1]); else g.moveTo(q.p[0], q.p[1]); }); g.closePath();
     g.fillStyle = "rgba(242,181,68,0.20)"; g.fill(); g.lineWidth = 5; g.strokeStyle = AMBER; g.lineJoin = "round"; g.stroke();
@@ -1783,7 +1786,8 @@ h1, h2, h3 { letter-spacing: -0.02em; }
     para("THE COMFORT AUDIT  -  I'M JUST NATE  -  NIGHTMARES COME TRUE", 8, "bold", MUTED, 8);
     para("My ladder out of comfort", 24, "bold", INK, 4);
     para(fmtDate(R.date), 10, "normal", MUTED, 16);
-    para(sc.overall + "% of my life is lived playing it safe.", 16, "bold", INK, 4);
+    para(sc.overall + "% of my life is lived playing it safe.", 16, "bold", INK, 2);
+    para("I push myself " + R.other + "% of the time. The goal is to get that number up.", 11, "bold", INK, 4);
     para(R.band.name + ". " + R.band.text, 10, "normal", MUTED, 8);
     para("Where I'm least comfortable: " + R.A.name + " (" + R.sorted[0].pct + "% playing it safe) and " + R.B.name + " (" + R.sorted[1].pct + "% playing it safe). " +
       "Where I push myself most: " + domainById(R.lowest.id).name + " (" + (100 - R.lowest.pct) + "% pushing myself).", 10, "normal", INK, 12);
@@ -1869,7 +1873,7 @@ h1, h2, h3 { letter-spacing: -0.02em; }
     for (var p = 1; p <= n; p++) {
       doc.setPage(p);
       font(7.5, "normal", MUTED);
-      doc.text("A self-reflection tool, not a psychological test or a diagnosis. Choose steps that stretch you, and skip anything that could hurt you or embarrass someone else.", M, PH - 40, { baseline: "top", maxWidth: CW - 150 });
+      doc.text("A self-reflection tool, not a psychological test or a diagnosis. Choose steps that push you, and skip anything that could hurt you or embarrass someone else.", M, PH - 40, { baseline: "top", maxWidth: CW - 150 });
       doc.text("@imjustnatehere  -  " + p + " / " + n, PW - M, PH - 40, { baseline: "top", align: "right" });
     }
     return doc.output("blob");
@@ -1909,11 +1913,13 @@ h1, h2, h3 { letter-spacing: -0.02em; }
     R = { sc: sc, band: band, sorted: sorted, lowest: lowest, A: A, B: B, date: nowIso, habits: habits, code: code, other: other, proofs: proofs };
     editing = null; logEditing = null;
 
-    var deltaHtml = "";
+    // The goal is framed as the pushing-yourself number going up.
+    var pushLine = 'You push yourself <b>' + other + '%</b> of the time. The goal is to get that number up.';
     if (prev && typeof prev.overall === "number") {
-      var diff = sc.overall - prev.overall;
-      var word = diff === 0 ? "no change" : (diff < 0 ? Math.abs(diff) + " points less playing it safe" : diff + " points more playing it safe");
-      deltaHtml = '<p class="delta">Last time (' + fmtDate(prev.date) + '): ' + prev.overall + '% · ' + word + '</p>';
+      var pushPrev = 100 - prev.overall, pd0 = other - pushPrev, when = fmtDate(prev.date);
+      pushLine = 'You push yourself <b>' + other + '%</b> of the time' +
+        (pd0 === 0 ? ', the same as last time (' + when + ').' : ', ' + (pd0 > 0 ? 'up' : 'down') + ' from ' + pushPrev + '% last time (' + when + ').') +
+        ' The goal is to keep that number going up.';
     }
     var prevPct = {};
     if (prev && prev.domains) prev.domains.forEach(function (d) { prevPct[d.id] = d.pct; });
@@ -1923,10 +1929,10 @@ h1, h2, h3 { letter-spacing: -0.02em; }
       var dom = domainById(d.id), inComfort = d.pct >= 55;
       var tag = "", chg = "";
       if (top.indexOf(d.id) !== -1 && !allLow) tag = '<span class="tag safe">Where you are least comfortable</span>';
-      else if (d.id === lowest.id) tag = '<span class="tag brave">' + (lowest.pct < 50 ? "Already brave" : "Most stretched") + '</span>';
+      else if (d.id === lowest.id) tag = '<span class="tag brave">' + (lowest.pct < 50 ? "Already brave" : "Where you push most") + '</span>';
       if (typeof prevPct[d.id] === "number" && prevPct[d.id] !== d.pct) {
-        var dd = d.pct - prevPct[d.id];
-        chg = ' <span class="chg' + (dd < 0 ? ' good' : '') + '" title="' + Math.abs(dd) + ' points ' + (dd < 0 ? 'less' : 'more') + ' safe than on ' + fmtDate(prev.date) + '">' + (dd < 0 ? '−' : '+') + Math.abs(dd) + '</span>';
+        var pd = prevPct[d.id] - d.pct;   // change in pushing yourself (up is good)
+        chg = ' <span class="chg' + (pd > 0 ? ' good' : '') + '" title="' + Math.abs(pd) + ' points ' + (pd > 0 ? 'more' : 'less') + ' pushing yourself than on ' + fmtDate(prev.date) + '">' + (pd > 0 ? '+' : '−') + Math.abs(pd) + ' pushing</span>';
       }
       return '<li class="bar"><div class="bar-top"><span class="bar-name">' + esc(dom.name) + tag + '</span>' + chg + '</div>' +
         '<div class="split" aria-hidden="true"><span class="s-safe" style="width:' + d.pct + '%"></span><span class="s-push" style="width:' + (100 - d.pct) + '%"></span></div>' +
@@ -1945,7 +1951,7 @@ h1, h2, h3 { letter-spacing: -0.02em; }
     var personal = A.id === lowest.id
       ? '<p>Your areas are close together. Your safest is <b>' + esc(A.name) + '</b> (' + sorted[0].pct + '% safe).</p>'
       : '<p>Your safest area is <b>' + esc(A.name) + '</b> (' + sorted[0].pct + '% safe). Its dot sits closest to the middle, so your first ladder starts there. ' +
-        'You stretch most on <b>' + esc(lowName) + '</b> (' + lowest.pct + '% safe). Its dot reaches farthest out.</p>';
+        'You push yourself most in <b>' + esc(lowName) + '</b> (' + lowest.pct + '% safe). Its dot reaches farthest out.</p>';
 
     var html =
       '<header class="res-head">' +
@@ -1953,13 +1959,14 @@ h1, h2, h3 { letter-spacing: -0.02em; }
         '<h1 id="res-title" class="sr">Your results</h1>' +
         '<div class="score-row"><div class="score" aria-label="Comfort Score ' + sc.overall + ' percent">' + sc.overall + '<small>%</small></div>' +
         '<div class="band"><span class="eyebrow">Comfort Score</span><span class="band-name">' + band.name + '</span></div></div>' +
-        '<p class="big">This means about <b>' + sc.overall + '% of your life is lived playing it safe.</b> The other ' + other + '% is where you feel the nerves and go anyway.</p>' +
-        '<p class="muted" style="max-width:62ch">' + band.text + '</p>' + deltaHtml +
+        '<p class="big">This means about <b>' + sc.overall + '% of your life is lived playing it safe.</b></p>' +
+        '<p class="push-line">' + pushLine + '</p>' +
+        '<p class="muted" style="max-width:62ch">' + band.text + '</p>' +
         '<a class="jump" href="#your-ladder" id="jump-ladder">How to get less scared: your step-by-step ladder <span aria-hidden="true">↓</span></a>' +
         (replay ? '<p class="fine">You\'re looking at a saved result from ' + fmtDate(nowIso) + '.</p>' : '') +
       '</header>' +
 
-      '<section class="sec" aria-labelledby="other-h"><div class="sec-head"><h2 id="other-h">Your other ' + other + '%</h2></div>' +
+      '<section class="sec" aria-labelledby="other-h"><div class="sec-head"><h2 id="other-h">The ' + other + '% where you push yourself</h2></div>' +
         '<p class="other-lead">The part of your life where you <b>feel the nerves and go anyway.</b></p>' +
         '<div class="truths">' +
           '<article class="truth"><h3>It isn\'t where you\'re fearless</h3><p>Fear still shows up here. It just doesn\'t get the final say. You feel it, and you do the thing anyway.</p></article>' +
@@ -1972,9 +1979,9 @@ h1, h2, h3 { letter-spacing: -0.02em; }
       '<section class="sec" aria-labelledby="map-h"><div class="sec-head"><h2 id="map-h">Your zone map</h2>' +
         '<p>Each dot is one area of your life. The closer a dot sits to the middle, the safer you play it there.</p></div>' +
         '<div class="mapgrid"><div>' + zoneMap(sc.domains, { title: "Your zone map" }) +
-        '<div class="legend" style="justify-content:center;margin-top:10px"><span><i style="background:var(--comfort)"></i>In your comfort zone (playing it safe 55% or more)</span><span><i style="background:var(--accent)"></i>Out in the stretch</span></div></div>' +
+        '<div class="legend" style="justify-content:center;margin-top:10px"><span><i style="background:var(--comfort)"></i>In your comfort zone (playing it safe 55% or more)</span><span><i style="background:var(--accent)"></i>Pushing yourself</span></div></div>' +
         '<div class="bars-wrap"><p class="bars-note">For each area of your life: how much of the time you play it safe, and how much you push yourself. It comes from your four answers about that area.' +
-          (prev && prev.domains ? ' The small number by each name is the change in playing it safe since ' + fmtDate(prev.date) + '. A minus means you\'re pushing yourself more there.' : '') + '</p>' +
+          (prev && prev.domains ? ' The small number by each name is how much more (+) or less (−) you push yourself there than on ' + fmtDate(prev.date) + '.' : '') + '</p>' +
         '<ul class="bars" aria-label="How safe you play it in each area, safest first">' + bars + '</ul></div></div>' +
         '<div class="readbox readcard"><h3>How to read your map</h3>' + personal +
           spokeKey([{ label: A.short, pct: sorted[0].pct }].concat(A.id === lowest.id ? [] : [{ label: domainById(lowest.id).short, pct: lowest.pct }])) +
@@ -2046,7 +2053,7 @@ h1, h2, h3 { letter-spacing: -0.02em; }
 
       '<section class="sec" aria-label="More about the audit">' +
         '<details><summary>The thinking behind it</summary><div class="body">' +
-          '<p><b>Comfort, stretch, panic.</b> A common model in experiential education splits life into three zones: comfort (familiar and low risk), stretch (uneasy, and where growth happens) and panic (too much to learn from). This audit maps how much of your life stays in the first one, and the ladder aims you at the second.</p>' +
+          '<p><b>Comfort, nervous, panic.</b> A common model in experiential education splits life into three zones: comfort (familiar and low risk), a nervous middle zone where growth happens (often called the stretch zone) and panic (too much to learn from). This audit maps how much of your life stays in the first one, and the ladder aims you at the second.</p>' +
           '<p><b>Avoidance keeps fear alive.</b> Each time you skip something, the relief tells your brain that skipping is what kept you safe. Skipping gets easier, and the thing gets scarier.</p>' +
           '<p><b>Safety habits do it quietly.</b> Leaving early, rehearsing, hiding behind your phone or a joke: psychologists call these safety behaviors. They make a moment easier, but they keep you from learning you would have been fine without them.</p>' +
           '<p><b>Small steps, repeated.</b> Fear tends to shrink with gradual, repeated approach: starting with what is uncomfortable but doable, and building up.</p>' +
@@ -2061,7 +2068,7 @@ h1, h2, h3 { letter-spacing: -0.02em; }
       '</section>' +
 
       '<footer class="foot">' +
-        '<p><b>This is a self-reflection tool, not a psychological test or a diagnosis.</b> If fear or anxiety keeps you from work, relationships or everyday life, a licensed therapist can help, and asking for that is a brave step in itself. Choose steps that stretch you, and skip anything that could hurt you or embarrass someone else.</p>' +
+        '<p><b>This is a self-reflection tool, not a psychological test or a diagnosis.</b> If fear or anxiety keeps you from work, relationships or everyday life, a licensed therapist can help, and asking for that is a brave step in itself. Choose steps that push you, and skip anything that could hurt you or embarrass someone else.</p>' +
         '<p>Your answers stay in this browser. Nothing is sent anywhere.</p>' +
         '<p>Made by I\'m Just Nate · Nightmares Come True · @imjustnatehere · <a href="https://imjustnate.com/">imjustnate.com</a> · <a href="' + SUBSTACK_URL + '" target="_blank" rel="noopener">Newsletter</a></p>' +
       '</footer>';
