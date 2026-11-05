@@ -194,6 +194,15 @@ a { color: var(--accent-text); }
 
 /* ---------- Quiz ---------- */
 .quiz { display: grid; gap: 26px; }
+.ready { display: grid; gap: 20px; }
+.ready-head { display: grid; gap: 10px; }
+.ready h2 { font-size: clamp(1.9rem, 6.5vw, var(--step-3)); font-weight: 800; line-height: 1.05; }
+.ready-lede { max-width: 46ch; }
+.ready-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.ready-top .link-btn { color: var(--muted); min-height: 0; padding: 4px 0; }
+.ready-sub { display: grid; gap: 8px; }
+.ready .sub-embed { height: 260px; } /* Substack's box drops its photo at this height and keeps the whole form */
+.ready-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
 .progress { display: grid; gap: 8px; }
 .progress-top { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
 .track { height: 6px; border-radius: 6px; background: var(--surface-2); overflow: hidden; }
@@ -248,6 +257,7 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
 .bar { display: grid; gap: 6px; }
 .bar-top { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; flex-wrap: wrap; }
 .bar-name { font-weight: 700; }
+.bar-name .tag { display: block; width: fit-content; margin: 6px 0 2px; white-space: normal; } /* label sits on its own line under the area name */
 .bar-pct { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 .bar-track { height: 10px; border-radius: 6px; background: var(--surface-2); overflow: hidden; }
 .bar-fill { height: 100%; border-radius: 6px; background: var(--accent); }
@@ -560,6 +570,24 @@ h1, h2, h3 { letter-spacing: -0.02em; }
       <button class="btn btn-ghost" id="back" type="button">Back</button>
       <button class="btn btn-primary" id="next" type="button" disabled>Next</button>
     </div>
+  </section>
+
+  <!-- ===== Results ready: an optional newsletter sign-up. Always skippable; results are the same either way. ===== -->
+  <section class="screen ready" id="ready" hidden aria-labelledby="ready-title">
+    <div class="ready-head">
+      <div class="ready-top"><p class="eyebrow">Done · 30 of 30</p><button class="link-btn" id="ready-skip" type="button">Skip to my results →</button></div>
+      <h2 id="ready-title" tabindex="-1">Your results are ready.</h2>
+      <p class="ready-lede">Want the full story too? My free video newsletter on Substack follows every nightmare I put myself through, start to finish. Subscribers also get ladders for all 7 areas of life, not just the 2 on your results.</p>
+    </div>
+    <div class="ready-sub">
+      <div class="sub-wrap"><iframe class="sub-embed" id="ready-embed" data-src="https://imjustnate.substack.com/embed" title="Subscribe to I'm Just Nate" scrolling="no"></iframe></div>
+      <p class="fine">Free, no card, unsubscribe anytime. Box not showing? <a href="https://imjustnate.substack.com/subscribe" target="_blank" rel="noopener">Subscribe on Substack</a> instead.</p>
+    </div>
+    <div class="ready-actions">
+      <button class="btn btn-primary" id="show-results" type="button">Show my results</button>
+      <button class="btn btn-ghost btn-small" id="ready-back" type="button">Back</button>
+    </div>
+    <p class="fine">Subscribing is optional. Your results are the same either way.</p>
   </section>
 
   <!-- ===== Results ===== -->
@@ -892,7 +920,7 @@ h1, h2, h3 { letter-spacing: -0.02em; }
   ];
 
   var BANDS = [
-    { min: 80, name: "Fully cocooned", text: "Almost everything in your life is arranged to keep you safe. That isn't a flaw. It's a system that works, right up until it starts keeping out the life you want. Start at the bottom rung. It will feel bigger than it looks, and that's the point." },
+    { min: 80, name: "Fully cocooned", text: "Almost everything in your life is arranged to keep you safe. That isn't a flaw. It's a system that works, right up until it starts keeping out the life you want." },
     { min: 65, name: "Padded", text: "You mostly do what you already know you can do. The courage is there; it just rarely gets called on. A few planned stretches a month would change the shape of your year." },
     { min: 50, name: "Mostly cozy", text: "You step outside your comfort zone sometimes, usually when life makes you. The next move is stepping out on purpose, before you're forced to." },
     { min: 30, name: "Stretching often", text: "You step outside your comfort zone more than most people. Your growth is in the one or two areas you still play safe." },
@@ -1074,7 +1102,7 @@ h1, h2, h3 { letter-spacing: -0.02em; }
   /* ---------- Quiz state ---------- */
   var state = { step: 0, answers: QUESTIONS.map(function () { return null; }), habits: [] };
   var el = function (id) { return document.getElementById(id); };
-  var screens = { intro: el("intro"), quiz: el("quiz"), results: el("results") };
+  var screens = { intro: el("intro"), quiz: el("quiz"), ready: el("ready"), results: el("results") };
 
   function show(name) {
     Object.keys(screens).forEach(function (k) { screens[k].hidden = (k !== name); });
@@ -1139,7 +1167,7 @@ h1, h2, h3 { letter-spacing: -0.02em; }
         });
         opts.appendChild(lab);
       });
-      el("next").textContent = "See my results";
+      el("next").textContent = "Finish";
       el("next").disabled = false;
     }
     el("qtext").focus({ preventScroll: true });
@@ -1149,8 +1177,19 @@ h1, h2, h3 { letter-spacing: -0.02em; }
     var s = state.step;
     if (s < QUESTIONS.length && state.answers[s] === null) return;
     if (s < TOTAL_STEPS - 1) { state.step++; persist(); renderStep(); window.scrollTo(0, 0); }
-    else finish();
+    else if (unlocked) finish();   // already a subscriber: straight to results
+    else showReady();
   }
+  // "Your results are ready": optional newsletter sign-up, then results whether or not they subscribed.
+  function showReady() {
+    var f = el("ready-embed");
+    if (f && !f.getAttribute("src")) f.setAttribute("src", f.getAttribute("data-src"));
+    show("ready");
+    el("ready-title").focus({ preventScroll: true });
+  }
+  el("show-results").addEventListener("click", function () { finish(); });
+  el("ready-skip").addEventListener("click", function () { finish(); });
+  el("ready-back").addEventListener("click", function () { show("quiz"); renderStep(); });
   function goBack() {
     if (state.step === 0) { show("intro"); setupIntro(); return; }
     state.step--; persist(); renderStep(); window.scrollTo(0, 0);
@@ -1554,7 +1593,6 @@ h1, h2, h3 { letter-spacing: -0.02em; }
     ];
     R.sorted.forEach(function (d) { lines.push("· " + domainById(d.id).name + ": " + d.pct + "% playing it safe, " + (100 - d.pct) + "% pushing myself"); });
     lines.push("", "Comfort habits checked: " + R.habits.length + " of " + HABITS.length);
-    if (R.proofs.length) { lines.push("", "My other " + R.other + "%, the proof:"); R.proofs.forEach(function (t) { lines.push("· " + t); }); }
     lines.push("", "My result code (paste it in when I retake): " + R.code);
     ladderList().forEach(function (p) { lines.push("", "My ladder: " + p[0].name); ladderLines(p[0]).forEach(function (l) { lines.push(l); }); });
     lines.push("", "My first 30 days");
@@ -1581,7 +1619,6 @@ h1, h2, h3 { letter-spacing: -0.02em; }
       ladderLines(dom).forEach(function (l) { lines.push(l); });
     });
     lines.push("", "Before each step, rate your dread from 0 to 10. Aim for 4 to 7. Start with step 1 this week.");
-    if (R.proofs.length) { lines.push("", "Proof I can already do hard things:"); R.proofs.forEach(function (t) { lines.push("- " + t); }); }
     return lines.join("\n");
   }
   function mailHref(to) {
@@ -1748,13 +1785,8 @@ h1, h2, h3 { letter-spacing: -0.02em; }
     para(fmtDate(R.date), 10, "normal", MUTED, 16);
     para(sc.overall + "% of my life is lived playing it safe.", 16, "bold", INK, 4);
     para(R.band.name + ". " + R.band.text, 10, "normal", MUTED, 8);
-    para("Where I play it safest: " + R.A.name + " (" + R.sorted[0].pct + "% playing it safe) and " + R.B.name + " (" + R.sorted[1].pct + "% playing it safe). " +
+    para("Where I'm least comfortable: " + R.A.name + " (" + R.sorted[0].pct + "% playing it safe) and " + R.B.name + " (" + R.sorted[1].pct + "% playing it safe). " +
       "Where I push myself most: " + domainById(R.lowest.id).name + " (" + (100 - R.lowest.pct) + "% pushing myself).", 10, "normal", INK, 12);
-    if (R.proofs.length) {
-      para("My other " + R.other + "%: where I feel the nerves and go anyway. Proof, from my answers:", 10, "bold", INK, 4);
-      R.proofs.forEach(function (t) { para("-  " + t, 10, "normal", INK, 2, M + 6, CW - 6); });
-      y += 10;
-    }
     para("My result code: " + R.code, 10.5, "bold", INK, 2);
     para("Paste it in at the start when I retake in 30 days, to see what changed.", 9, "normal", MUTED, 16);
     rule();
@@ -1890,7 +1922,7 @@ h1, h2, h3 { letter-spacing: -0.02em; }
     var bars = sorted.map(function (d) {
       var dom = domainById(d.id), inComfort = d.pct >= 55;
       var tag = "", chg = "";
-      if (top.indexOf(d.id) !== -1 && !allLow) tag = '<span class="tag safe">Safest</span>';
+      if (top.indexOf(d.id) !== -1 && !allLow) tag = '<span class="tag safe">Where you are least comfortable</span>';
       else if (d.id === lowest.id) tag = '<span class="tag brave">' + (lowest.pct < 50 ? "Already brave" : "Most stretched") + '</span>';
       if (typeof prevPct[d.id] === "number" && prevPct[d.id] !== d.pct) {
         var dd = d.pct - prevPct[d.id];
@@ -1934,12 +1966,7 @@ h1, h2, h3 { letter-spacing: -0.02em; }
           '<article class="truth"><h3>It\'s already on the record</h3><p>Every number on this page comes from what you actually did in the last 3 months. So your ' + other + '% isn\'t a hope. It\'s proof you already know how to do hard things.</p></article>' +
           '<article class="truth"><h3>It\'s what the ladder grows</h3><p>Every step you take moves a little of your ' + sc.overall + '% over to this side. Retake in 30 days and watch this number grow.</p></article>' +
         '</div>' +
-        '<div class="proof-box"><h3>Your proof</h3>' +
-          (proofs.length
-            ? '<p class="other-note">Straight from your answers:</p><ul class="proof">' + proofs.map(function (t) { return '<li><span>' + esc(t) + '</span></li>'; }).join("") + '</ul>'
-            : '<p class="other-note">Your answers didn\'t turn up much here yet, and that\'s okay. That\'s what the ladder is for. Retake in 30 days and this list will start filling in.</p>') +
-          '<p class="other-note">You don\'t need to get this to 100%. Comfort is where you rest and recover. The goal is to choose your discomfort on purpose, instead of letting comfort choose for you.</p>' +
-        '</div>' +
+        '<p class="other-note">You don\'t need to get this to 100%. Comfort is where you rest and recover. The goal is to choose your discomfort on purpose, instead of letting comfort choose for you.</p>' +
       '</section>' +
 
       '<section class="sec" aria-labelledby="map-h"><div class="sec-head"><h2 id="map-h">Your zone map</h2>' +
@@ -1952,6 +1979,20 @@ h1, h2, h3 { letter-spacing: -0.02em; }
         '<div class="readbox readcard"><h3>How to read your map</h3>' + personal +
           spokeKey([{ label: A.short, pct: sorted[0].pct }].concat(A.id === lowest.id ? [] : [{ label: domainById(lowest.id).short, pct: lowest.pct }])) +
           '<ol class="howto">' + howtoHtml() + '</ol></div>' +
+      '</section>' +
+
+      '<section class="sec" id="your-ladder" aria-labelledby="ladder-h"><div class="sec-head"><h2 id="ladder-h" tabindex="-1">Your ladder: how to get less scared</h2>' +
+        '<p>Fear shrinks the same way a muscle grows: small, real reps, a little heavier each time. Your ladder gives you those reps, built for the two areas where ' +
+        (allLow ? 'you have the most room left' : 'you play it safest') + ': <b>' + esc(A.name) + '</b> and <b>' + esc(B.name) + '</b>. Each ladder has four steps, from a 5-minute Bad Dream down to the nightmare you\'ve been avoiding.</p></div>' +
+        '<div class="readcard howclimb"><h3>How it works</h3><ol class="howto">' +
+          '<li><b>Start with step 1, the Bad Dream.</b> It takes about 5 minutes. Do it for real this week.</li>' +
+          '<li><b>Aim for nervous, not panicked.</b> Before a step, rate your dread from 0 to 10. Somewhere from 4 to 7 is right. If it\'s a 9 or 10, pick something smaller. If it\'s under 4, it\'s too easy, so go bigger.</li>' +
+          '<li><b>Log it.</b> Tap Log it to rate your dread before, then come back afterward and rate how bad it actually got. Most of the time it\'s less bad than you expected, and that gap is what teaches your brain it can handle more.</li>' +
+          '<li><b>Move to the next step when the last one felt doable,</b> not when it feels easy. Don\'t like a step? Tap Shuffle for another idea (there are six for every step), or write your own.</li>' +
+        '</ol><p class="fine">Every step only puts you on the line, never anyone else.</p></div>' +
+        '<div class="ladders" id="ladders"></div>' +
+        '<div id="unlock-host"></div>' +
+        '<div id="dlog"></div>' +
       '</section>' +
 
       '<section class="sec" aria-labelledby="share-h"><div class="sec-head"><h2 id="share-h">Share your score</h2>' +
@@ -1968,20 +2009,6 @@ h1, h2, h3 { letter-spacing: -0.02em; }
       '<section class="sec" aria-labelledby="habits-h"><div class="sec-head"><h2 id="habits-h">Your comfort habits</h2>' +
         '<p>You checked ' + habits.length + ' of ' + HABITS.length + '. Researchers call these safety behaviors: they make a moment easier, and they also stop you from finding out you would have been fine without them.</p></div>' +
         (habitCards ? '<div class="habits">' + habitCards + '</div>' : '<p class="empty">You didn\'t check any. Either you face things head on, or your habits are well hidden. Try the checklist again after your next uncomfortable moment and see what you notice.</p>') +
-      '</section>' +
-
-      '<section class="sec" id="your-ladder" aria-labelledby="ladder-h"><div class="sec-head"><h2 id="ladder-h" tabindex="-1">Your ladder: how to get less scared</h2>' +
-        '<p>Fear shrinks the same way a muscle grows: small, real reps, a little heavier each time. Your ladder gives you those reps, built for the two areas where ' +
-        (allLow ? 'you have the most room left' : 'you play it safest') + ': <b>' + esc(A.name) + '</b> and <b>' + esc(B.name) + '</b>. Each ladder has four steps, from a 5-minute Bad Dream down to the nightmare you\'ve been avoiding.</p></div>' +
-        '<div class="readcard howclimb"><h3>How it works</h3><ol class="howto">' +
-          '<li><b>Start with step 1, the Bad Dream.</b> It takes about 5 minutes. Do it for real this week.</li>' +
-          '<li><b>Aim for nervous, not panicked.</b> Before a step, rate your dread from 0 to 10. Somewhere from 4 to 7 is right. If it\'s a 9 or 10, pick something smaller. If it\'s under 4, it\'s too easy, so go bigger.</li>' +
-          '<li><b>Log it.</b> Tap Log it to rate your dread before, then come back afterward and rate how bad it actually got. Most of the time it\'s less bad than you expected, and that gap is what teaches your brain it can handle more.</li>' +
-          '<li><b>Move to the next step when the last one felt doable,</b> not when it feels easy. Don\'t like a step? Tap Shuffle for another idea (there are six for every step), or write your own.</li>' +
-        '</ol><p class="fine">Every step only puts you on the line, never anyone else.</p></div>' +
-        '<div class="ladders" id="ladders"></div>' +
-        '<div id="unlock-host"></div>' +
-        '<div id="dlog"></div>' +
       '</section>' +
 
       '<section class="sec" aria-labelledby="plan-h"><div class="sec-head"><h2 id="plan-h">Your first 30 days</h2>' +
