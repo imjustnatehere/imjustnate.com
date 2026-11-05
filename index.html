@@ -11,7 +11,7 @@
 <meta property="og:title" content="i'm just nate · Nightmares Come True">
 <meta property="og:description" content="Making my nightmares come true, on purpose, on camera. Take the free Comfort Audit.">
 <meta property="og:url" content="https://imjustnate.com/">
-<meta property="og:image" content="https://imjustnate.com/og-home.png">
+<meta property="og:image" content="https://imjustnate.com/og-home.v2.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -20,7 +20,7 @@
 <meta name="color-scheme" content="dark">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Saira+Semi+Condensed:wght@800&display=swap">
 <link rel="preload" as="image" href="/nate-bg.v3.webp" type="image/webp">
 <link rel="preload" as="image" href="/nate-fg.v3.webp" type="image/webp">
 <script>document.documentElement.classList.add("js");</script>
@@ -31,6 +31,7 @@
   --ink: #f4f3ee; --muted: #9d9c96; --rec: #ff3b30; --osd: #ffffff;
   --font-osd: "JetBrains Mono", ui-monospace, Menlo, monospace;
   --font-body: "Inter Tight", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --font-mark: "Saira Semi Condensed", "Arial Narrow", "Helvetica Neue", sans-serif; /* the "i'm just nate" name only */
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
@@ -103,7 +104,7 @@ h1, h2, h3, p { margin: 0; }
 .b1 { top: 70px; left: 16px; border-right: 0; border-bottom: 0; } .b2 { top: 70px; right: 16px; border-left: 0; border-bottom: 0; }
 .b3 { bottom: 236px; left: 16px; border-right: 0; border-top: 0; } .b4 { bottom: 236px; right: 16px; border-left: 0; border-top: 0; }
 .title { position: absolute; z-index: 3; left: 18px; right: 18px; bottom: 54px; }
-.title h1 { font: 800 clamp(2.9rem, 13.5vw, 3.7rem)/0.9 var(--font-body); letter-spacing: -0.045em; word-spacing: 0.1em; text-transform: none; }
+.title h1 { font: 800 clamp(3.2rem, 14.8vw, 4.05rem)/0.9 var(--font-mark); letter-spacing: -0.02em; word-spacing: 0.08em; text-transform: none; }
 .title p { margin-top: 10px; font-size: 1rem; line-height: 1.45; color: #dcdbd4; max-width: 30ch; }
 
 /* Big red call to action */
@@ -170,7 +171,7 @@ h1, h2, h3, p { margin: 0; }
 /* ===== Computer ===== */
 @media (min-width: 900px) {
   .top { display: flex; justify-content: space-between; align-items: center; padding-block: 18px; }
-  .top .mark { font: 800 1.35rem/1 var(--font-body); letter-spacing: -0.03em; word-spacing: 0.08em; text-decoration: none; text-transform: none; }
+  .top .mark { font: 800 1.5rem/1 var(--font-mark); letter-spacing: -0.02em; word-spacing: 0.06em; text-decoration: none; text-transform: none; }
   .top .mark i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--rec); box-shadow: 0 0 8px var(--rec); margin-right: 10px; vertical-align: 3px; animation: blink 1.6s steps(1) infinite; }
   .top nav { display: flex; gap: 26px; font-size: 12px; }
   .top nav a { text-decoration: none; color: var(--muted); }
@@ -181,7 +182,7 @@ h1, h2, h3, p { margin: 0; }
   .ambient img { width: 100%; margin-left: -50%; opacity: 0.92; }
   .title { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; left: 0; bottom: 0; }
   .side { display: grid; gap: 18px; }
-  .side h1 { font: 800 clamp(3.6rem, 6vw, 5.8rem)/0.88 var(--font-body); letter-spacing: -0.05em; word-spacing: 0.12em; text-transform: none; }
+  .side h1 { font: 800 clamp(3.95rem, 6.6vw, 6.4rem)/0.88 var(--font-mark); letter-spacing: -0.02em; word-spacing: 0.08em; text-transform: none; }
   .side .sub { font-size: 1.3rem; color: #d2d1ca; max-width: 26ch; line-height: 1.4; }
   .menu { padding-top: 6px; }
   .menu a { font-size: 15px; }
